@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 17:01:03 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/08/18 18:34:44 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/08/21 12:48:33 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,7 @@ int		find_d_quoute_end(char *trimed);
 char	**pipe_spliter(char **in);
 char	**mini_split(char *s);
 int		input_handle(char *input);
+int		check_valid(char *s);
+char	*ft_find_space(char *s);
 
 #endif

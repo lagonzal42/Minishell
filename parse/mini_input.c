@@ -35,7 +35,7 @@ int	main(void)
     signal (SIGTSTP, sigtstphandle);
 	while(!eof)
 	{
-        s = readline(">>>");
+        s = readline(">>> ");
 		if (s)
 		{
 			input_handle(s);

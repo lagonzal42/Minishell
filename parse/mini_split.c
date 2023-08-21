@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 12:09:10 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/08/18 18:23:54 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/08/21 13:56:30 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	mini_wc(char *trimed)
 			n += find_d_quoute_end(&trimed[n]);
 		n++;
 	}
-	printf("%d malloc to do\n", word);
 	return (word);
 }
 
@@ -78,6 +77,7 @@ char	**mini_split(char *s)
 	spltd = malloc((n + 1) * sizeof(char *));
 	separate(s, spltd, n, 0);
 	spltd[n] = NULL;
+	ft_multitrim(spltd, " ");
 	free(trimed);
 	return (spltd);
 }

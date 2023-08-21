@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 11:40:27 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/08/18 18:24:05 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/08/21 13:42:00 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,13 @@ char **spliter(char *s, int m)
 	holder[0] = ft_substr(s, 0, m);
 	holder[1] = ft_substr(s, m, 1);
 	holder[2] = ft_substr(s, m + 1, ft_strlen(&s[m] + 1));
+	printf("%d\n", holder[2][0]);
+	if (!holder[2][0])
+	{
+		printf("Enters\n");
+		free(holder[2]);
+		holder[2] = 0;
+	}
 	free(s);
 	return (holder);
 }

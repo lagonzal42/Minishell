@@ -1,20 +1,26 @@
 
-PARSE_SRC = check_valid.c\
-	input_handle.c\
-	mini_input.c\
-	mini_split.c\
-	parsing_utils.c\
-	split_pipes.c
+NAME = parse.exec
 
-OBJ = check_valid.o\
-	input_handle.o\
-	mini_input.o\
-	mini_split.o\
-	parsing_utils.o\
-	split_pipes.o
+PARSE_SRC = check_valid\
+	handle_input\
+	mini_input\
+	mini_split\
+	parsing_utils\
+	split_pipes
 
+#OBJ = check_valid\
+	input_handle\
+	mini_input\
+	mini_split\
+	parsing_utils\
+	split_pipes
 
-OBJ_DIR = parse/obj
+SRC = $(addprefix $(SRC_DIR), $(addsuffix .c, $(PARSE_SRC)))
+OBJ = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(PARSE_SRC)))
+
+SRC_DIR = parse/
+
+OBJ_DIR = parse/obj/
 
 RLMAKE = readline/Makefile
 
@@ -24,16 +30,25 @@ CFLAGS = -Wall -Werror -Wextra
 
 LDLIBS := -lreadline -lncurses
 
-$(RLMAKE) :
-	cd ./readline;\
-		./configure;\
-	cd ..
+all: $(NAME)
 
-%.o:%.c
-	@$(CC) $(CFLAGS) -c $(PARSE_SRC)
+$(OBJ): $(SRC)
+	$(CC) $(CFLAGS) -c $(SRC) -I libft
+	@mkdir -p parse/obj
+	mv *.o parse/obj
 
-
-all: $(OBJ) $(RLMAKE) 
+$(NAME): $(OBJ)
+	make -C libft
 	make -C readline
-	$(CC) $(CFLAGS) $(OBJ) readline/libhistory.a readline/libreadline.a libft/libft.a $(LDLIBS) -o parse.exec
+	$(CC) $(CFLAGS) $(OBJ) readline/libhistory.a readline/libreadline.a libft/libft.a $(LDLIBS) -o $(NAME) -fsanitize=address -g3
 
+clean:
+	rm -fr $(OBJ_DIR)
+	make clean -C libft
+	make clean -C readline
+
+fclean: clean
+	make fclean -C libft
+	rm -fr $(NAME)
+
+re: fclean clean all

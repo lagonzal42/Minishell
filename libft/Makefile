@@ -5,7 +5,6 @@ SRCS = ft_atoi.c\
 	   ft_bzero.c \
 	   ft_calloc.c \
 	   ft_double_print.c\
-	   ft_find_space.c\
 	   ft_is_space.c\
 	   ft_isalnum.c \
 	   ft_isalpha.c \
@@ -60,7 +59,6 @@ OBJS = ft_atoi.o \
 	   ft_bzero.o \
 	   ft_calloc.o \
 	   ft_double_print.o\
-	   ft_find_space.o\
 	   ft_is_space.o\
 	   ft_isalnum.o \
 	   ft_isalpha.o \
