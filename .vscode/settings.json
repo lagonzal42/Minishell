@@ -1,8 +1,0 @@
-{
-    "files.associations": {
-        "keymaps.h": "c",
-        "tilde.h": "c",
-        "rlstdc.h": "c",
-        "rltypedefs.h": "c"
-    }
-}
