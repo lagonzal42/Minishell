@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 15:43:23 by lagonzal          #+#    #+#             */
-/*   Updated: 2022/09/22 15:39:47 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/08/21 14:40:39 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 			if (needle[m] == '\0')
 				return (&((char *)haystack)[n]);
 		}
-	n++;
+		n++;
 	}
 	return (NULL);
 }

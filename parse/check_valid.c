@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 18:36:02 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/08/21 12:19:05 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/08/21 16:15:39 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	check_valid(char *s)
 		return (1);
 	if (check_opened_quoutes(s))
 		return (1);
+	if (ft_strnstr(s, "&&", ft_strlen(s)) || ft_strnstr(s, "||", ft_strlen(s)))
+		return (ft_error(4));
 	return (0);
 }
 int	check_forbidden_chars(char *s)
@@ -31,7 +33,7 @@ int	check_forbidden_chars(char *s)
 	n = -1;
 	while (s[++n])
 	{
-		if (s[n] == '\\' || s[n] == '`')
+		if (s[n] == '\\' || s[n] == '`' || s[n] == ';')
 			return (ft_error(1));
 		else if (!ft_isascii(s[n]))
 		{
@@ -71,11 +73,13 @@ int	ft_error(int ecode)
 {
 	ft_putstr_fd("Error: ", 2);
 	if (ecode == 1)
-		ft_putstr_fd("Minishell no acepta los caracteres \\ ni `\n", 2);
+		ft_putstr_fd("Minishell no acepta los caracteres \"\\, ;, `\"\n", 2);
 	else if (ecode == 2)
 		ft_putstr_fd("Minishell solo acepta caracteres ascii fuera de las parentesis\n", 2);
 	else if (ecode == 3)
 		ft_putstr_fd("Minishell no acepta comillas sin cerrar\n", 2);
+	else if (ecode == 4)
+		ft_putstr_fd("Minishell no acepta los cadenas \"&& o ||\"\n", 2);
 	return (1);
-		
+	
 }

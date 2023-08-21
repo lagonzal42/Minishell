@@ -8,12 +8,6 @@ PARSE_SRC = check_valid\
 	parsing_utils\
 	split_pipes
 
-#OBJ = check_valid\
-	input_handle\
-	mini_input\
-	mini_split\
-	parsing_utils\
-	split_pipes
 
 SRC = $(addprefix $(SRC_DIR), $(addsuffix .c, $(PARSE_SRC)))
 OBJ = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(PARSE_SRC)))
