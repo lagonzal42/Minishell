@@ -117,18 +117,18 @@ AR = ar rcs
 CFLAGS = -Wall -Wextra -Werror
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< 
+	@$(CC) $(CFLAGS) -c $< 
 
 all: $(NAME)
 
 $(NAME):$(OBJS)
-	$(AR) $(NAME) $(OBJS) 
+	@$(AR) $(NAME) $(OBJS) 
 
 clean:
-	$(RM) $(OBJS)  
+	@$(RM) $(OBJS)  
 
 fclean: clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 
 re: fclean all
 

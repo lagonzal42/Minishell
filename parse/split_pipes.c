@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 11:40:27 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/08/21 13:42:00 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/08/21 20:30:20 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,24 @@
 char **spliter(char *s, int m)
 {
 	char	**holder;
+	int		n;
+	int		size;
 
-	holder = malloc(4 * sizeof(char *));
-	holder[3] = NULL;
-	holder[0] = ft_substr(s, 0, m);
-	holder[1] = ft_substr(s, m, 1);
-	holder[2] = ft_substr(s, m + 1, ft_strlen(&s[m] + 1));
-	printf("%d\n", holder[2][0]);
-	if (!holder[2][0])
-	{
-		printf("Enters\n");
-		free(holder[2]);
-		holder[2] = 0;
-	}
+	size = 2;
+	if (m != 0)
+		size++;
+	if (s[m + 1])
+		size++;
+	holder = malloc(size * sizeof(char *));
+	holder[size - 1] = NULL;
+	n = 0;
+	if (m != 0)
+		holder[n++] = ft_substr(s, 0, m);
+	holder[n++] = ft_substr(s, m, 1);
+	if (s[m + 1])
+		holder[n] = ft_substr(s, m + 1, ft_strlen(&s[m] + 1));
 	free(s);
+	ft_double_print(holder);
 	return (holder);
 }
 
@@ -53,13 +57,13 @@ char	**ft_resize2(char **sp, char **addition, unsigned int pos)
 	m = 0;
 	while (addition[m])
 		new[n++] = addition[m++];
-	
 	while (sp[++pos])
 	{
 		new[n] = sp[pos];
 		n++;
 	}
 	new[n] = NULL;
+	ft_double_print(new);
 	return (free(sp), free(addition), new);
 }
 
