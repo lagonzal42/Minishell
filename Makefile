@@ -34,7 +34,7 @@ $(OBJ): $(SRC)
 $(NAME): $(OBJ)
 	make -C libft
 	make -C readline
-	$(CC) $(CFLAGS) $(OBJ) readline/libhistory.a readline/libreadline.a libft/libft.a $(LDLIBS) -o $(NAME) -fsanitize=address -g3
+	$(CC) $(CFLAGS) $(OBJ) readline/libhistory.a readline/libreadline.a libft/libft.a  -I realdine $(LDLIBS) -o $(NAME) -fsanitize=address -g3
 
 clean:
 	rm -fr $(OBJ_DIR)

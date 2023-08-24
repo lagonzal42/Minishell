@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand.h                                           :+:      :+:    :+:   */
+/*   expan_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: larra <larra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/21 16:19:45 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/08/24 15:00:55 by larra            ###   ########.fr       */
+/*   Created: 2023/08/24 14:54:01 by larra             #+#    #+#             */
+/*   Updated: 2023/08/24 15:02:00 by larra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXPAND_H
-# define EXPAND_H
+#include "../libft/libft.h"
+#include "../parse/parse.h"
 
-int	find_end_word(char **spltd, int n, int m);
+int	find_end_word(char **spltd, int n, int m)
+{
+	int	k;
 
-#endif
+	k = m;
+	while (spltd[n][m] && (!ft_is_space(spltd[n][m]) && spltd[n][m] != '>' &&
+		spltd[n][m] != '<' && spltd[n][m] != '|' && spltd[n][m] != '\"' &&
+		spltd[n][m] != '&' && spltd[n][m] != '\\'))
+		m  += 1;
+	return (m - k);
+}
