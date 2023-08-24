@@ -46,3 +46,34 @@ char		*get_env_name(char *dest, const char *src)
 	dest[i] = '\0';
 	return (dest);
 }
+
+char     *search_for_var(t_env *env, char  *search)
+{
+    t_env *tmp;
+    char    *ret_path;
+
+    tmp = env;
+    while (tmp)
+    {
+        if (ft_strcmp(tmp->name, search) == 0)
+        {
+            ret_path = tmp->value;
+        }
+        tmp = tmp->next;
+    }
+    return (ret_path);
+}
+
+t_list  *give_variable(t_env *env, char *search)
+{
+    t_env *tmp;
+    
+    tmp = env;
+    while (tmp)
+    {
+        if (ft_strcmp(tmp->name, search) == 0)
+            return (tmp);
+        tmp = tmp->next;
+    }
+    return(0);
+}

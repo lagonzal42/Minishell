@@ -38,5 +38,6 @@ int    	go_back(t_env   *env);
 int     absolute_path(t_env *env, char *absolute_path);
 int    	do_whatever(t_env *env);
 int		check_var_name(char	arg);
+t_list  *give_variable(t_env *env, char *search);
 
 #endif
