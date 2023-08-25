@@ -1,4 +1,4 @@
-#include "../../builtins.h"
+#include "builtins.h"
 
 t_env *get_env(char **envp, t_env *env)
 {
