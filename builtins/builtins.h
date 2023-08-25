@@ -31,7 +31,7 @@ t_env	*get_env(char **envp, t_env *env);
 char	*get_env_name(char *dest, const char *src);
 t_env  	*make_node(void);
 void    print_nodes(t_env   *env);
-t_list 	*ft_lstlast(t_list *lst);
+t_env 	*ft_lstlast(t_env *lst);
 void    ft_lstadd_back(t_env *lst, t_env *new);
 int		ft_strcmp(const char *s1, const char *s2);
 char    *search_for_var(t_env *env, char *search);

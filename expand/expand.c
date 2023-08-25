@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 16:16:20 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/08/25 14:31:33 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/08/25 16:17:07 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,11 @@ int	main(int ac, char **av, char **envp)
 	enviroment = get_env(envp, enviroment);
 	char *spltd[] = {"echo", "\"my asingment is to write de user: $USER|mi_file TASK COMPLETED!\"", "|<<$USER", "$? cat", "-e", NULL};
 	char **new;
-	printf("==============FINAL================\n");
+	printf("==============PREV================\n");
+	ft_double_print(spltd);
+	printf("==============PREV================\n");
 	new = expand(spltd);
+	printf("==============FINAL================\n");
 	ft_double_print(new);
+	printf("==============FINAL================\n");
 }
