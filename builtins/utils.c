@@ -64,17 +64,14 @@ char     *search_for_var(t_env *env, char  *search)
     return (ret_path);
 }
 
-t_env  *give_variable(t_env *env, char *search)
-{
-    t_env *tmp;
-    
-    tmp = env;
-    while (tmp)
+int give_variable(t_env *env, t_env **ret, char *search)
+{  
+    *ret = env;
+    while (ret)
     {
-        if (ft_strcmp(tmp->name, search) == 0)
-            return (tmp);
-        tmp = tmp->next;
+        if (ft_strcmp((*ret)->name, search) == 0)
+            return (0);
+        *ret = (*ret)->next;
     }
-    return(0);
+    return(1);
 }
-

@@ -3,6 +3,7 @@
 void	export(t_env *env, char **args)
 {
 	t_env *tmp;
+	char *var_name;
 
 	tmp = env;
 	//Si solo nos viene un argumento, "export" a secas, escribimos todas las variables del enviroment con "declare -x" enfrente.
@@ -16,7 +17,11 @@ void	export(t_env *env, char **args)
 	}
 	else
 	{
-		check_env_string(env, args);
-		//dcheck_if_already_exits(env, args);
+		var_name = ft_substr(args[1], 0, ft_strchr(args[1], '=')- &args[1][0]);
+		if (!give_variable(env, &tmp, var_name))
+			printf("%s\n", tmp->name);
+		//else
+
+		//check_if_already_exits(env, args, var_name);
 	}
 }
