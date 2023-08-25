@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: larra <larra@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 16:16:20 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/08/24 15:01:23 by larra            ###   ########.fr       */
+/*   Updated: 2023/08/25 12:06:53 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,13 @@ char **dollar_case(char **spltd, int n, int *m, int quoute)
 	right = ft_substr(spltd[n], *m + find_end_word(spltd, n, *m), ft_strlen(spltd[n]));
 	printf("left %s\n", left);
 	printf("right %s\n", right);
+	holder = 
 	*m += ft_strlen(name);
 	free(name);
 	free(left);
 	free(right);
 	return (spltd);
 }
-
 
 int	main(void)
 {
