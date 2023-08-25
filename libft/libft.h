@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 10:18:40 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/08/25 13:08:08 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/08/25 13:14:12 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define LIBFT_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1000
+#  define BUFFER_SIZE 4096
 # endif
 
 # include <stddef.h>

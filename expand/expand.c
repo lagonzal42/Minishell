@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 16:16:20 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/08/25 13:05:01 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/08/25 14:31:33 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 #include "../libft/libft.h"
 #include "../parse/parse.h"
 #include "expand.h"
+#include <errno.h>
 #include <stdio.h>
+#include <fcntl.h>
 
 char	**quoute_case(char **spltd, int n, int *m);
 char	**dollar_case(char **spltd, int n, int *m, int quoute);
@@ -95,18 +97,25 @@ char **dollar_case(char **spltd, int n, int *m, int quoute)
 		ft_strlen(spltd[n]));
 	printf("left %s\n", to_add[0]);
 	printf("right %s\n", to_add[2]);
-	to_add[1] = search_for_var(enviroment, name);
-	printf("expanded: %s\n");
+	if (open("a.txt", O_RDONLY))
+		printf("not opened\n");
+	if (ft_strncmp(name, "?", 1) == 0)
+	 	to_add[1] = ft_itoa(errno);
+	to_add[1] = ft_strdup(search_for_var(enviroment, name));
+	printf("expanded: %s\n", to_add[1]);
 	*m += ft_strlen(to_add[1]) - 1;
 	holder = ft_strjoin(to_add[0], ft_strjoin(to_add[1], to_add[2]));
-	free(spltd[n]);
 	spltd[n] = holder;
+	ft_double_print(spltd);
 	return (free(to_add[0]), free(to_add[1]), free(to_add[2]), spltd);
 }
 
 int	main(int ac, char **av, char **envp)
 {
 	enviroment = get_env(envp, enviroment);
-	char *spltd[] = {"echo", "\"my asingment is to write de user: $USER|mi_file TASK COMPLETED!\"", "|", "cat", "-e", NULL};
-	expand(spltd);
+	char *spltd[] = {"echo", "\"my asingment is to write de user: $USER|mi_file TASK COMPLETED!\"", "|<<$USER", "$? cat", "-e", NULL};
+	char **new;
+	printf("==============FINAL================\n");
+	new = expand(spltd);
+	ft_double_print(new);
 }

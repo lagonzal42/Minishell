@@ -1,14 +1,17 @@
 #ifndef	BUILTINS_H
 # define BUILTINS_H
 
-#include "libft/libft.h"
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
+# include "../libft/libft.h"
+# include <unistd.h>
+# include <stdio.h>
+# include <stdlib.h>
 
-#define	ERROR 1
-#define	SUCCESS 0
-#define BUFFER_SIZE 4096
+# define	ERROR 1
+# define	SUCCESS 0
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 4096
+# endif
 
 typedef struct	s_env
 {
@@ -38,6 +41,6 @@ int    	go_back(t_env   *env);
 int     absolute_path(t_env *env, char *absolute_path);
 int    	do_whatever(t_env *env);
 int		check_var_name(char	arg);
-t_list  *give_variable(t_env *env, char *search);
+t_env  *give_variable(t_env *env, char *search);
 
 #endif
