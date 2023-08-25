@@ -77,3 +77,4 @@ t_env  *give_variable(t_env *env, char *search)
     }
     return(0);
 }
+
