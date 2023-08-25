@@ -13,7 +13,7 @@ t_env  *make_node(void)
     return (new);
 }
 
-t_list *ft_lstlast(t_list *lst)
+t_env *ft_lstlast(t_env *lst)
 {
     if (lst == NULL)
         return (NULL);
@@ -55,7 +55,7 @@ char     *search_for_var(t_env *env, char  *search)
     tmp = env;
     while (tmp)
     {
-        if (ft_strncmp(tmp->name, search, ft_strlen(tmp->name) + 1) == 0)
+        if (ft_strcmp(tmp->name, search) == 0)
         {
             ret_path = tmp->value;
         }
@@ -71,7 +71,7 @@ t_env  *give_variable(t_env *env, char *search)
     tmp = env;
     while (tmp)
     {
-        if (ft_strncmp(tmp->name, search, ft_strlen(tmp->name) + 1) == 0)
+        if (ft_strcmp(tmp->name, search) == 0)
             return (tmp);
         tmp = tmp->next;
     }
