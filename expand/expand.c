@@ -6,13 +6,14 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 16:16:20 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/08/25 16:17:07 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/08/29 13:33:26 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../builtins/builtins.h"
 #include "../libft/libft.h"
 #include "../parse/parse.h"
+#include <stdarg.h>
 #include "expand.h"
 #include <errno.h>
 #include <stdio.h>
@@ -23,6 +24,20 @@ char	**dollar_case(char **spltd, int n, int *m, int quoute);
 
 
 t_env *enviroment;
+
+int	exit_status(char *action, ...)
+{
+	static int	e_status;
+	va_list		arg_ptr;
+
+	if (action[0] == 'g')
+		return (e_status);
+	else
+	{
+		va_start(arg_ptr, action);
+		e_status = va_arg(arg_ptr, int);
+	}		
+}
 
 t_env *get_env(char **envp, t_env *env)
 {
@@ -100,7 +115,7 @@ char **dollar_case(char **spltd, int n, int *m, int quoute)
 	if (open("a.txt", O_RDONLY))
 		printf("not opened\n");
 	if (ft_strncmp(name, "?", 1) == 0)
-	 	to_add[1] = ft_itoa(errno);
+	 	to_add[1] = ft_itoa(exit_status("get"));
 	to_add[1] = ft_strdup(search_for_var(enviroment, name));
 	printf("expanded: %s\n", to_add[1]);
 	*m += ft_strlen(to_add[1]) - 1;
