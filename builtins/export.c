@@ -3,40 +3,25 @@
 void	export(t_env *env, char **args)
 {
 	t_env *tmp;
+	char *var_name;
 
 	tmp = env;
-	//print_nodes(env);
+	//Si solo nos viene un argumento, "export" a secas, escribimos todas las variables del enviroment con "declare -x" enfrente.
 	if (!args[1])
 	{
 		while (tmp != NULL)
 		{
-			printf("declare -x %s=%s\n", tmp->name, tmp->value);
+			ft_printf("declare -x %s=%s\n", tmp->name, tmp->value);
 			tmp = tmp->next;
 		}
 	}
 	else
 	{
-		int i;
+		var_name = ft_substr(args[1], 0, ft_strchr(args[1], '=')- &args[1][0]);
+		if (!give_variable(env, &tmp, var_name))
+			printf("%s\n", tmp->name);
+		//else
 
-		i = 0;
-		while (args[1][i] != '=')
-		{
-			if (check_var_name(args[1][i]) != 0)
-			{
-				printf("error\n");
-			}
-			i++;
-			printf("esta bien\n");		
-		}
+		//check_if_already_exits(env, args, var_name);
 	}
-}
-
-int		check_var_name(char arg)
-{
-	if ((arg >= 'a' && arg <= 'z') && \
-	(arg >= 'A' && arg <= 'Z') && \
-	(arg >= '0' && arg <= '9') && \
-	arg == '_')
-		return (0);
-	return (1);
 }

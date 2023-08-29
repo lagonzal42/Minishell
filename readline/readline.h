@@ -38,6 +38,8 @@ extern "C" {
 #  include "tilde.h"
 #endif
 
+# include<stdio.h>
+
 /* Hex-encoded Readline version number. */
 #define RL_READLINE_VERSION	0x0802		/* Readline 8.2 */
 #define RL_VERSION_MAJOR	8
