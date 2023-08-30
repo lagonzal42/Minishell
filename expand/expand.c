@@ -6,23 +6,39 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 16:16:20 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/08/25 16:17:07 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/08/29 17:38:45 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../builtins/builtins.h"
 #include "../libft/libft.h"
 #include "../parse/parse.h"
+#include <stdarg.h>
 #include "expand.h"
 #include <errno.h>
 #include <stdio.h>
 #include <fcntl.h>
 
 char	**quoute_case(char **spltd, int n, int *m);
-char	**dollar_case(char **spltd, int n, int *m, int quoute);
+char	**dollar_case(char **spltd, int n, int *m);
 
 
 t_env *enviroment;
+
+int	exit_status(char *action, ...)
+{
+	static int	e_status;
+	va_list		arg_ptr;
+
+	if (action[0] == 'g')
+		return (e_status);
+	else
+	{
+		va_start(arg_ptr, action);
+		e_status = va_arg(arg_ptr, int);
+		return (0);
+	}		
+}
 
 t_env *get_env(char **envp, t_env *env)
 {
@@ -60,7 +76,9 @@ char	**expand(char **spltd)
 			if (spltd[n][m] == '\"')
 				spltd = quoute_case(spltd, n, &m);
 			else if (spltd[n][m] == '$')
-				spltd = dollar_case(spltd, n, &m, 0);
+				spltd = dollar_case(spltd, n, &m);
+			else if (spltd[n][m] == '\'')
+				m += find_quoute_end(&spltd[n][m]);
 			m++;
 		}
 		n++;
@@ -73,15 +91,15 @@ char	**quoute_case(char **spltd, int n, int *m)
 	*m += 1;
 	while (spltd[n][*m] && spltd[n][*m] != '\"')
 	{
-		if (spltd[n][*m] == '$')
-			spltd = dollar_case(spltd, n, m, 1);
+		if (spltd[n][*m] == '$' && ft_isalnum(spltd[n][*m]))
+			spltd = dollar_case(spltd, n, m);
 		else
 			*m += 1;
 	}
 	return (spltd);
 }
 
-char **dollar_case(char **spltd, int n, int *m, int quoute)
+char **dollar_case(char **spltd, int n, int *m)
 {
 	int		prev;
 	char	*holder;
@@ -100,7 +118,7 @@ char **dollar_case(char **spltd, int n, int *m, int quoute)
 	if (open("a.txt", O_RDONLY))
 		printf("not opened\n");
 	if (ft_strncmp(name, "?", 1) == 0)
-	 	to_add[1] = ft_itoa(errno);
+	 	to_add[1] = ft_itoa(exit_status("get"));
 	to_add[1] = ft_strdup(search_for_var(enviroment, name));
 	printf("expanded: %s\n", to_add[1]);
 	*m += ft_strlen(to_add[1]) - 1;
@@ -110,7 +128,7 @@ char **dollar_case(char **spltd, int n, int *m, int quoute)
 	return (free(to_add[0]), free(to_add[1]), free(to_add[2]), spltd);
 }
 
-int	main(int ac, char **av, char **envp)
+/*int	main(int ac, char **av, char **envp)
 {
 	enviroment = get_env(envp, enviroment);
 	char *spltd[] = {"echo", "\"my asingment is to write de user: $USER|mi_file TASK COMPLETED!\"", "|<<$USER", "$? cat", "-e", NULL};
@@ -122,4 +140,4 @@ int	main(int ac, char **av, char **envp)
 	printf("==============FINAL================\n");
 	ft_double_print(new);
 	printf("==============FINAL================\n");
-}
+}*/
