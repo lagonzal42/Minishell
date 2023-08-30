@@ -26,22 +26,23 @@ t_env *ft_lstlast(t_env *lst)
 
 void    ft_lstadd_back(t_env *lst, t_env *new)
 {
-    while (lst != NULL)
+    while (lst->next)
     {
         lst = lst->next;
     }
-    lst = new;
+    lst->next = new;
 }
 
 t_env	*ft_lstnew(char	*name, char *value)
 {
 	t_env	*new;
 
-	new = malloc(sizeof(t_list));
+	new = malloc(sizeof(t_env));
 	if (!new)
 		return (NULL);
 	new->name = name;
     new->value = value;
+    new->next = NULL;
 	return (new);
 }
 
