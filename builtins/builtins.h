@@ -43,10 +43,9 @@ int    	do_whatever(t_env *env);
 int		check_var_name(char	arg);
 int		give_variable(t_env *env, t_env **tmp, char *search);
 t_env	*ft_lstnew(char	*name, char *value);
-char	*return_env_value(t_env *env, char **args);
+char	*return_env_value(char **args);
 
 				//EXPORT:
-char	*check_env_string(t_env *env, char **args);
-void	check_if_already_exists(t_env *env, char **args);
+char	*check_env_string(char **args);
 
 #endif

@@ -149,19 +149,18 @@ int    do_whatever(t_env *env)
 
 void     cd(char **args, t_env *env)
 {
-    char    *s[] = {"ls", "-l", NULL};
-    char    *a[] = {"pwd", NULL, NULL};
+    int i;
 
+    i = 0;
     if (!args[1] || args[1][0] == '~')
-        home_case(env);
+        i = home_case(env);
     else if (args[1][0] == '/' && args[1][1] == '\0')
-        slash_case(env);
+        i = slash_case(env);
     else if (args[1])
-        absolute_path(env, args[1]);
+        i = absolute_path(env, args[1]);
     else if (args[1][0] == '.' && args[1][1] == '.')
-        go_back(env);
+        i = go_back(env);
     else if (args[1][0] == '.')
-        do_whatever(env);
-    //execve("/bin/pwd", a, NULL);
-    //execve("/bin/ls", s, NULL);
+        i = do_whatever(env);
+    exit (i);
 }

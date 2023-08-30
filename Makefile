@@ -1,20 +1,47 @@
 
 NAME = parse.exec
 
-PARSE_SRC = check_valid\
+OBJ_DIR = obj/
+
+############################### PARSE ######################################
+PARSE = check_valid\
 	handle_input\
 	mini_input\
 	mini_split\
 	parsing_utils\
 	split_pipes
 
+PARSE_SRC_DIR = parse/
+PARSE_SRC = $(addprefix $(PARSE_SRC_DIR), $(addsuffix .c, $(PARSE)))
+PARSE_OBJ = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(PARSE)))
 
-SRC = $(addprefix $(SRC_DIR), $(addsuffix .c, $(PARSE_SRC)))
-OBJ = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(PARSE_SRC)))
+############################### EXPAND ####################################
 
-SRC_DIR = parse/
+EXPAND = expand\
+	expand_utils
 
-OBJ_DIR = parse/obj/
+EXPAND_SRC_DIR = expand/
+EXPAND_SRC = $(addprefix $(EXPAND_SRC_DIR), $(addsuffix .c, $(EXPAND)))
+EXPAND_OBJ = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(EXPAND)))
+
+############################## BUILTIN ####################################
+
+BUILTINS = cd\
+	echo\
+	env\
+	export\
+	pwd\
+	utils\
+	utils1
+
+BULITINS_SRC_DIR = builtins/
+BUILTINS_SRC = $(addprefix $(BULITINS_SRC_DIR), $(addsuffix .c, $(BUILTINS)))
+BUILTINS_OBJ = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(BUILTINS)))
+
+#########################################################################
+
+OBJ = $(PARSE_OBJ) $(BUILTINS_OBJ) $(EXPAND_OBJ)
+SRC = $(BUILTINS_SRC) $(EXPAND_SRC) $(PARSE_SRC)
 
 RLMAKE = readline/Makefile
 
@@ -31,7 +58,7 @@ $(OBJ): $(SRC)
 	@mkdir -p parse/obj
 	mv *.o parse/obj
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(RLMAKE)
 	make -C libft
 	make -C readline
 	$(CC) $(CFLAGS) $(OBJ) readline/libhistory.a readline/libreadline.a libft/libft.a  -I realdine $(LDLIBS) -o $(NAME) -fsanitize=address -g3

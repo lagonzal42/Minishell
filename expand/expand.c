@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 16:16:20 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/08/29 13:33:26 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/08/29 17:38:45 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include <fcntl.h>
 
 char	**quoute_case(char **spltd, int n, int *m);
-char	**dollar_case(char **spltd, int n, int *m, int quoute);
+char	**dollar_case(char **spltd, int n, int *m);
 
 
 t_env *enviroment;
@@ -36,6 +36,7 @@ int	exit_status(char *action, ...)
 	{
 		va_start(arg_ptr, action);
 		e_status = va_arg(arg_ptr, int);
+		return (0);
 	}		
 }
 
@@ -75,7 +76,9 @@ char	**expand(char **spltd)
 			if (spltd[n][m] == '\"')
 				spltd = quoute_case(spltd, n, &m);
 			else if (spltd[n][m] == '$')
-				spltd = dollar_case(spltd, n, &m, 0);
+				spltd = dollar_case(spltd, n, &m);
+			else if (spltd[n][m] == '\'')
+				m += find_quoute_end(&spltd[n][m]);
 			m++;
 		}
 		n++;
@@ -88,15 +91,15 @@ char	**quoute_case(char **spltd, int n, int *m)
 	*m += 1;
 	while (spltd[n][*m] && spltd[n][*m] != '\"')
 	{
-		if (spltd[n][*m] == '$')
-			spltd = dollar_case(spltd, n, m, 1);
+		if (spltd[n][*m] == '$' && ft_isalnum(spltd[n][*m]))
+			spltd = dollar_case(spltd, n, m);
 		else
 			*m += 1;
 	}
 	return (spltd);
 }
 
-char **dollar_case(char **spltd, int n, int *m, int quoute)
+char **dollar_case(char **spltd, int n, int *m)
 {
 	int		prev;
 	char	*holder;
@@ -125,7 +128,7 @@ char **dollar_case(char **spltd, int n, int *m, int quoute)
 	return (free(to_add[0]), free(to_add[1]), free(to_add[2]), spltd);
 }
 
-int	main(int ac, char **av, char **envp)
+/*int	main(int ac, char **av, char **envp)
 {
 	enviroment = get_env(envp, enviroment);
 	char *spltd[] = {"echo", "\"my asingment is to write de user: $USER|mi_file TASK COMPLETED!\"", "|<<$USER", "$? cat", "-e", NULL};
@@ -137,4 +140,4 @@ int	main(int ac, char **av, char **envp)
 	printf("==============FINAL================\n");
 	ft_double_print(new);
 	printf("==============FINAL================\n");
-}
+}*/
