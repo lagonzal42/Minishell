@@ -26,11 +26,24 @@ t_env *ft_lstlast(t_env *lst)
 
 void    ft_lstadd_back(t_env *lst, t_env *new)
 {
-    while (lst != NULL)
+    while (lst->next)
     {
         lst = lst->next;
     }
-    lst = new;
+    lst->next = new;
+}
+
+t_env	*ft_lstnew(char	*name, char *value)
+{
+	t_env	*new;
+
+	new = malloc(sizeof(t_env));
+	if (!new)
+		return (NULL);
+	new->name = name;
+    new->value = value;
+    new->next = NULL;
+	return (new);
 }
 
 char		*get_env_name(char *dest, const char *src)
@@ -67,7 +80,8 @@ char     *search_for_var(t_env *env, char  *search)
 int give_variable(t_env *env, t_env **ret, char *search)
 {  
     *ret = env;
-    while (ret)
+
+    while ((*ret)->next != NULL)
     {
         if (ft_strcmp((*ret)->name, search) == 0)
             return (0);

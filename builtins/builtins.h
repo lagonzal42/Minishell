@@ -33,7 +33,7 @@ t_env  	*make_node(void);
 void    print_nodes(t_env   *env);
 t_env 	*ft_lstlast(t_env *lst);
 void    ft_lstadd_back(t_env *lst, t_env *new);
-int		ft_strcmp(const char *s1, const char *s2);
+int		ft_strcmp(char *s1, char *s2);
 char    *search_for_var(t_env *env, char *search);
 int    	home_case(t_env *env);
 int    	slash_case(t_env *env);
@@ -42,9 +42,10 @@ int     absolute_path(t_env *env, char *absolute_path);
 int    	do_whatever(t_env *env);
 int		check_var_name(char	arg);
 int		give_variable(t_env *env, t_env **tmp, char *search);
+t_env	*ft_lstnew(char	*name, char *value);
+char	*return_env_value(char **args);
 
 				//EXPORT:
-char	*check_env_string(t_env *env, char **args);
-void	check_if_already_exists(t_env *env, char **args);
+char	*check_env_string(char **args);
 
 #endif

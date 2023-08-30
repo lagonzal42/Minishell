@@ -1,12 +1,14 @@
 #include "builtins.h"
 
+//Si solo nos viene un argumento, "export" a secas, escribimos 
+//todas las variables del enviroment con "declare -x" enfrente.
 void	export(t_env *env, char **args)
 {
 	t_env *tmp;
 	char *var_name;
+	char *var_value;
 
 	tmp = env;
-	//Si solo nos viene un argumento, "export" a secas, escribimos todas las variables del enviroment con "declare -x" enfrente.
 	if (!args[1])
 	{
 		while (tmp != NULL)
@@ -17,11 +19,18 @@ void	export(t_env *env, char **args)
 	}
 	else
 	{
-		var_name = ft_substr(args[1], 0, ft_strchr(args[1], '=')- &args[1][0]);
+		var_name = check_env_string(args);
+		var_value = return_env_value(args);
 		if (!give_variable(env, &tmp, var_name))
-			printf("%s\n", tmp->name);
-		//else
-
-		//check_if_already_exits(env, args, var_name);
+		{
+			free(tmp->value);
+			tmp->value = var_value;
+			free(var_name);
+		}
+		else
+		{
+			tmp = ft_lstnew(var_name, var_value);
+			ft_lstadd_back(env, tmp);
+		}
 	}
 }
