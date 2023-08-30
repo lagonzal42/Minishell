@@ -6,7 +6,7 @@
 /*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 18:07:46 by abasante          #+#    #+#             */
-/*   Updated: 2023/08/25 19:00:56 by abasante         ###   ########.fr       */
+/*   Updated: 2023/08/30 14:04:36 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@ char	*check_env_string(t_env *env, char **args)
 	while (args[1][i] != '=')
 	{
 		if (ft_isalnum(args[1][i]) == 0 && args[1][i] != '_')
-			ft_printf("error\n");
+		{
+			ft_printf("export: '%s': not a valid identifier\n", args[1]);
+			exit (0);
+		}
 		i++;
-		ft_printf("esta bien\n");		
 	}
 	a = i;
 	while(args[1][i] && !ft_is_space(args[1][i]))
@@ -32,9 +34,37 @@ char	*check_env_string(t_env *env, char **args)
 	return (var_name);
 }
 
-// void	check_if_already_exists(t_env *env, char **args, char *var_name)
-// {
-// 	t_env	*to_name_if_exists;
-// 	to_name_if_exists = give_variable(env, var_name);
-	
-// }
+char	*return_env_value(t_env *env, char **args)
+{
+	char	*var_value;
+	int i;
+	int a;
+
+	a = 0;
+	i = 0;
+	while (args[1][i] != '=')
+		i++;
+	i++;
+	while (args[1][i] != '\0')
+	{
+		var_value[a] = args[1][i];
+		i++;
+		a++;
+	}
+	printf("%s\n", var_value);
+	return (var_value);
+}
+
+int	ft_strcmp(char *s1, char *s2)
+{
+	size_t	i;
+
+	i = 0;
+	while (s1[i] == s2[i])
+	{
+		if (s1[i] == '\0' && s2[i] == '\0')
+			return (0);
+		i++;
+	}
+	return (s1[i] - s2[i]);
+}
