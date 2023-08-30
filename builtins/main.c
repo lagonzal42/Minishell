@@ -11,5 +11,5 @@ int main(int ac, char **av, char **envp)
 	//trying to change the directory with cd
 	//cd(av, env);
 	//pwd(av);
-	export(env, av);
+	//export(env, av);
 }
