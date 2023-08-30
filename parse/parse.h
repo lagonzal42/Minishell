@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 17:01:03 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/08/21 12:48:33 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/08/30 19:17:24 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define STD_IN 0
 
 # include "../libft/libft.h"
+# include "../expand/expand.h"
 
 typedef struct s_redir
 {

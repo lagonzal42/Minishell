@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:27:36 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/08/21 20:32:43 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/08/30 19:09:16 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,12 @@
 int input_handle(char *input)
 {
 	char	**args;
-	int	n = 0;
 	
 	if (check_valid(input))
 		return (1);
 	args = mini_split(input);
-	ft_printf("============MINI============\n");
-	ft_double_print(args);
-	while (args[n])
-	{
-		ft_printf("args[%d] len : %d\n", n, ft_strlen(args[n]));
-		n++;
-	}
-	ft_printf("============================\n");
 	args = pipe_spliter(args);
-	ft_printf("============PIPE============\n");
-	ft_double_print(args);
-	n = 0;
-	while (args[n])
-	{
-		ft_printf("args[%d] len : %d\n", n, ft_strlen(args[n]));
-		n++;
-	}
-	ft_printf("============================\n");
+	args = expand(args);
 	ft_double_free(args);
 	return (0);
 }

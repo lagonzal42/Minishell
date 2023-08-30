@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 16:16:20 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/08/29 17:38:45 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/08/30 19:11:19 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 #include "../parse/parse.h"
 #include <stdarg.h>
 #include "expand.h"
-#include <errno.h>
-#include <stdio.h>
-#include <fcntl.h>
 
 char	**quoute_case(char **spltd, int n, int *m);
 char	**dollar_case(char **spltd, int n, int *m);
@@ -38,28 +35,6 @@ int	exit_status(char *action, ...)
 		e_status = va_arg(arg_ptr, int);
 		return (0);
 	}		
-}
-
-t_env *get_env(char **envp, t_env *env)
-{
-    t_env   *tmp;
-    int i = 0;
-
-    env = make_node();
-    tmp = env;
-    while (envp[i] != NULL)
-    {
-        tmp->name = ft_substr(envp[i], 0, ft_strchr(envp[i], '=') - envp[i]);
-        tmp->value = ft_substr(envp[i], ft_strchr(envp[i], '=') - envp[i] + 1,
-            ft_strlen(envp[i]));
-        if (envp[++i])
-        {
-            ft_lstadd_back(env, tmp);
-            tmp->next = make_node();
-            tmp = tmp->next;    
-        }
-    }
-    return (env);
 }
 
 char	**expand(char **spltd)
@@ -115,8 +90,6 @@ char **dollar_case(char **spltd, int n, int *m)
 		ft_strlen(spltd[n]));
 	printf("left %s\n", to_add[0]);
 	printf("right %s\n", to_add[2]);
-	if (open("a.txt", O_RDONLY))
-		printf("not opened\n");
 	if (ft_strncmp(name, "?", 1) == 0)
 	 	to_add[1] = ft_itoa(exit_status("get"));
 	to_add[1] = ft_strdup(search_for_var(enviroment, name));

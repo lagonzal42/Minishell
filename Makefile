@@ -40,7 +40,9 @@ BUILTINS_OBJ = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(BUILTINS)))
 
 #########################################################################
 
-OBJ = $(PARSE_OBJ) $(BUILTINS_OBJ) $(EXPAND_OBJ)
+OBJ = $(PARSE_OBJ) \
+	$(BUILTINS_OBJ)\
+	$(EXPAND_OBJ)
 SRC = $(BUILTINS_SRC) $(EXPAND_SRC) $(PARSE_SRC)
 
 RLMAKE = readline/Makefile
@@ -60,7 +62,7 @@ $(OBJ): $(SRC)
 
 $(NAME): $(OBJ) $(RLMAKE)
 	make -C libft
-	make -C readline
+	@make -C readline
 	$(CC) $(CFLAGS) $(OBJ) readline/libhistory.a readline/libreadline.a libft/libft.a  -I realdine $(LDLIBS) -o $(NAME) -fsanitize=address -g3
 
 clean:
