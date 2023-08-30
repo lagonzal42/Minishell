@@ -65,6 +65,7 @@ char     *search_for_var(t_env *env, char  *search)
     t_env *tmp;
     char    *ret_path;
 
+    ret_path = NULL;
     tmp = env;
     while (tmp)
     {

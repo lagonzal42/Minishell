@@ -57,8 +57,8 @@ all: $(NAME)
 
 $(OBJ): $(SRC)
 	$(CC) $(CFLAGS) -c $(SRC) -I libft
-	@mkdir -p parse/obj
-	mv *.o parse/obj
+	@mkdir -p $(OBJ_DIR)
+	mv *.o $(OBJ_DIR)
 
 $(NAME): $(OBJ) $(RLMAKE)
 	make -C libft

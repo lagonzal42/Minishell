@@ -5,6 +5,7 @@
 # include "../readline/history.h"
 #include <unistd.h>
 #include "parse.h"
+#include <../builtins/builtins.h>
 
 void	sigtstphandle(int sigint)
 {
@@ -24,11 +25,17 @@ void	siginthandle(int sigint)
     rl_redisplay();
 }
 
-int	main(void)
+int	main(int argc, char **argv, char **envp)
 {
 	char	*s;
     int     eof;
-
+	t_env	*env;
+	
+	argv = 0;
+	if (argc != 1)
+		return (1);
+	env = NULL;
+	env = get_env(envp, env);
 	rl_catch_signals = 0;
     eof = 0;
 	signal(SIGINT, siginthandle);
@@ -38,7 +45,7 @@ int	main(void)
         s = readline(">>> ");
 		if (s)
 		{
-			input_handle(s);
+			input_handle(s, env);
 			if (*s)
 				add_history(s);
 			free(s);

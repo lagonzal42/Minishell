@@ -2,7 +2,7 @@
 
 int     update_oldpwd(t_env *env, char *oldpwd)
 {
-    char    cwd[10000];
+    //char    cwd[10000];
     t_env   *tmp;
     char    *name;
 
@@ -17,23 +17,6 @@ int     update_oldpwd(t_env *env, char *oldpwd)
         tmp = tmp->next;
     }
     return (SUCCESS);
-}
-
-char     *search_for_var(t_env *env, char  *search)
-{
-    t_env *tmp;
-    char    *ret_path;
-
-    tmp = env;
-    while (tmp)
-    {
-        if (ft_strcmp(tmp->name, search) == 0)
-        {
-            ret_path = tmp->value;
-        }
-        tmp = tmp->next;
-    }
-    return (ret_path);
 }
 
 int    home_case(t_env *env)
@@ -62,7 +45,7 @@ int    home_case(t_env *env)
 
 int    slash_case(t_env *env)
 {
-    char    *root_path;
+    //char    *root_path;
     char    cwd[10000];
 
     getcwd(cwd, sizeof(cwd));
@@ -127,9 +110,9 @@ int    go_back(t_env   *env)
     }
 }
 
-int    do_whatever(t_env *env)
+int    do_whatever(void)
 {
-    char    cwd[10000];
+    //char    cwd[10000];
 
     if (chdir(".") == 0)
     {
@@ -161,6 +144,6 @@ void     cd(char **args, t_env *env)
     else if (args[1][0] == '.' && args[1][1] == '.')
         i = go_back(env);
     else if (args[1][0] == '.')
-        i = do_whatever(env);
+        i = do_whatever();
     exit (i);
 }
