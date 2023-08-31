@@ -12,4 +12,5 @@ int main(int ac, char **av, char **envp)
 	//cd(av, env);
 	//pwd(av);
 	//export(env, av);
+	unset(env, av);
 }

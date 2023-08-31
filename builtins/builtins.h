@@ -48,4 +48,8 @@ char	*return_env_value(char **args);
 				//EXPORT:
 char	*check_env_string(char **args);
 
+				//UNSET:
+void	unset(t_env *env, char **args);
+t_env	*search_for_name_to_unset(t_env *env, char *search);
+
 #endif
