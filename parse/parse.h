@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 17:01:03 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/08/21 12:48:33 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/08/31 00:38:21 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # define STD_IN 0
 
 # include "../libft/libft.h"
+# include "../expand/expand.h"
+#include "../builtins/builtins.h"
 
 typedef struct s_redir
 {
@@ -50,7 +52,7 @@ int		find_quoute_end(char *trimed);
 int		find_d_quoute_end(char *trimed);
 char	**pipe_spliter(char **in);
 char	**mini_split(char *s);
-int		input_handle(char *input);
+int		input_handle(char *input, t_env *env);
 int		check_valid(char *s);
 char	*ft_find_space(char *s);
 
