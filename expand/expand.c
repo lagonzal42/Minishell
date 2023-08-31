@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 16:16:20 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/08/29 17:38:45 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/08/31 01:07:13 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,10 @@
 #include "../parse/parse.h"
 #include <stdarg.h>
 #include "expand.h"
-#include <errno.h>
-#include <stdio.h>
-#include <fcntl.h>
+#include <string.h>
 
-char	**quoute_case(char **spltd, int n, int *m);
-char	**dollar_case(char **spltd, int n, int *m);
-
-
-t_env *enviroment;
+char	**quoute_case(char **spltd, int n, int *m, t_env *env);
+char	**dollar_case(char **spltd, int n, int *m, t_env *env);
 
 int	exit_status(char *action, ...)
 {
@@ -40,29 +35,7 @@ int	exit_status(char *action, ...)
 	}		
 }
 
-t_env *get_env(char **envp, t_env *env)
-{
-    t_env   *tmp;
-    int i = 0;
-
-    env = make_node();
-    tmp = env;
-    while (envp[i] != NULL)
-    {
-        tmp->name = ft_substr(envp[i], 0, ft_strchr(envp[i], '=') - envp[i]);
-        tmp->value = ft_substr(envp[i], ft_strchr(envp[i], '=') - envp[i] + 1,
-            ft_strlen(envp[i]));
-        if (envp[++i])
-        {
-            ft_lstadd_back(env, tmp);
-            tmp->next = make_node();
-            tmp = tmp->next;    
-        }
-    }
-    return (env);
-}
-
-char	**expand(char **spltd)
+char	**expand(char **spltd, t_env *env)
 {
 	int n;
 	int m;
@@ -74,9 +47,9 @@ char	**expand(char **spltd)
 		while (spltd[n][m])
 		{
 			if (spltd[n][m] == '\"')
-				spltd = quoute_case(spltd, n, &m);
+				spltd = quoute_case(spltd, n, &m, env);
 			else if (spltd[n][m] == '$')
-				spltd = dollar_case(spltd, n, &m);
+				spltd = dollar_case(spltd, n, &m, env);
 			else if (spltd[n][m] == '\'')
 				m += find_quoute_end(&spltd[n][m]);
 			m++;
@@ -86,20 +59,20 @@ char	**expand(char **spltd)
 	return (spltd);
 }
 
-char	**quoute_case(char **spltd, int n, int *m)
+char	**quoute_case(char **spltd, int n, int *m, t_env *env)
 {
 	*m += 1;
 	while (spltd[n][*m] && spltd[n][*m] != '\"')
 	{
-		if (spltd[n][*m] == '$' && ft_isalnum(spltd[n][*m]))
-			spltd = dollar_case(spltd, n, m);
+		if (spltd[n][*m] == '$')
+			spltd = dollar_case(spltd, n, m, env);
 		else
 			*m += 1;
 	}
 	return (spltd);
 }
 
-char **dollar_case(char **spltd, int n, int *m)
+char **dollar_case(char **spltd, int n, int *m, t_env *env)
 {
 	int		prev;
 	char	*holder;
@@ -113,18 +86,12 @@ char **dollar_case(char **spltd, int n, int *m)
 	to_add[0] = ft_substr(spltd[n], 0, *m);
 	to_add[2] = ft_substr(spltd[n], *m + find_end_word(spltd, n, *m), 
 		ft_strlen(spltd[n]));
-	printf("left %s\n", to_add[0]);
-	printf("right %s\n", to_add[2]);
-	if (open("a.txt", O_RDONLY))
-		printf("not opened\n");
 	if (ft_strncmp(name, "?", 1) == 0)
 	 	to_add[1] = ft_itoa(exit_status("get"));
-	to_add[1] = ft_strdup(search_for_var(enviroment, name));
-	printf("expanded: %s\n", to_add[1]);
+	to_add[1] = ft_strdup(search_for_var(env, name));
 	*m += ft_strlen(to_add[1]) - 1;
 	holder = ft_strjoin(to_add[0], ft_strjoin(to_add[1], to_add[2]));
 	spltd[n] = holder;
-	ft_double_print(spltd);
 	return (free(to_add[0]), free(to_add[1]), free(to_add[2]), spltd);
 }
 

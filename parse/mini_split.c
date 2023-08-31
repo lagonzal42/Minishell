@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 12:09:10 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/08/21 13:56:30 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/08/31 00:58:00 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 #include "parse.h"
 #include <stdio.h>
 
-int		mini_wc(char *trimed);
-void	separate(char *s, char **spltd, int n, int j);
+static int		mini_wc(char *trimed);
+static void		separate(char *s, char **spltd, int n, int j);
 
-int	mini_wc(char *trimed)
+static int	mini_wc(char *trimed)
 {
 	int		n;
 	char	word;
@@ -40,7 +40,6 @@ int	mini_wc(char *trimed)
 void	separate(char *s, char **spltd, int n, int j)
 {
 	int	start;
-	int	end;
 
 	start = 0;
 	j = 0;
@@ -48,16 +47,6 @@ void	separate(char *s, char **spltd, int n, int j)
 	{
 		if (ft_is_space(s[start]))
 			start++;
-		else if ((s[start] == '\'' || s[start] == '\"')
-			&& (start == 0 || s[start - 1] != 92))
-		{
-			if (s[start] == '\'')
-				end = start + find_quoute_end(&s[start]);
-			else
-				end = start + find_d_quoute_end(&s[start]);
-			spltd[j++] = ft_substr(&s[start], 0, end - start + 1);
-			start = end + 1;
-		}
 		else
 		{
 			spltd[j] = ft_substr(s, start, ft_find_space(&s[start]) - &s[start] + 1);

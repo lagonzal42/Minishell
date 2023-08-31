@@ -39,7 +39,7 @@ int    	home_case(t_env *env);
 int    	slash_case(t_env *env);
 int    	go_back(t_env   *env);
 int     absolute_path(t_env *env, char *absolute_path);
-int    	do_whatever(t_env *env);
+int    	do_whatever(void);
 int		check_var_name(char	arg);
 int		give_variable(t_env *env, t_env **tmp, char *search);
 t_env	*ft_lstnew(char	*name, char *value);
