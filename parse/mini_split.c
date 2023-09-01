@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 12:09:10 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/08/31 00:58:00 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/01 16:16:57 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ void	separate(char *s, char **spltd, int n, int j)
 			start++;
 		else
 		{
-			spltd[j] = ft_substr(s, start, ft_find_space(&s[start]) - &s[start] + 1);
+			spltd[j] = ft_substr(s, start,
+					ft_find_space(&s[start]) - &s[start] + 1);
 			start += ft_strlen(spltd[j++]);
 		}
 	}

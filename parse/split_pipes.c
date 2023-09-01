@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 11:40:27 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/08/21 20:30:20 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/01 16:27:00 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "parse.h"
 #include <stdio.h>
 
-char **spliter(char *s, int m)
+char	**spliter(char *s, int m)
 {
 	char	**holder;
 	int		n;
@@ -40,9 +40,9 @@ char **spliter(char *s, int m)
 
 char	**ft_resize2(char **sp, char **addition, unsigned int pos)
 {
-	int	n;
-	int	m;
-	char **new;
+	int		n;
+	int		m;
+	char	**new;
 
 	n = 0;
 	while (sp[n])
@@ -96,9 +96,9 @@ char	**ft_split_pipes(char **sp)
 	return (sp);
 }
 
-char **pipe_spliter(char **in)
+char	**pipe_spliter(char **in)
 {
-	char **spltd;
+	char	**spltd;
 
 	spltd = ft_split_pipes(in);
 	return (spltd);

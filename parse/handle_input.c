@@ -6,17 +6,17 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:27:36 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/08/31 00:54:00 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/01 16:19:04 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 #include "../builtins/builtins.h"
 
-int input_handle(char *input, t_env *env)
+int	input_handle(char *input, t_env *env)
 {
 	char	**args;
-	
+
 	if (check_valid(input))
 		return (1);
 	args = mini_split(input);
