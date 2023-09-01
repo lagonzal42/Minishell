@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 16:16:20 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/01 13:47:46 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/01 16:36:08 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ int	exit_status(char *action, ...)
 
 char	**expand(char **spltd, t_env *env)
 {
-	int n;
-	int m;
+	int	n;
+	int	m;
 
 	n = 0;
 	while (spltd[n])
@@ -73,7 +73,7 @@ char	**quoute_case(char **spltd, int n, int *m, t_env *env)
 	return (spltd);
 }
 
-char **dollar_case(char **spltd, int n, int *m, t_env *env)
+char	**dollar_case(char **spltd, int n, int *m, t_env *env)
 {
 	int		prev;
 	char	*holder;
@@ -85,10 +85,10 @@ char **dollar_case(char **spltd, int n, int *m, t_env *env)
 	name = ft_substr(spltd[n], *m + 1, find_end_word(spltd, n, *m + 1));
 	ft_printf("name to expand :%s\n", name);
 	to_add[0] = ft_substr(spltd[n], 0, *m);
-	to_add[2] = ft_substr(spltd[n], *m + find_end_word(spltd, n, *m), 
-		ft_strlen(spltd[n]));
+	to_add[2] = ft_substr(spltd[n], *m + find_end_word(spltd, n, *m),
+			ft_strlen(spltd[n]));
 	if (ft_strncmp(name, "?", 1) == 0)
-	 	to_add[1] = ft_itoa(exit_status("get"));
+		to_add[1] = ft_itoa(exit_status("get"));
 	to_add[1] = ft_strdup(search_for_var(env, name));
 	*m += ft_strlen(to_add[1]) - 1;
 	holder = ft_strjoin(to_add[0], ft_strjoin(to_add[1], to_add[2]));
@@ -99,7 +99,8 @@ char **dollar_case(char **spltd, int n, int *m, t_env *env)
 /*int	main(int ac, char **av, char **envp)
 {
 	enviroment = get_env(envp, enviroment);
-	char *spltd[] = {"echo", "\"my asingment is to write de user: $USER|mi_file TASK COMPLETED!\"", "|<<$USER", "$? cat", "-e", NULL};
+	char *spltd[] = {"echo", "\"my asingment is to write de user:
+			$USER|mi_file TASK COMPLETED!\"", "|<<$USER", "$? cat", "-e", NULL};
 	char **new;
 	printf("==============PREV================\n");
 	ft_double_print(spltd);

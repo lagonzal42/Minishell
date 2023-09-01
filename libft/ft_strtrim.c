@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 13:00:16 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/08/18 11:33:46 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/01 16:34:14 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,11 @@ char	*ft_strtrim(const char *s1, const char *set)
 	ptr[m] = '\0';
 	return (ptr);
 }
-char **ft_multitrim(char **to_trim, char *set)
+
+char	**ft_multitrim(char **to_trim, char *set)
 {
-	int	n;
-	char *holder;
+	int		n;
+	char	*holder;
 
 	n = -1;
 	while (to_trim[++n])

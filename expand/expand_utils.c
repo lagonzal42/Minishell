@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:54:01 by larra             #+#    #+#             */
-/*   Updated: 2023/09/01 16:11:50 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/01 16:37:27 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int	find_end_word(char **spltd, int n, int m)
 	m++;
 	while (spltd[n][m] && (!ft_is_space(spltd[n][m]) && spltd[n][m] != '>' &&
 		spltd[n][m] != '<' && spltd[n][m] != '|' && spltd[n][m] != '\"' &&
-		spltd[n][m] != '&' && spltd[n][m] != '\\' && spltd[n][m] != '\''&&
+		spltd[n][m] != '&' && spltd[n][m] != '\\' && spltd[n][m] != '\'' &&
 		spltd[n][m] != '$'))
-		m  += 1;
+		m += 1;
 	return (m - k);
 }
 
