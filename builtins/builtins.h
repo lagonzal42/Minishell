@@ -57,6 +57,6 @@ char	*check_env_string(char **args);
 				//UNSET:
 void	unset(t_env *env, char **args);
 t_env	*search_for_name_to_unset(t_env *env, char *search);
-void	remove_var_from_env(t_temp *func, t_env *to_unset, t_env *env);
+void	remove_var_from_env(t_env *to_unset, t_env *env, t_temp *func);
 
 #endif
