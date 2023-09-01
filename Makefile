@@ -75,3 +75,6 @@ fclean: clean
 	rm -fr $(NAME)
 
 re: fclean clean all
+
+norm:
+	norminette $(SRC)
