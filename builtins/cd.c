@@ -2,7 +2,6 @@
 
 int     update_oldpwd(t_env *env, char *oldpwd)
 {
-    //char    cwd[10000];
     t_env   *tmp;
     char    *name;
 
