@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:54:01 by larra             #+#    #+#             */
-/*   Updated: 2023/09/01 16:37:27 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/01 16:47:45 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ char	**quit_quoutes(char **spltd)
 	int		n;
 	int		m;
 	int		end;
-	char	*holder;
 
 	n = -1;
 	while (spltd[++n])
