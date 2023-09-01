@@ -2,10 +2,14 @@
 
 void	unset(t_env *env, char **args)
 {
-	t_env *to_unset;
+	t_env 	*to_unset;
+	t_temp	*func;
 	char	*name_only;
 	int i;
 
+	func = malloc(sizeof(t_temp));
+	func->one = env;
+	func->two = env->next;
 	i = 0;
 	if (!args[1])
 		exit (ERROR);
@@ -15,8 +19,14 @@ void	unset(t_env *env, char **args)
 	to_unset = search_for_name_to_unset(env, name_only);
 	if (to_unset != NULL)
 	{
-		printf("%s=%s\n", to_unset->name, to_unset->value);
+		printf("unseting\n");
+		if (env == to_unset)
+			env = env->next;
+		else
+			remove_var_from_env(func, to_unset, env);
+		print_nodes(env);
+		free(func);
 	}
 	else
-		printf("there is no %s name variable\n", name_only);
+		exit(0);
 }
