@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 16:16:20 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/08/31 01:07:13 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/01 13:47:46 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ char	**expand(char **spltd, t_env *env)
 		}
 		n++;
 	}
+	quit_quoutes(spltd);
 	return (spltd);
 }
 
