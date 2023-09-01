@@ -31,7 +31,8 @@ BUILTINS = cd\
 	env\
 	export\
 	pwd\
-	utils\
+	utils_export\
+	utils_unset\
 	utils1
 
 BULITINS_SRC_DIR = builtins/
