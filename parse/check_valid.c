@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_valid.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: larra <larra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 18:36:02 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/01 16:18:33 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/02 18:45:58 by larra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ int	check_valid(char *s)
 		return (1);
 	if (check_opened_quoutes(s))
 		return (1);
-	if (ft_strnstr(s, "&&", ft_strlen(s)) || ft_strnstr(s, "||", ft_strlen(s)))
-		return (ft_error(4));
 	return (0);
 }
 
@@ -37,9 +35,9 @@ int	check_forbidden_chars(char *s)
 		if (s[n] == '\\' || s[n] == '`' || s[n] == ';')
 			return (ft_error(1));
 		else if (!ft_isascii(s[n]))
-		{
 			return (ft_error(2));
-		}
+		else if (s[n] == '&' || (s[n] == '|' && s[n + 1] == '|'))
+			return (ft_error(4));
 		else if (s[n] == '\"')
 			n += find_d_quoute_end(&s[n]);
 		else if (s[n] == '\'')
@@ -81,6 +79,6 @@ int	ft_error(int ecode)
 	else if (ecode == 3)
 		ft_putstr_fd("Minishell no acepta comillas sin cerrar\n", 2);
 	else if (ecode == 4)
-		ft_putstr_fd("Minishell no acepta los cadenas \"&& o ||\"\n", 2);
+		ft_putstr_fd("Minishell no acepta los cadenas \"& o ||\"\n", 2);
 	return (1);
 }

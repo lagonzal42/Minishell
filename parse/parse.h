@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: larra <larra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 17:01:03 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/01 16:19:54 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/02 18:48:21 by larra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,18 @@ typedef struct s_cmnd
 	struct s_redir	redirs;
 }	t_cmnd;
 
-t_cmnd	*parse(char *s);
+int		input_handle(char *input, t_env *env);
+
+/*============================CALLED BY INPUT HANDLER===============================*/
+
+int		check_valid(char *s);
+char	**mini_split(char *s);
+char	**pipe_spliter(char **in);
+
+/*============================UTILS=================================*/
+
 int		find_quoute_end(char *trimed);
 int		find_d_quoute_end(char *trimed);
-char	**pipe_spliter(char **in);
-char	**mini_split(char *s);
-int		input_handle(char *input, t_env *env);
-int		check_valid(char *s);
 char	*ft_find_space(char *s);
 
 #endif
