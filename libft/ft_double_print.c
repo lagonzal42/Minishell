@@ -6,13 +6,12 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 20:42:44 by larra             #+#    #+#             */
-/*   Updated: 2023/08/21 20:30:28 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/01 16:33:39 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
-
 
 void	ft_double_print(char **ptr)
 {

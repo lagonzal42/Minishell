@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: larra <larra@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 12:19:35 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/08/24 15:04:20 by larra            ###   ########.fr       */
+/*   Updated: 2023/09/01 16:20:58 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "parse.h"
-# include <stdio.h>
+#include "parse.h"
+#include <stdio.h>
 
 t_cmnd	*cmnd_init(void)
 {
@@ -28,9 +28,10 @@ t_cmnd	*cmnd_init(void)
 	new->prev = NULL;
 	return (new);
 }
+
 void	add_back(t_cmnd *lst, t_cmnd *new)
 {
-	t_cmnd *nav;
+	t_cmnd	*nav;
 
 	if (!lst)
 		lst = new;
@@ -42,6 +43,7 @@ void	add_back(t_cmnd *lst, t_cmnd *new)
 		nav->next = new;
 	}
 }
+
 int	find_quoute_end(char *trimed)
 {
 	int	n;
@@ -77,7 +79,8 @@ char	*ft_find_space(char *s)
 	{
 		if (ft_is_space(s[n]))
 			return ((char *)&s[n]);
-		else if ((s[n] == '\"' || s[n] == '\'') && (n == 0 || s[n - 1] != '\\'))
+		else if ((s[n] == '\"' || s[n] == '\'')
+			&& (n == 0 || s[n - 1] != '\\'))
 		{
 			if (s[n] == '\"')
 				n += find_d_quoute_end(&s[n]);

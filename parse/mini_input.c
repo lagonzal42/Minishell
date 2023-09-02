@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mini_input.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: larra <larra@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/01 16:39:36 by lagonzal          #+#    #+#             */
+/*   Updated: 2023/09/02 18:16:24 by larra            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 #include <signal.h>
 #include <stdlib.h>
@@ -7,6 +19,7 @@
 #include "parse.h"
 #include <../builtins/builtins.h>
 
+
 void	sigtstphandle(int sigint)
 {
 	sigint = 0;
@@ -15,6 +28,7 @@ void	sigtstphandle(int sigint)
     rl_replace_line("", sigint);
     rl_redisplay();
 }
+/*This function below manages the ctrl + c signal. I don't know if we will need to change it in the future so i wont explain it now.*/
 
 void	siginthandle(int sigint)
 {
@@ -24,6 +38,9 @@ void	siginthandle(int sigint)
     rl_replace_line("", sigint);
     rl_redisplay();
 }
+
+/*This function is the start of the program, we will probably need to aply some changes to it. But basically calls the readline function and sends the input to the input handler. 
+If an eof appears it closes the prompt line and clears the history.*/
 
 int	main(int argc, char **argv, char **envp)
 {

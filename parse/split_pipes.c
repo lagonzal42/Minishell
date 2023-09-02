@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_pipes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: larra <larra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 11:40:27 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/08/21 20:30:20 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/02 20:35:44 by larra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,13 @@
 #include "parse.h"
 #include <stdio.h>
 
-char **spliter(char *s, int m)
+/*Splits by the current position separating in 3, the left part the pipe and
+the right part. If there is no left part(pipe in first position) or there is
+no right part (pipe in last position) the size of the array will be different
+- Input: s: the string that will be splited in 1, 2, or 3; m: the position of the pipe.
+- Output: The array that has the s string splitted.*/
+
+char	**spliter(char *s, int m)
 {
 	char	**holder;
 	int		n;
@@ -38,11 +44,17 @@ char **spliter(char *s, int m)
 	return (holder);
 }
 
+/*Resizes the arrai to insert the adition in the indicated position
+- Input: sp: The array that is space splited; addition: the array that is
+			going to be added; pos: the position where the first element of
+			addition should be placed
+- Output: the resized array.*/
+
 char	**ft_resize2(char **sp, char **addition, unsigned int pos)
 {
-	int	n;
-	int	m;
-	char **new;
+	int		n;
+	int		m;
+	char	**new;
 
 	n = 0;
 	while (sp[n])
@@ -66,6 +78,11 @@ char	**ft_resize2(char **sp, char **addition, unsigned int pos)
 	ft_double_print(new);
 	return (free(sp), free(addition), new);
 }
+
+/*Finds pipes out of the quoutes and divides it in 3 arrays.
+Then inserts it in the previous array using resize.
+-Input: same as previous
+-Output: the array that has the pipes in independent lines.*/
 
 char	**ft_split_pipes(char **sp)
 {
@@ -96,25 +113,14 @@ char	**ft_split_pipes(char **sp)
 	return (sp);
 }
 
-char **pipe_spliter(char **in)
+/*This function  calls the pipe splitter
+-Input: The space splited prompt
+-Output: The prompt but with the pipes splited and separated.*/
+
+char	**pipe_spliter(char **in)
 {
-	char **spltd;
+	char	**spltd;
 
 	spltd = ft_split_pipes(in);
 	return (spltd);
 }
-
-/*int main(void)
-{
-	// char *s[] = {"<Es>to", "es", ">una|redireccion", "prueba<<patata", NULL};
-	char **s;
-	s = malloc(5 * sizeof(char *));
-	s[0] = ft_strdup("<Es>to");
-	s[1] = ft_strdup("es");
-	s[2] = ft_strdup(">una|redireccion");
-	s[3] = ft_strdup("prueba<<patata");
-	s[4] = NULL;
-	s = pipe_spliter(s);
-	ft_double_print(s);
-	fscanf(stdin, "c");
-}*/
