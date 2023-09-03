@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: larra <larra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 16:16:20 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/01 16:36:08 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/03 18:27:27 by larra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,16 @@
 
 char	**quoute_case(char **spltd, int n, int *m, t_env *env);
 char	**dollar_case(char **spltd, int n, int *m, t_env *env);
+
+/*This function has an static variable to manage the exit status. We
+need it in order to have the exit codes of the comands that we execute.
+- Input: action: this is going to have to options (set and get). If we use get
+		it returns the last exit status of the last thing that was executed. If
+		we use set it sets the static variable to the new exit status code.
+		It is suposed to be a second varible in the input in the set case, the
+		new error code.
+- Output: it returns the value of the static variable in the get case and 0 in
+		the set case.*/
 
 int	exit_status(char *action, ...)
 {
@@ -34,6 +44,13 @@ int	exit_status(char *action, ...)
 		return (0);
 	}		
 }
+
+/*This function looks for expanding cases. If a simple quoute appears it simply
+jumps to the end of it. If there is a double quoute or a dollar sign it goes to
+the function that manages that case.
+-Input: spltd: the splitted array of that comes from de comand line; 
+		env: a pointer to the head of our enviroment linked list
+-Output: The array with the modifications if there has been any.*/
 
 char	**expand(char **spltd, t_env *env)
 {
@@ -60,6 +77,15 @@ char	**expand(char **spltd, t_env *env)
 	return (spltd);
 }
 
+/*This fucntion looks for any dollar that appears before the end of the quoutes.
+input,
+- Input: spltd: the comand line array; n: the first pointers reference;
+		m: a pointer to the variable of the second pointers reference
+		(i use a pointer in order to be able to modify it, this way i dont
+		check some positions twice); env: a pointer to the enviroment linked
+		list.
+-Output: The array with the modifications if there has been any.*/
+
 char	**quoute_case(char **spltd, int n, int *m, t_env *env)
 {
 	*m += 1;
@@ -72,6 +98,18 @@ char	**quoute_case(char **spltd, int n, int *m, t_env *env)
 	}
 	return (spltd);
 }
+
+/*This function checks for the name of the variable that has to be expanded.
+Then divides de array in three: name, left and right. After that checks how to
+expand the name. If it is ? gets the last exit status, otherwise takes
+the value from the enviroment list. If the variable to be expanded doesn't
+exist it returns nothing and nothing will be between left and right.
+In the end it joins everything again and substitutes the not expanded one
+in the array for the new one with the expansion.
+- Input: spltd: The spltd array; n: first reference to pointer;
+		m: second reference to pointer; env = pointer to enviroment linked
+		list.
+- Output: The new array with the proper expansion for each case.*/
 
 char	**dollar_case(char **spltd, int n, int *m, t_env *env)
 {
@@ -89,9 +127,11 @@ char	**dollar_case(char **spltd, int n, int *m, t_env *env)
 			ft_strlen(spltd[n]));
 	if (ft_strncmp(name, "?", 1) == 0)
 		to_add[1] = ft_itoa(exit_status("get"));
-	to_add[1] = ft_strdup(search_for_var(env, name));
+	else
+		to_add[1] = ft_strdup(search_for_var(env, name));
 	*m += ft_strlen(to_add[1]) - 1;
 	holder = ft_strjoin(to_add[0], ft_strjoin(to_add[1], to_add[2]));
+	free(spltd[n]);
 	spltd[n] = holder;
 	return (free(to_add[0]), free(to_add[1]), free(to_add[2]), spltd);
 }
