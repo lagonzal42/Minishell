@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   utils1.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/25 18:07:46 by abasante          #+#    #+#             */
-/*   Updated: 2023/08/30 18:53:31 by abasante         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "builtins.h"
 
@@ -79,4 +68,22 @@ void    print_nodes(t_env   *env)
         write (1, "\n", 1);
         tmp = tmp->next;
     }
+}
+
+int	ft_strisnum(const char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str == NULL)
+		return (0);
+	if (str[0] == '-')
+		i++;
+	while (str[i])
+	{
+		if (str[i] < '0' || str[i] > '9')
+			return (0);
+		i++;
+	}
+	return (1);
 }
