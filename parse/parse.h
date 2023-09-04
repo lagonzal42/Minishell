@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: larra <larra@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 17:01:03 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/02 18:48:21 by larra            ###   ########.fr       */
+/*   Updated: 2023/09/04 13:57:50 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,7 @@
 # include "../expand/expand.h"
 # include "../builtins/builtins.h"
 
-typedef struct s_redir
-{
-	int		i_r_type;
-	int		o_r_type;
-	int		i_fd;
-	int		o_fd;
-	char	*h_lim;
-}	t_redir;
 
-typedef struct s_cmnd
-{
-	char			**cmd;
-	struct s_cmnd	*next;
-	struct s_cmnd	*prev;
-	struct s_redir	redirs;
-}	t_cmnd;
 
 int		input_handle(char *input, t_env *env);
 
