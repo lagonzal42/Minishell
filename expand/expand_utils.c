@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: larra <larra@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:54:01 by larra             #+#    #+#             */
-/*   Updated: 2023/09/03 18:44:31 by larra            ###   ########.fr       */
+/*   Updated: 2023/09/04 19:38:13 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	find_end_word(char **spltd, int n, int m)
 	int	k;
 
 	k = m;
-	m++;
 	while (spltd[n][m] && (!ft_is_space(spltd[n][m]) && spltd[n][m] != '>' &&
 		spltd[n][m] != '<' && spltd[n][m] != '|' && spltd[n][m] != '\"' &&
 		spltd[n][m] != '&' && spltd[n][m] != '\\' && spltd[n][m] != '\'' &&
