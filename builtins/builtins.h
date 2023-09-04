@@ -26,11 +26,18 @@ typedef struct 	s_temp
 	t_env	*two;
 }				t_temp;
 
+typedef struct s_ex
+{
+	int		exit;
+	int		ret;
+}				t_ex;
+
 				//BUILTIN FUNCTIONS:
 void     cd(char **args, t_env *env);
 int		echo(char **args);
 void	pwd(char **cmd);
 void	export(t_env *env, char **args);
+void	exit_builtin(t_ex *exit, char **cmd);
 
 				//FUNCTIONS:
 t_env	*get_env(char **envp, t_env *env);
@@ -50,6 +57,7 @@ int		check_var_name(char	arg);
 int		give_variable(t_env *env, t_env **tmp, char *search);
 t_env	*ft_lstnew(char	*name, char *value);
 char	*return_env_value(char **args);
+int	ft_strisnum(const char *str);
 
 				//EXPORT:
 char	*check_env_string(char **args);
