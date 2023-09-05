@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_input.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: larra <larra@student.42.fr>                +#+  +:+       +#+        */
+/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 16:39:36 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/02 18:16:24 by larra            ###   ########.fr       */
+/*   Updated: 2023/09/05 11:03:50 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "../readline/history.h"
 #include <unistd.h>
 #include "parse.h"
-#include <../builtins/builtins.h>
+#include "../builtins/builtins.h"
 
 
 void	sigtstphandle(int sigint)

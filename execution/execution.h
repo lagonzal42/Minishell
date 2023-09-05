@@ -8,4 +8,7 @@
 # include <fcntl.h>
 # include "../builtins/builtins.h"
 
+int		check_if_path_absolute(char *cmd);
+int	execute_commands_path(char *path_name, char **av, char **envp);
+
 #endif
