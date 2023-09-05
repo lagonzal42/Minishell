@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:59:11 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/05 16:18:02 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/05 20:56:15 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int	find_next_meta(char *spltd);
 
-int	add_cmd(char *spltd, int *m, t_cmnd **tmp)
+int	add_cmnd(char *spltd, int *m, t_cmnd **tmp)
 {
 	char	*holder;
 	int		end;
@@ -34,9 +34,26 @@ int	add_cmd(char *spltd, int *m, t_cmnd **tmp)
 int	find_next_meta(char *spltd)
 {
 	int	n;
+	int	quouted;
 
 	n = 0;
-	while (spltd[n] && spltd[n] != '<' && spltd[n] != '>' && spltd[n] != '|')
+	while (spltd[n] && ((spltd[n] != '<' && spltd[n] != '>' && spltd[n] != '|') || quouted))
+	{
+		if (spltd[n] == '\"' && (quouted == 1 || !quouted))
+		{
+			if (quouted)
+				quouted = 0;
+			else
+				quouted = 1;
+		}
+		else if (spltd[n] == '\'' && (quouted == 2 || !quouted))
+		{
+			if (quouted)
+				quouted = 0;
+			else 
+				quouted = 2;
+		}
 		n++;
+	}
 	return (n);
 }

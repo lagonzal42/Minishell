@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:56:55 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/05 17:45:36 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/05 20:57:46 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,11 @@ typedef struct s_cmnd
 
 void	add_back(t_cmnd *lst, t_cmnd *new);
 t_cmnd	*cmnd_init(void);
-int		cmd_create(char **spltd, t_cmnd **head);
+int		node_create(char **spltd, t_cmnd **head);
 void	redir_error(char c);
 void	close_previous_in(t_cmnd **tmp);
-int	add_cmd(char *spltd, int *m, t_cmnd **tmp)
+int		add_cmnd(char *spltd, int *m, t_cmnd **tmp);
+void	print_cmnds(t_cmnd *head);
+int	find_next_meta(char *spltd)
 
 #endif
