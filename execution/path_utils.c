@@ -8,10 +8,10 @@ int	check_if_path_absolute(char *cmd)
 		return (1);
 }
 
-void	execute_commands_path(char *path_name, char **av, char **envp)
+int	execute_commands_path(char *path_name, char **av, char **envp)
 {
-	printf("entro aqui\n");
 	if(execve(path_name, av, envp) == -1)
-		printf("no se ha podido ejecutar el comando %s\n", path_name);
+		return (0);
 	printf("si funciona esto no deberia printearse\n");
+	return 0;
 }
