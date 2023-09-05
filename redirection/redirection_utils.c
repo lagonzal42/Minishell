@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:59:46 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/04 20:57:58 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/05 15:16:49 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	add_back(t_cmnd *lst, t_cmnd *new)
 		nav->next = new;
 	}
 }
-void	ft_redir_error(char c)
+void	redir_error(char c)
 {
 	ft_putstr_fd("minishell: syntax error near unexpected token '", 2);
 	ft_putchar_fd(c, 2);

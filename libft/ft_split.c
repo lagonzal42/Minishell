@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <larraingonzalez@gmail.com>       +#+  +:+       +#+        */
+/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 13:47:08 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/02/14 19:38:14 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/05 16:16:33 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,11 @@ char	**ft_double_free(char **s)
 	int	n;
 
 	n = -1;
-	while (s[++n])
+	while (s && s[++n])
 		free(s[n]);
-	return (free(s), NULL);
+	if (s)
+		free(s);
+	return (NULL);
 }
 
 char	**ft_copy(char ***ptr, const char *s, char c)

@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:56:55 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/04 20:58:14 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/05 17:45:36 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_redir
 typedef struct s_cmnd
 {
 	char			**cmd;
+	char			*cmd_pth;
 	int				prev_pid;
 	struct s_cmnd	*next;
 	struct s_cmnd	*prev;
@@ -36,7 +37,8 @@ typedef struct s_cmnd
 void	add_back(t_cmnd *lst, t_cmnd *new);
 t_cmnd	*cmnd_init(void);
 int		cmd_create(char **spltd, t_cmnd **head);
-void	ft_redir_error(char c);
+void	redir_error(char c);
 void	close_previous_in(t_cmnd **tmp);
+int	add_cmd(char *spltd, int *m, t_cmnd **tmp)
 
 #endif
