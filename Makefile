@@ -31,7 +31,8 @@ BUILTINS = cd\
 	env\
 	export\
 	pwd\
-	utils\
+	utils_export\
+	utils_unset\
 	utils1
 
 BULITINS_SRC_DIR = builtins/
@@ -75,3 +76,6 @@ fclean: clean
 	rm -fr $(NAME)
 
 re: fclean clean all
+
+norm:
+	norminette $(SRC)
