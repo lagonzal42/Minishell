@@ -1,6 +1,6 @@
 #include "execution.h"
 
-int	main(int ac, char **av, char **envp)
+int	find_path(int ac, char **av, char **envp)
 {
 	int i;
 	int j;
@@ -39,10 +39,4 @@ int	main(int ac, char **av, char **envp)
 		ft_putstr_fd("Minishell: command not found", STDERR_FILENO);
 	free(split_cmd);
 	free(bin_paths);
-}
-
-
-void	redirections()
-{
-
 }
