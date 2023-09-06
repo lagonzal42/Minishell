@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:59:46 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/05 15:16:49 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/06 17:20:49 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ t_cmnd	*cmnd_init(void)
 	t_cmnd	*new;
 
 	new = malloc(sizeof(t_cmnd));
+	if (!new)
+		return (NULL);
 	new->cmd = NULL;
 	new->redirs.i_r_type = 0;
 	new->redirs.o_r_type = 0;
@@ -62,4 +64,31 @@ void	close_previous_in(t_cmnd **tmp)
 		free((*tmp)->redirs.h_lim);
 		(*tmp)->redirs.h_lim = NULL;
 	}
+}
+
+int	find_next_meta(char *spltd)
+{
+	int	n;
+	int	quouted;
+
+	n = 0;
+	while (spltd[n] && ((spltd[n] != '<' && spltd[n] != '>' && spltd[n] != '|') || quouted))
+	{
+		if (spltd[n] == '\"' && (quouted == 1 || !quouted))
+		{
+			if (quouted)
+				quouted = 0;
+			else
+				quouted = 1;
+		}
+		else if (spltd[n] == '\'' && (quouted == 2 || !quouted))
+		{
+			if (quouted)
+				quouted = 0;
+			else 
+				quouted = 2;
+		}
+		n++;
+	}
+	return (n);
 }

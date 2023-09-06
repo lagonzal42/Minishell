@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 20:16:12 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/05 20:45:14 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/06 17:23:28 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../expand/expand.h"
 
 
-int	select_redirection(char **spltd, int *n, int *m, t_cmnd **tmp);
+static int	select_redirection(char **spltd, int *n, int *m, t_cmnd **tmp);
 
 int	node_create(char **spltd, t_cmnd **head)
 {
@@ -40,7 +40,7 @@ int	node_create(char **spltd, t_cmnd **head)
 	return (e);
 }
 
-int	select_redirection(char **spltd, int *n, int *m, t_cmnd **tmp)
+static int	select_redirection(char **spltd, int *n, int *m, t_cmnd **tmp)
 {
 	if (spltd[*n][*m] == '<')
 		return (get_i_redir(spltd, n, m, tmp));
@@ -48,4 +48,26 @@ int	select_redirection(char **spltd, int *n, int *m, t_cmnd **tmp)
 		return (get_o_redir(spltd, n, m, tmp));
 	else
 		return (pipe_case(tmp));	
+}
+
+int	main(void)
+{
+	char	**str;
+	t_cmnd	*cmds;
+	t_cmnd	*tmp;
+
+	cmds = NULL;
+	cmds = cmnd_init();
+	str = malloc(5 * sizeof(char *));
+	str[4] = NULL;
+	str[0] = ft_strdup("echo>>infile");
+	str[1] = ft_strdup("|");
+	str[2] = ft_strdup("cat<<inf\"ile\"");
+	str[3] = ft_strdup(">>outfile");
+	tmp = NULL;
+	if (cmd_create(str, &cmds))
+		ft_printf("FAILED WHILE OPENING FDS\n");
+	//else
+		//ft_print_cmnds(cmds);
+	ft_double_free(str);
 }
