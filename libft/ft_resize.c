@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 19:04:27 by larra             #+#    #+#             */
-/*   Updated: 2023/09/05 16:15:51 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/06 20:04:03 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,8 @@ char	**ft_resize(char **old, char *new_line)
 	int		n;
 
 	n = 1;
-	if (old)
-	{
-		while (old && old[n])
-			n++;
-	}
+	while (old && old[n])
+		n++;
 	new = malloc((n + 1) * sizeof(char *));
 	if (!new)
 	{

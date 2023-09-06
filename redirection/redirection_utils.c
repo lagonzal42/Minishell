@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:59:46 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/06 17:25:45 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/06 19:02:08 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int	find_next_meta(char *spltd)
 	int	quouted;
 
 	n = 0;
+	quouted = 0;
 	while (spltd[n] && ((spltd[n] != '<' && spltd[n] != '>' && spltd[n] != '|') || quouted))
 	{
 		if (spltd[n] == '\"' && (quouted == 1 || !quouted))

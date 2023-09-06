@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:56:55 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/06 17:18:12 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/06 18:57:08 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,16 @@ t_cmnd	*cmnd_init(void);
 int		node_create(char **spltd, t_cmnd **head);
 void	redir_error(char c);
 void	close_previous_in(t_cmnd **tmp);
-//int		add_cmnd(char *spltd, int *m, t_cmnd **tmp);
+int		add_cmnd(char *spltd, int *m, t_cmnd **tmp);
 void	print_cmnds(t_cmnd *head);
 int		find_next_meta(char *spltd);
+void	print_commands(t_cmnd *head);
+
+
+/*========================REDIRECTION.C=========================*/
+
+int	get_i_redir(char **spltd, int *n, int *m, t_cmnd **tmp);
+int	get_o_redir(char **spltd, int *n, int *m, t_cmnd **tmp);
+int pipe_case(t_cmnd **tmp);
 
 #endif

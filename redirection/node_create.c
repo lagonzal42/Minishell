@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 20:16:12 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/06 17:23:28 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/06 20:08:15 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,17 @@ int	node_create(char **spltd, t_cmnd **head)
 
 	n = 0;
 	e = 0;
+	tmp = *head;
 	while (spltd[n] && !e)
 	{
+		m = 0;
 		while (spltd[n][m])
 		{
+			ft_printf("m: %d\n", m);
 			if (spltd[n][m] == '<' || spltd[n][m] == '>' || spltd[n][m] == '|')
 				e = select_redirection(spltd, &n, &m, &tmp);
 			else
-				e = add_cmnd(spltd, &n, &m, &tmp);
+				e = add_cmnd(spltd[n], &m, &tmp);
 			m++;
 		}
 		n++;
@@ -60,14 +63,14 @@ int	main(void)
 	cmds = cmnd_init();
 	str = malloc(5 * sizeof(char *));
 	str[4] = NULL;
-	str[0] = ft_strdup("echo>>infile");
+	str[0] = ft_strdup("echo>infile");
 	str[1] = ft_strdup("|");
 	str[2] = ft_strdup("cat<<inf\"ile\"");
 	str[3] = ft_strdup(">>outfile");
 	tmp = NULL;
-	if (cmd_create(str, &cmds))
+	if (node_create(str, &cmds))
 		ft_printf("FAILED WHILE OPENING FDS\n");
-	//else
-		//ft_print_cmnds(cmds);
+	else
+		print_commands(cmds);
 	ft_double_free(str);
 }
