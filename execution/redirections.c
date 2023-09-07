@@ -3,10 +3,10 @@
 /*I am going to receive the t_cmnd structure:
     1:char **cmd, which are going to be the commands already splited. 
     2:int   prev_pid, not sure what i am going to use this for yet, but it is the previous process id
-    3:struct s_cmnd *next and struct s_cmnd *prev, each node is almost as if it was separated with pipes.
+    3:struct s_cmnd *next and struct s_cmnd *prev, each node is almost as if it was the command line separated with pipes.
     4:struct s_redir redirs-> this will be used to know the type of redirection*/
 
-int main() 
+int main()
 {
     int outputFile = open("output.txt", O_WRONLY);
 
