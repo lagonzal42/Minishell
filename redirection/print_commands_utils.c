@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_commands_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: larra <larra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 17:34:13 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/06 18:49:53 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/07 10:56:48 by larra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,25 @@ void	print_commands(t_cmnd *head)
 		tmp = tmp->next;
 		n++;
 	}
+}
+
+void	free_cmnds(t_cmnd *cmds)
+{
+	t_cmnd	*next;
+
+	next = cmds->next;
+	while (next)
+	{
+		if (cmds->cmd)
+			ft_double_free(cmds->cmd);
+		if (cmds->redirs.h_lim)
+			free(cmds->redirs.h_lim);
+		cmds = cmds->next;
+		free(cmds->prev);
+	}
+	if (cmds->cmd)
+		ft_double_free(cmds->cmd);
+	if (cmds->redirs.h_lim)
+		free(cmds->redirs.h_lim);
+	free(cmds);
 }

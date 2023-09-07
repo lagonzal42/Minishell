@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: larra <larra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 20:45:08 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/06 20:11:53 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/07 10:44:22 by larra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ int	get_i_redir(char **spltd, int *n, int *m, t_cmnd **tmp)
 		*n += 1;
 		*m = 0; 
 	}
-	holder = ft_substr(&spltd[*n][*m], 0, find_next_meta(&spltd[*n][*m]));
+	holder = q_t(ft_substr(&spltd[*n][*m], 0, find_next_meta(&spltd[*n][*m])));
+	ft_printf("HOLDER IS: %s", holder);
 	if (ft_strlen(holder) == 0)
 		return (redir_error(spltd[*n][*m]), free(holder), 1);
 	if ((*tmp)->redirs.i_r_type == 2)
@@ -70,7 +71,7 @@ static int	get_heredoc_redir(t_cmnd **tmp, char *holder)
 		}
 	}
 	close(fd[1]);
-	//free(holder);
+	//free(holder); //optional to free here
 	return (0);	
 }
 
@@ -100,7 +101,7 @@ int	get_o_redir(char **spltd, int *n, int *m, t_cmnd **tmp)
 	}
 	if (spltd[*n][*m] == '\"' || spltd[*n][*m] == '\'')
 		*m += 1;
-	holder = ft_substr(&spltd[*n][*m], 0, find_next_meta(&spltd[*n][*m]));
+	holder = q_t(ft_substr(&spltd[*n][*m], 0, find_next_meta(&spltd[*n][*m])));
 	if (ft_strlen(holder) == 0)
 		return(redir_error(spltd[*n][*m]), free(holder), 1);
 	else if ((*tmp)->redirs.o_r_type == 1)

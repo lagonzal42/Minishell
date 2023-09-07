@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   node_create.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: larra <larra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 20:16:12 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/06 20:08:15 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/07 10:45:19 by larra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ int	main(void)
 {
 	char	**str;
 	t_cmnd	*cmds;
-	t_cmnd	*tmp;
 
 	cmds = NULL;
 	cmds = cmnd_init();
@@ -67,10 +66,10 @@ int	main(void)
 	str[1] = ft_strdup("|");
 	str[2] = ft_strdup("cat<<inf\"ile\"");
 	str[3] = ft_strdup(">>outfile");
-	tmp = NULL;
 	if (node_create(str, &cmds))
 		ft_printf("FAILED WHILE OPENING FDS\n");
 	else
 		print_commands(cmds);
+	free_cmnds(cmds);
 	ft_double_free(str);
 }
