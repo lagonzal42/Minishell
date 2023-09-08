@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: larra <larra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:54:01 by larra             #+#    #+#             */
-/*   Updated: 2023/09/04 19:38:13 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/07 10:33:56 by larra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	find_end_word(char **spltd, int n, int m)
 	int	k;
 
 	k = m;
+	ft_printf("first char checked: %c\n", spltd[n][m]);
 	while (spltd[n][m] && (!ft_is_space(spltd[n][m]) && spltd[n][m] != '>' &&
 		spltd[n][m] != '<' && spltd[n][m] != '|' && spltd[n][m] != '\"' &&
 		spltd[n][m] != '&' && spltd[n][m] != '\\' && spltd[n][m] != '\'' &&
@@ -51,7 +52,7 @@ char	*trim_quoutes(char *spltd, int end, int start)
 	mid = ft_substr(spltd, start + 1, end - 1);
 	right = ft_substr(spltd, start + end + 1, ft_strlen(spltd));
 	ret = ft_strjoin(ft_strjoin(left, mid), right);
-	return (free(left), free(mid), free(right), ret);
+	return (free(left), free(mid), free(right), free(spltd),  ret);
 }
 
 /*This function finds the quoutes in the strings from the array that gets as

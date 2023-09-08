@@ -6,7 +6,7 @@
 /*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:27:36 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/05 11:09:07 by abasante         ###   ########.fr       */
+/*   Updated: 2023/09/05 19:30:24 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ quoute triming and then executing the commands.*/
 int	input_handle(char *input, t_env *env)
 {
 	char	**args;
-	t_cmnd	*head;
+	//t_cmnd	*head;
 
 	if (check_valid(input))
 		return (1);
@@ -48,7 +48,7 @@ int	input_handle(char *input, t_env *env)
 	ft_printf("TO CREATE COMANDS ===================\n");
 	ft_double_print(args);
 	ft_printf("=====================================\n");
-	cmd_create(args, &head);
+	//cmd_create(args, &head);
 	ft_double_free(args);
 	return (0);
 }

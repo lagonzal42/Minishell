@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:59:46 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/04 20:57:58 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/06 19:02:08 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ t_cmnd	*cmnd_init(void)
 	t_cmnd	*new;
 
 	new = malloc(sizeof(t_cmnd));
+	if (!new)
+		return (NULL);
 	new->cmd = NULL;
 	new->redirs.i_r_type = 0;
 	new->redirs.o_r_type = 0;
@@ -29,21 +31,7 @@ t_cmnd	*cmnd_init(void)
 	return (new);
 }
 
-void	add_back(t_cmnd *lst, t_cmnd *new)
-{
-	t_cmnd	*nav;
-
-	if (!lst)
-		lst = new;
-	else
-	{
-		nav = lst;
-		while (nav->next)
-			nav = nav->next;
-		nav->next = new;
-	}
-}
-void	ft_redir_error(char c)
+void	redir_error(char c)
 {
 	ft_putstr_fd("minishell: syntax error near unexpected token '", 2);
 	ft_putchar_fd(c, 2);
@@ -62,4 +50,32 @@ void	close_previous_in(t_cmnd **tmp)
 		free((*tmp)->redirs.h_lim);
 		(*tmp)->redirs.h_lim = NULL;
 	}
+}
+
+int	find_next_meta(char *spltd)
+{
+	int	n;
+	int	quouted;
+
+	n = 0;
+	quouted = 0;
+	while (spltd[n] && ((spltd[n] != '<' && spltd[n] != '>' && spltd[n] != '|') || quouted))
+	{
+		if (spltd[n] == '\"' && (quouted == 1 || !quouted))
+		{
+			if (quouted)
+				quouted = 0;
+			else
+				quouted = 1;
+		}
+		else if (spltd[n] == '\'' && (quouted == 2 || !quouted))
+		{
+			if (quouted)
+				quouted = 0;
+			else 
+				quouted = 2;
+		}
+		n++;
+	}
+	return (n);
 }
