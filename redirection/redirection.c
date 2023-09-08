@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <larraingonzalez@gmail.com>       +#+  +:+       +#+        */
+/*   By: larra <larra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 20:45:08 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/08 14:41:45 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/08 19:52:23 by larra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ static int	get_heredoc_redir(t_cmnd **tmp, char *holder);
 
 int	get_i_redir(char *holder, t_cmnd **tmp)
 {
-	if ((*tmp)->redirs.i_r_type)
-		close_previous_in(tmp);
 	ft_printf("HOLDER IS: %s\n", holder); //debug
 	if (ft_strlen(holder) == 0)
 		return ( free(holder), 1);
