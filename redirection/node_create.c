@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   node_create.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: larra <larra@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lagonzal <larraingonzalez@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 20:16:12 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/07 10:45:19 by larra            ###   ########.fr       */
+/*   Updated: 2023/09/08 14:54:25 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 
 static int	select_redirection(char **spltd, int *n, int *m, t_cmnd **tmp);
+static char	*get_next_word(char **spltd, int *n, int *m, t_cmnd **tmp);
+
 
 int	node_create(char **spltd, t_cmnd **head)
 {
@@ -45,12 +47,48 @@ int	node_create(char **spltd, t_cmnd **head)
 
 static int	select_redirection(char **spltd, int *n, int *m, t_cmnd **tmp)
 {
+
 	if (spltd[*n][*m] == '<')
-		return (get_i_redir(spltd, n, m, tmp));
+	{
+		close_previous_in(tmp);
+		return (get_i_redir(get_next_word(spltd, n, m, tmp), tmp));
+	}
 	else if (spltd[*n][*m] == '>')
-		return (get_o_redir(spltd, n, m, tmp));
+	{
+		close_previous_out(tmp);	
+		return (get_o_redir(get_next_word(spltd, n, m, tmp), tmp));
+	}
 	else
 		return (pipe_case(tmp));	
+}
+
+static char	*get_next_word(char **spltd, int *n, int *m, t_cmnd **tmp)
+{
+	char	*holder;
+
+	if (spltd[*n][*m] == spltd[*n][*m + 1])
+	{
+		if (spltd[*n][*m] == '>')
+			(*tmp)->redirs.o_r_type = 2;
+		else
+			(*tmp)->redirs.i_r_type = 2;
+		*m += 2;
+	}
+	else
+	{
+		if (spltd[*n][*m] == '>')
+			(*tmp)->redirs.o_r_type = 1;
+		else
+			(*tmp)->redirs.i_r_type = 1;
+		*m += 1;
+	}
+	if (spltd[*n][*m] == '\0')
+	{
+		*n += 1;
+		*m = 0; 
+	}
+	holder = ft_substr(&spltd[*n][*m], 0, find_next_meta(&spltd[*n][*m]));
+	return (*m += ft_strlen(holder) - 1, q_t(holder));
 }
 
 int	main(void)
@@ -62,10 +100,10 @@ int	main(void)
 	cmds = cmnd_init();
 	str = malloc(5 * sizeof(char *));
 	str[4] = NULL;
-	str[0] = ft_strdup("echo>infile");
+	str[0] = ft_strdup("echo>outfile1");
 	str[1] = ft_strdup("|");
-	str[2] = ft_strdup("cat<<inf\"ile\"");
-	str[3] = ft_strdup(">>outfile");
+	str[2] = ft_strdup("cat<<inf\"ile\"1");
+	str[3] = ft_strdup(">>outfile2");
 	if (node_create(str, &cmds))
 		ft_printf("FAILED WHILE OPENING FDS\n");
 	else

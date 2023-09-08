@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lagonzal <larraingonzalez@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:59:46 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/06 19:02:08 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/08 14:56:59 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,20 @@ void	close_previous_in(t_cmnd **tmp)
 		close((*tmp)->redirs.i_fd);
 		(*tmp)->redirs.i_fd = 0;
 	}
-	else if ((*tmp)->redirs.i_r_type == 3)
+	else if ((*tmp)->redirs.i_r_type == 2)
 	{
 		free((*tmp)->redirs.h_lim);
+		(*tmp)->redirs.i_fd = 0;
 		(*tmp)->redirs.h_lim = NULL;
+	}
+}
+
+void	close_previous_out(t_cmnd **tmp)
+{
+	if ((*tmp)->redirs.o_r_type)
+	{
+		close((*tmp)->redirs.o_fd);
+		(*tmp)->redirs.o_fd = 1;
 	}
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: larra <larra@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lagonzal <larraingonzalez@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:54:01 by larra             #+#    #+#             */
-/*   Updated: 2023/09/07 10:33:56 by larra            ###   ########.fr       */
+/*   Updated: 2023/09/08 14:37:34 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,18 @@ char	*trim_quoutes(char *spltd, int end, int start)
 	char	*right;
 	char	*mid;
 	char	*ret;
-
+	char	*midjoin;
+ 
+	ft_printf("trim quoutes=========================\n");
+	ft_printf("CHARACTERS: spltd[start]:%c, spltd[end]: %c", spltd[start] ,spltd[end]);
 	left = ft_substr(spltd, 0, start);
 	mid = ft_substr(spltd, start + 1, end - 1);
 	right = ft_substr(spltd, start + end + 1, ft_strlen(spltd));
-	ret = ft_strjoin(ft_strjoin(left, mid), right);
-	return (free(left), free(mid), free(right), free(spltd),  ret);
+	ft_printf("left: %s\nmid: %s\nright: %s\n", left, mid, right);
+	midjoin = ft_strjoin(left, mid);
+	ret = ft_strjoin(midjoin, right);
+	ft_printf("ret: %s\n", ret);
+	return (free(left), free(mid), free(right), free(spltd), free(midjoin), ret);
 }
 
 /*This function finds the quoutes in the strings from the array that gets as
