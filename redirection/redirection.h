@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
+/*   By: larra <larra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:56:55 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/05 15:47:09 by abasante         ###   ########.fr       */
+/*   Updated: 2023/09/08 20:21:30 by larra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_redir
 typedef struct s_cmnd
 {
 	char			**cmd;
+	char			*cmd_pth;
 	int				prev_pid;
 	struct s_cmnd	*next;
 	struct s_cmnd	*prev;
@@ -35,8 +36,24 @@ typedef struct s_cmnd
 
 void	add_back(t_cmnd *lst, t_cmnd *new);
 t_cmnd	*cmnd_init(void);
-int		cmd_create(char **spltd, t_cmnd **head);
-void	ft_redir_error(char c);
+int		node_create(char **spltd, t_cmnd **head);
+void	redir_error(char c);
 void	close_previous_in(t_cmnd **tmp);
+int		add_cmnd(char *spltd, int *m, t_cmnd **tmp);
+void	print_cmnds(t_cmnd *head);
+int		find_next_meta(char *spltd);
+void	print_commands(t_cmnd *head);
+
+
+/*========================REDIRECTION.C=========================*/
+
+int	get_i_redir(char *holder, t_cmnd **tmp);
+int	get_o_redir(char *holder, t_cmnd **tmp);
+int pipe_case(t_cmnd **tmp);
+
+/*============================UTILS============================*/
+
+char	*q_t(char *s);
+void	free_cmnds(t_cmnd *cmds);
 
 #endif
