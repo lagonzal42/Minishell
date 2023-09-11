@@ -10,7 +10,7 @@
 /*First I am going to consider the following case: echo "hello" > file.txt
   in this case i am going to be redirecting the output of the echo hello command into the file.txt
   */
-void    execute(char **cmd)
+void    execute(t_cmnd  *node)
 {
     int l;
     int s;
@@ -20,16 +20,14 @@ void    execute(char **cmd)
     s = 0;
 //while (node->next != NULL);
     type = check_type(node);
+    
 }
 
 int main(void)
 {
-  char **cmd;
-
-  cmd = malloc(4 * sizeof(char *));
-  cmd[0] = ft_strdup("echo");
-  cmd[1] = ft_strdup("hello");
-  cmd[2] = ft_strdup(">");
-  cmd[3] = ft_strdup("hello.txt");
-  execute(cmd);
+    t_cmnd  *node;
+    
+    node = malloc(sizeof(t_cmnd));
+    node->cmd = {"echo", "hello", ">", "hello.txt"};
+    execute(node);
 }
