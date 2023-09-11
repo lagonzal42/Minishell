@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 16:16:20 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/05 19:40:06 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/11 14:20:59 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,6 @@ char	**dollar_case(char **spltd, int n, int *m, t_env *env)
 		to_add[1] = ft_itoa(exit_status("get"));
 	else
 		to_add[1] = ft_strdup(search_for_var(env, name));
-	*m += ft_strlen(to_add[1]) - 1;
 	holder = ft_strjoin(to_add[0], ft_strjoin(to_add[1], to_add[2]));
 	free(spltd[n]);
 	spltd[n] = holder;
