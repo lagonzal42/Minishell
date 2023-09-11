@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: larra <larra@student.42.fr>                +#+  +:+       +#+        */
+/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:56:55 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/07 10:51:15 by larra            ###   ########.fr       */
+/*   Updated: 2023/09/11 13:04:06 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void	print_commands(t_cmnd *head);
 
 /*========================REDIRECTION.C=========================*/
 
-int	get_i_redir(char **spltd, int *n, int *m, t_cmnd **tmp);
-int	get_o_redir(char **spltd, int *n, int *m, t_cmnd **tmp);
+int	get_i_redir(char *holder, t_cmnd **tmp);
+int	get_o_redir(char *holder, t_cmnd **tmp);
 int pipe_case(t_cmnd **tmp);
 
 /*============================UTILS============================*/
