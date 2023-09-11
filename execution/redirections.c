@@ -10,24 +10,39 @@
 /*First I am going to consider the following case: echo "hello" > file.txt
   in this case i am going to be redirecting the output of the echo hello command into the file.txt
   */
-void    execute(t_cmnd  *node)
-{
-    int l;
-    int s;
-    int type;
 
-    l = 0;
-    s = 0;
-//while (node->next != NULL);
-    type = check_type(node);
+void    check_if_builtin(t_cmnd *node)
+{
     
 }
 
-int main(void)
+void    execute(t_cmnd  *node)
 {
-    t_cmnd  *node;
-    
-    node = malloc(sizeof(t_cmnd));
-    node->cmd = {"echo", "hello", ">", "hello.txt"};
-    execute(node);
+    printf("===========INSIDE EXECUTE==============\n");
+    if (node->redirs.o_r_type != 0)
+        dup2(node->redirs.o_fd, STDOUT_FILENO);
+    if (node->redirs.i_r_type != 0)
+        dup2(node->redirs.i_fd, STDIN_FILENO);
+}
+
+int	main(void)
+{
+	char	**str;
+	t_cmnd	*cmds;
+
+	cmds = NULL;
+	cmds = cmnd_init();
+	str = malloc(3 * sizeof(char *));
+	str[2] = NULL;
+	str[0] = ft_strdup("echo>outfile1");
+    str[1] = ft_strdup("hello good morning");
+	// str[1] = ft_strdup("|");
+	// str[2] = ft_strdup("cat<<inf\"ile\"1");
+	// str[3] = ft_strdup(">>outfile2");
+	if (node_create(str, &cmds))
+	 	ft_printf("FAILED WHILE OPENING FDS\n");
+    check_if_builtin(cmds);
+	execute(cmds);
+	free_cmnds(cmds);
+	ft_double_free(str);
 }

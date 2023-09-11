@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   node_create.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: larra <larra@student.42.fr>                +#+  +:+       +#+        */
+/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 20:16:12 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/08 19:59:51 by larra            ###   ########.fr       */
+/*   Updated: 2023/09/11 13:21:24 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,23 +93,24 @@ static char	*get_next_word(char **spltd, int *n, int *m, t_cmnd **tmp)
 	return (*m += ft_strlen(holder) - 1, q_t(holder));
 }
 
-int	main(void)
-{
-	char	**str;
-	t_cmnd	*cmds;
+// int	main(void)
+// {
+// 	char	**str;
+// 	t_cmnd	*cmds;
 
-	cmds = NULL;
-	cmds = cmnd_init();
-	str = malloc(5 * sizeof(char *));
-	str[4] = NULL;
-	str[0] = ft_strdup("echo>outfile1");
-	str[1] = ft_strdup("|");
-	str[2] = ft_strdup("cat<<inf\"ile\"1");
-	str[3] = ft_strdup(">>outfile2");
-	if (node_create(str, &cmds))
-		ft_printf("FAILED WHILE OPENING FDS\n");
-	else
-		print_commands(cmds);
-	free_cmnds(cmds);
-	ft_double_free(str);
-}
+// 	cmds = NULL;
+// 	cmds = cmnd_init();
+// 	str = malloc(5 * sizeof(char *));
+// 	str[4] = NULL;
+// 	str[0] = ft_strdup("echo>outfile1");
+// 	str[1] = ft_strdup("|");
+// 	str[2] = ft_strdup("cat<<inf\"ile\"1");
+// 	str[3] = ft_strdup(">>outfile2");
+// 	if (node_create(str, &cmds))
+// 		ft_printf("FAILED WHILE OPENING FDS\n");
+// 	else
+// 		print_commands(cmds);
+// 	execution(cmds);
+// 	free_cmnds(cmds);
+// 	ft_double_free(str);
+// }

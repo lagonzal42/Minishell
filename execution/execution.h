@@ -18,6 +18,6 @@ int		check_if_path_absolute(char *cmd);
 int		execute_commands_path(char *path_name, char **av, char **envp);
 int		check_if_access(char *holder);
 int		find_path(int ac, char **av, char **envp);
-int		check_type(t_cmnd *node);
+void    output_redirection(t_cmnd  *node);
 
 #endif

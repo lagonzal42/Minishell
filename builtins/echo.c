@@ -10,11 +10,12 @@ int	num_of_args(char **args)
 	return (size);
 }
 
-int		echo(char **args)
+int		echo(t_env *env, char **args)
 {
 	int i;
 	int n_flag;
 
+	env = 0;
 	i = 1;
 	n_flag = 0;
 	if (num_of_args(args) > 1)

@@ -1,23 +1,13 @@
 #include "builtins.h"
 
-t_env *get_env(char **envp, t_env *env)
+void    print_env(t_env *env, char *standardized)
 {
-    t_env   *tmp;
-    int i = 0;
-
-    env = make_node();
-    tmp = env;
-    while (envp[i] != NULL)
+    if (standardized != NULL)
     {
-        tmp->name = ft_substr(envp[i], 0, ft_strchr(envp[i], '=') - envp[i]);
-        tmp->value = ft_substr(envp[i], ft_strchr(envp[i], '=') - envp[i] + 1,
-            ft_strlen(envp[i]));
-        if (envp[++i])
-        {
-            ft_lstadd_back(env, tmp);
-            tmp->next = make_node();
-            tmp = tmp->next;
-        }
+        ft_putstr_fd("env: ", STDERR_FILENO);
+        ft_putstr_fd(standardized, STDERR_FILENO);
+        ft_putstr_fd(": No such file or directory", STDERR_FILENO);
     }
-    return (env);
+    while(env->next != NULL)
+        ft_printf("%s=%s\n", env->name, env->value);
 }

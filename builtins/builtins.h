@@ -34,11 +34,12 @@ typedef struct s_ex
 }				t_ex;
 
 				//BUILTIN FUNCTIONS:
-void    cd(char **args, t_env *env);
-int		echo(char **args);
-void	pwd(char **cmd);
+void    cd(t_env *env, char **args);
+int		echo(t_env *env, char **args);
+void	pwd(t_env *env, char **cmd);
 void	export(t_env *env, char **args);
 void	exit_builtin(t_ex *exit, char **cmd);
+void	print_env(t_env *env, char *standarized);
 
 				//FUNCTIONS:
 t_env	*get_env(char **envp, t_env *env);
