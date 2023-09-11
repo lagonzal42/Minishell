@@ -15,7 +15,7 @@
 // 	exit (0);
 // }
 
-void	pwd(char **cmd)
+void	pwd(t_env *env, char **cmd)
 {
 	char	*test;
 

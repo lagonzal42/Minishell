@@ -1,33 +1,48 @@
 #include "execution.h"
 
 /*I am going to receive the t_cmnd structure:
-    1:char **cmd, which are going to be the commands already splited. 
+    1:char **cmd, which are going to be the commands already splited.
     2:int   prev_pid, not sure what i am going to use this for yet, but it is the previous process id
-    3:struct s_cmnd *next and struct s_cmnd *prev, each node is almost as if it was separated with pipes.
+    3:struct s_cmnd *next and struct s_cmnd *prev, each node is almost as if it was the command line separated with pipes.
     4:struct s_redir redirs-> this will be used to know the type of redirection*/
 
-int main() 
+
+/*First I am going to consider the following case: echo "hello" > file.txt
+  in this case i am going to be redirecting the output of the echo hello command into the file.txt
+  */
+
+void    check_if_builtin(t_cmnd *node)
 {
-    int outputFile = open("output.txt", O_WRONLY);
+    
+}
 
-    if (outputFile == -1) 
-	{
-        perror("Error opening file");
-        return 1;
-    }
+void    execute(t_cmnd  *node)
+{
+    printf("===========INSIDE EXECUTE==============\n");
+    if (node->redirs.o_r_type != 0)
+        dup2(node->redirs.o_fd, STDOUT_FILENO);
+    if (node->redirs.i_r_type != 0)
+        dup2(node->redirs.i_fd, STDIN_FILENO);
+}
 
-    // Redirect stdout to the file
-    int saved_stdout = dup(STDOUT_FILENO);
-    dup2(outputFile, STDOUT_FILENO);
-    close(outputFile);
+int	main(void)
+{
+	char	**str;
+	t_cmnd	*cmds;
 
-    printf("This text will be redirected to output.txt\n");
-
-    // Restore stdout
-    dup2(saved_stdout, STDOUT_FILENO);
-    close(saved_stdout);
-
-    printf("This text will be printed to the console.\n");
-
-    return 0;
+	cmds = NULL;
+	cmds = cmnd_init();
+	str = malloc(3 * sizeof(char *));
+	str[2] = NULL;
+	str[0] = ft_strdup("echo>outfile1");
+    str[1] = ft_strdup("hello good morning");
+	// str[1] = ft_strdup("|");
+	// str[2] = ft_strdup("cat<<inf\"ile\"1");
+	// str[3] = ft_strdup(">>outfile2");
+	if (node_create(str, &cmds))
+	 	ft_printf("FAILED WHILE OPENING FDS\n");
+    check_if_builtin(cmds);
+	execute(cmds);
+	free_cmnds(cmds);
+	ft_double_free(str);
 }
