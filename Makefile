@@ -56,6 +56,11 @@ LDLIBS := -lreadline -lncurses
 
 all: $(NAME)
 
+$(RLMAKE):
+	cd readline;\
+	./configure;\
+	cd ..
+
 $(OBJ): $(SRC)
 	$(CC) $(CFLAGS) -c $(SRC) -I libft
 	@mkdir -p $(OBJ_DIR)
