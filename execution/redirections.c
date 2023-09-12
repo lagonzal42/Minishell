@@ -19,7 +19,26 @@ void    execute(t_cmnd  *node)
 
 void	execute_builtins(t_cmnd	*node, t_env *env)
 {
+		char	*string_in_node;
 
+	string_in_node = ft_strdup((*node)->cmd[0]);
+	if (ft_strcmp(string_in_node, "echo") == 0)
+		echo(env, (*node)->cmd[1]);
+	else if (ft_strcmp(string_in_node, "cd") == 0)
+		cd(env, );
+	else if (ft_strcmp(string_in_node, "env") == 0)
+		env();
+	else if (ft_strcmp(string_in_node, "exit") == 0)
+		exit_builtin();
+	else if (ft_strcmp(string_in_node, "export") == 0)
+		export(env, );
+	else if (ft_strcmp(string_in_node, "pwd") == 0)
+		pwd(env, );
+	else if (ft_strcmp(string_in_node, "unset") == 0)
+		unset(env, );
+	else
+		return (0);
+	free(string_in_node);
 }
 
 int	main(int ac, char **av, char **envp)
