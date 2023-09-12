@@ -2,7 +2,6 @@
 
 int		check_if_builtin(t_cmnd **node)
 {
-	printf("========INSIDE CHECK_IF_BUILTIN======\n");
 	char	*string_in_node;
 
 	string_in_node = ft_strdup((*node)->cmd[0]);

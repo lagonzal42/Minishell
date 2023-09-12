@@ -19,25 +19,23 @@ void    execute(t_cmnd  *node)
 
 void	execute_builtins(t_cmnd	*node, t_env *env)
 {
-		char	*string_in_node;
+	char	*string_in_node;
 
-	string_in_node = ft_strdup((*node)->cmd[0]);
+	string_in_node = ft_strdup(node->cmd[0]);
 	if (ft_strcmp(string_in_node, "echo") == 0)
-		echo(env, (*node)->cmd[1]);
+		echo(env, node->cmd);
 	else if (ft_strcmp(string_in_node, "cd") == 0)
-		cd(env, );
+		cd(env, node->cmd);
 	else if (ft_strcmp(string_in_node, "env") == 0)
-		env();
-	else if (ft_strcmp(string_in_node, "exit") == 0)
-		exit_builtin();
+		print_env(env, NULL);
+	// else if (ft_strcmp(string_in_node, "exit") == 0)
+	// 	exit_builtin();
 	else if (ft_strcmp(string_in_node, "export") == 0)
-		export(env, );
+		export(env, node->cmd);
 	else if (ft_strcmp(string_in_node, "pwd") == 0)
-		pwd(env, );
+		pwd(env, node->cmd);
 	else if (ft_strcmp(string_in_node, "unset") == 0)
-		unset(env, );
-	else
-		return (0);
+		unset(env, node->cmd);
 	free(string_in_node);
 }
 
@@ -54,7 +52,7 @@ int	main(int ac, char **av, char **envp)
 	cmds = cmnd_init();
 	str = malloc(3 * sizeof(char *));
 	str[2] = NULL;
-	str[0] = ft_strdup("echo>outfile1");
+	str[0] = ft_strdup("yes>outfile1");
     str[1] = ft_strdup("hello good morning");
 	// str[1] = ft_strdup("|");
 	// str[2] = ft_strdup("cat<<inf\"ile\"1");
