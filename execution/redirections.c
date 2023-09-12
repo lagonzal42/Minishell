@@ -6,14 +6,13 @@
     3:struct s_cmnd *next and struct s_cmnd *prev, each node is almost as if it was the command line separated with pipes.
     4:struct s_redir redirs-> this will be used to know the type of redirection*/
 
-void    execute(t_cmnd  *node)
+void    execute(t_cmnd  *node, char *path, char **envp)
 {
     if (node->redirs.o_r_type != 0)
         dup2(node->redirs.o_fd, STDOUT_FILENO);
     if (node->redirs.i_r_type != 0)
         dup2(node->redirs.i_fd, STDIN_FILENO);
-	// if (check_if_path_absolute((*node)->cmd[0]) == 0)
-	// 	execve();
+	execve(node->cmd, path, envp);
 	
 }
 
@@ -64,7 +63,7 @@ int	main(int ac, char **av, char **envp)
 	if (bon == 1)
 		execute_builtins(cmds, env);
 	path = find_path(bon, &cmds, env);
-	execute(cmds);
+	execute(cmds, path, envp);
 	free_cmnds(cmds);
 	ft_double_free(str);
 }
