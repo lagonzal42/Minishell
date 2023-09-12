@@ -12,12 +12,11 @@
 # define APPEND 5
 # define TRUNC  6
 
-
-
 int		check_if_path_absolute(char *cmd);
-int		execute_commands_path(char *path_name, char **av, char **envp);
+char	*find_path(int bon, t_cmnd **node, t_env *env);
 int		check_if_access(char *holder);
-int		find_path(int ac, char **av, char **envp);
 void    output_redirection(t_cmnd  *node);
+int		execute_commands_path(char *path_name, char **av, char **envp);
+int		check_if_builtin(t_cmnd **node);
 
 #endif
