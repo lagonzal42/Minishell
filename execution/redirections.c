@@ -19,7 +19,7 @@ void    execute(t_cmnd  *node)
 
 void	execute_builtins(t_cmnd	*node, t_env *env)
 {
-	
+
 }
 
 int	main(int ac, char **av, char **envp)
@@ -44,6 +44,8 @@ int	main(int ac, char **av, char **envp)
 	 	ft_printf("FAILED WHILE OPENING FDS\n");
     bon = check_if_builtin(&cmds);
 	printf("built in or not:%d if it is 1 if it's not 0\n", bon);
+	if (bon == 1)
+		execute_builtins(cmds, env);
 	path = find_path(bon, &cmds, env);
 	execute(cmds);
 	free_cmnds(cmds);

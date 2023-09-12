@@ -19,8 +19,6 @@ char	*find_path(int bon, t_cmnd **node, t_env *env)
 	i = 0;
 	j = 0;
 	a = 1;
-	if (bon == 1)
-		execute_builtins(node, env);
 	if (!(*node)->cmd[0])
 		exit(0);
 	while (env && env->name && ft_strncmp(env->name, "PATH", 4) != 0)
@@ -34,6 +32,6 @@ char	*find_path(int bon, t_cmnd **node, t_env *env)
 		if (a == 1)
 			free(holder);
 	}
-	return (holder);
 	free(bin_paths);
+	return (holder);
 }
