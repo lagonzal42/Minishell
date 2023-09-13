@@ -6,7 +6,7 @@
 /*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 16:39:36 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/05 11:03:50 by abasante         ###   ########.fr       */
+/*   Updated: 2023/09/13 13:19:12 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,34 +42,34 @@ void	siginthandle(int sigint)
 /*This function is the start of the program, we will probably need to aply some changes to it. But basically calls the readline function and sends the input to the input handler. 
 If an eof appears it closes the prompt line and clears the history.*/
 
-int	main(int argc, char **argv, char **envp)
-{
-	char	*s;
-    int     eof;
-	t_env	*env;
+// int	main(int argc, char **argv, char **envp)
+// {
+// 	char	*s;
+//     int     eof;
+// 	t_env	*env;
 	
-	argv = 0;
-	if (argc != 1)
-		return (1);
-	env = NULL;
-	env = get_env(envp, env);
-	rl_catch_signals = 0;
-    eof = 0;
-	signal(SIGINT, siginthandle);
-    signal (SIGTSTP, sigtstphandle);
-	while(!eof)
-	{
-        s = readline(">>> ");
-		if (s)
-		{
-			input_handle(s, env);
-			if (*s)
-				add_history(s);
-			free(s);
-		}
-        else
-            eof = 1;
-    }
-	rl_clear_history();
-	return (0);
-}
+// 	argv = 0;
+// 	if (argc != 1)
+// 		return (1);
+// 	env = NULL;
+// 	env = get_env(envp, env);
+// 	rl_catch_signals = 0;
+//     eof = 0;
+// 	signal(SIGINT, siginthandle);
+//     signal (SIGTSTP, sigtstphandle);
+// 	while(!eof)
+// 	{
+//         s = readline(">>> ");
+// 		if (s)
+// 		{
+// 			input_handle(s, env);
+// 			if (*s)
+// 				add_history(s);
+// 			free(s);
+// 		}
+//         else
+//             eof = 1;
+//     }
+// 	rl_clear_history();
+// 	return (0);
+// }
