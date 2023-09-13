@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 20:45:08 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/11 13:46:22 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/13 18:21:31 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,11 @@ int pipe_case(t_cmnd **tmp)
 	(*tmp)->next = new;
 	if ((*tmp)->redirs.o_r_type == 0)
 	{
-		(*tmp)->redirs.o_fd = fd[0];
+		(*tmp)->redirs.o_fd = fd[1];
 		(*tmp)->redirs.o_r_type = 3;
 	}
 	*tmp = (*tmp)->next;
 	(*tmp)->redirs.i_r_type = 3;
-	(*tmp)->redirs.i_fd = fd[1];
+	(*tmp)->redirs.i_fd = fd[0];
 	return (0);
 }
