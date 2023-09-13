@@ -55,7 +55,6 @@ void	fork_loop(t_cmnd *node, t_env *env)
 		{
 			execute(tmp, env);
 		}
-		wait(NULL);
 		tmp = tmp->next;
 		//printf("aaaaaaa\n");
 	}
