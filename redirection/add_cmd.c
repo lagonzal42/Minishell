@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   add_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:59:11 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/11 13:46:02 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/13 15:20:03 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../builtins/builtins.h"
 #include "redirection.h"
 #include "../expand/expand.h"
 

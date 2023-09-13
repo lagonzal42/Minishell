@@ -6,7 +6,7 @@
 /*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:56:55 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/13 13:23:09 by abasante         ###   ########.fr       */
+/*   Updated: 2023/09/13 16:17:18 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define REDIRECTION_H
 
 #include "../libft/libft.h"
+#include "../builtins/builtins.h"
 
 typedef struct s_redir
 {
@@ -24,15 +25,17 @@ typedef struct s_redir
 	char	*h_lim;
 }	t_redir;
 
+typedef void	(*builtin_function)(t_env *, char **);
+
 typedef struct s_cmnd
 {
-	char			**cmd;
-	char			*cmd_pth;
-	
-	int				prev_pid;
-	struct s_cmnd	*next;
-	struct s_cmnd	*prev;
-	struct s_redir	redirs;
+	char				**cmd;
+	char				*cmd_pth;
+	builtin_function	built_ptr;
+	int					prev_pid;
+	struct s_cmnd		*next;
+	struct s_cmnd		*prev;
+	struct s_redir		redirs;
 }	t_cmnd;
 
 void	add_back(t_cmnd *lst, t_cmnd *new);
