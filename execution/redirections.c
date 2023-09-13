@@ -23,7 +23,6 @@ int    before_execution(t_cmnd  *node, t_env *env)
 			ft_putstr_fd(tmp->cmd[0], STDERR_FILENO);
 			ft_putstr_fd(": command not found\n", STDERR_FILENO);
 		}
-		printf("path:%s\n", tmp->cmd_pth);
 		node->built_ptr = check_if_builtin(&tmp); 
 		tmp = tmp->next;
 	}
@@ -32,6 +31,7 @@ int    before_execution(t_cmnd  *node, t_env *env)
 
 void	execute(t_cmnd	*node, t_env *env)
 {
+	printf("%d\n", node->redirs.i_fd);
 	if (node->redirs.o_r_type != 0)
         dup2(node->redirs.o_fd, STDOUT_FILENO);
     if (node->redirs.i_r_type != 0)
@@ -39,9 +39,28 @@ void	execute(t_cmnd	*node, t_env *env)
 	if (node->built_ptr != NULL)
 		node->built_ptr(env, node->cmd);
 	else
-	{
 		execve(node->cmd_pth, node->cmd, NULL);
+}
+
+void	fork_loop(t_cmnd *node, t_env *env)
+{
+	t_cmnd	*tmp;
+	int	pid;
+
+	tmp = node;
+	while (tmp != NULL)
+	{
+		pid = fork();
+		if (pid == 0)
+		{
+			execute(tmp, env);
+		}
+		tmp = tmp->next;
+		//printf("aaaaaaa\n");
 	}
+	wait(NULL);
+	printf("bbbbbbb\n");
+	exit (0);
 }
 
 int	main(int ac, char **av, char **envp)
@@ -55,19 +74,20 @@ int	main(int ac, char **av, char **envp)
 	env = NULL;
 
 	cmds = cmnd_init();
-	str = malloc(6 * sizeof(char *));
-	str[5] = NULL;
-	str[0] = ft_strdup("ls>outfile1");
+	str = malloc(5 * sizeof(char *));
+	str[4] = NULL;
+	str[0] = ft_strdup("pwd");
     str[1] = ft_strdup("");
 	str[2] = ft_strdup("|");
-	str[3] = ft_strdup("cat>nf\"ile\"1");
-	str[4] = ft_strdup("pwd");
+	str[3] = ft_strdup("cat>infile");
+	//str[4] = ft_strdup("pwd");
 	env = get_env(envp, env);
 	if (node_create(str, &cmds))
 	 	ft_printf("FAILED WHILE OPENING FDS\n");
 	if (before_execution(cmds, env) != 0)
 		return (1);
-	execute(cmds, env);	
+	print_commands(cmds);
+	fork_loop(cmds, env);	
 	free_cmnds(cmds);
 	ft_double_free(str);
 }
