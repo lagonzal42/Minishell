@@ -3,6 +3,26 @@ NAME = parse.exec
 
 OBJ_DIR = obj/
 
+############################### REDIRECTION ######################################
+REDIRECTION = add_cmd\
+	node_create\
+	print_commands_utils\
+	quoute_trim\
+	redirection_utils\
+	redirection
+
+REDIRECTION_SRC_DIR = redirection/
+REDIRECTION_SRC = $(addprefix $(REDIRECTION_SRC_DIR), $(addsuffix .c, $(REDIRECTION)))
+REDIRECTION_OBJ = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(REDIRECTION)))
+############################### EXECUTION ######################################
+EXECUTION = execution_utils\
+	find_path\
+	path_utils\
+	redirections
+
+EXECUTION_SRC_DIR = execution/
+EXECUTION_SRC = $(addprefix $(EXECUTION_SRC_DIR), $(addsuffix .c, $(EXECUTION)))
+EXECUTION_OBJ = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(EXECUTION)))
 ############################### PARSE ######################################
 PARSE = check_valid\
 	handle_input\
@@ -33,7 +53,9 @@ BUILTINS = cd\
 	pwd\
 	utils_export\
 	utils_unset\
-	utils1
+	utils_env\
+	utils1\
+	unset
 
 BULITINS_SRC_DIR = builtins/
 BUILTINS_SRC = $(addprefix $(BULITINS_SRC_DIR), $(addsuffix .c, $(BUILTINS)))
@@ -43,8 +65,11 @@ BUILTINS_OBJ = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(BUILTINS)))
 
 OBJ = $(PARSE_OBJ) \
 	$(BUILTINS_OBJ)\
-	$(EXPAND_OBJ)
-SRC = $(BUILTINS_SRC) $(EXPAND_SRC) $(PARSE_SRC)
+	$(EXPAND_OBJ) \
+	$(EXECUTION_OBJ)\
+	$(REDIRECTION_OBJ)
+
+SRC = $(BUILTINS_SRC) $(EXPAND_SRC) $(PARSE_SRC) $(EXECUTION_SRC) $(REDIRECTION_SRC)
 
 RLMAKE = readline/Makefile
 

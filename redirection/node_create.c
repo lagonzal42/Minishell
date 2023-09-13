@@ -6,7 +6,7 @@
 /*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 20:16:12 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/12 13:04:04 by abasante         ###   ########.fr       */
+/*   Updated: 2023/09/13 14:18:59 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,20 @@ int	node_create(char **spltd, t_cmnd **head)
 		{
 			ft_printf("m: %d\n", m);
 			if (spltd[n][m] == '<' || spltd[n][m] == '>' || spltd[n][m] == '|')
+			{
 				e = select_redirection(spltd, &n, &m, &tmp);
+			}
 			else
 			{
 				e = add_cmnd(spltd[n], &m, &tmp);
 			}
 			m++;
+			ft_printf("rest: %s\n", &spltd[n][m]);
 		}
 		n++;
 	}
 	return (e);
+
 }
 
 static int	select_redirection(char **spltd, int *n, int *m, t_cmnd **tmp)
@@ -58,7 +62,7 @@ static int	select_redirection(char **spltd, int *n, int *m, t_cmnd **tmp)
 	}
 	else if (spltd[*n][*m] == '>')
 	{
-		if ((*tmp)->redirs.i_r_type)
+		if ((*tmp)->redirs.i_r_type && (*tmp)->redirs.o_fd != 1)
 			close((*tmp)->redirs.o_fd);
 		return (get_o_redir(get_next_word(spltd, n, m, tmp), tmp));
 	}

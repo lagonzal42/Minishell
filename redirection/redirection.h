@@ -6,7 +6,7 @@
 /*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:56:55 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/11 13:04:06 by abasante         ###   ########.fr       */
+/*   Updated: 2023/09/13 13:23:09 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_cmnd
 {
 	char			**cmd;
 	char			*cmd_pth;
+	
 	int				prev_pid;
 	struct s_cmnd	*next;
 	struct s_cmnd	*prev;
