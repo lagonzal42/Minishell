@@ -1,6 +1,6 @@
 #include "execution.h"
 
-void *check_if_builtin(t_cmnd **node)
+builtin_function	check_if_builtin(t_cmnd **node)
 {
 	char	*string_in_node;
 
@@ -23,7 +23,7 @@ void *check_if_builtin(t_cmnd **node)
 	else if (ft_strcmp(string_in_node, "exit") == 0)
 	{
 		free(string_in_node);
-		return (&exit);
+		return (&exit_builtin);
 	}
 	else if (ft_strcmp(string_in_node, "export") == 0)
 	{
