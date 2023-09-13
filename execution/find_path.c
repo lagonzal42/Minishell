@@ -8,7 +8,7 @@
 /*if int bon is 1, it means it is a built in function, so in this case we don't
   need to find the path of the command because we are going to execute it with our code.
 */
-char	*find_path(int bon, t_cmnd **node, t_env *env)
+char	*find_path(t_cmnd **node, t_env *env)
 {
 	int i;
 	int j;
@@ -20,7 +20,7 @@ char	*find_path(int bon, t_cmnd **node, t_env *env)
 	j = 0;
 	a = 1;
 	if (!(*node)->cmd[0])
-		exit(0);
+		return (0);
 	while (env && env->name && ft_strncmp(env->name, "PATH", 4) != 0)
 		env = env->next;
 	bin_paths = ft_split(env->value, ':');
@@ -30,8 +30,14 @@ char	*find_path(int bon, t_cmnd **node, t_env *env)
 		j++;
 		a = check_if_access(holder);
 		if (a == 1)
+		{
 			free(holder);
+			holder = NULL;
+		}
 	}
-	free(bin_paths);
-	return (holder);
+	ft_double_free(bin_paths);
+	if (holder != NULL)
+		return (holder);
+	else
+		return (NULL);
 }

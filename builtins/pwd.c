@@ -18,6 +18,7 @@
 void	pwd(t_env *env, char **cmd)
 {
 	char	*test;
+	env = 0;
 
 	test = getcwd(NULL, 0);
 	if (test == NULL || cmd[1])
