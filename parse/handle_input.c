@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_input.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:27:36 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/11 13:04:09 by abasante         ###   ########.fr       */
+/*   Updated: 2023/09/13 14:50:22 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ each variable.
 When the expansion is finished next step will be command creation,
 quoute triming and then executing the commands.*/
 
-int	input_handle(char *input, t_env *env)
+int	input_handle(char *input, t_env *env, char **envp)
 {
 	char	**args;
-	//t_cmnd	*head;
+	t_cmnd	*head;
 
 	if (check_valid(input))
 		return (1);
@@ -48,7 +48,13 @@ int	input_handle(char *input, t_env *env)
 	ft_printf("TO CREATE COMANDS ===================\n");
 	ft_double_print(args);
 	ft_printf("=====================================\n");
-	//cmd_create(args, &head);
+	envp = 0; //debug
+	head = cmnd_init();
+	node_create(args, &head);
 	ft_double_free(args);
+	ft_printf("==============COMANDS IN NODES ARE=======================\n");
+	print_commands(head);
+	ft_printf("==========================================================\n");
+	free_cmnds(head);
 	return (0);
 }

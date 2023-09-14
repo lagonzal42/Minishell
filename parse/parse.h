@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 17:01:03 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/04 13:57:50 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/13 14:34:56 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 
 
 
-int		input_handle(char *input, t_env *env);
+int	input_handle(char *input, t_env *env, char **envp);
 
 /*============================CALLED BY INPUT HANDLER===============================*/
 
