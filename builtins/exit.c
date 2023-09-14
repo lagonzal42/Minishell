@@ -1,6 +1,6 @@
 #include "builtins.h"
 
-void	exit_builtin(t_env *env, char **cmd)
+int	exit_builtin(t_env *env, char **cmd)
 {
 	int ret;
 	ret = 0;
@@ -20,5 +20,5 @@ void	exit_builtin(t_env *env, char **cmd)
 	}
 	else if (cmd[1])
 		ret = ft_atoi(cmd[1]);
-	exit (ret);
+	return (ret);
 }

@@ -10,7 +10,7 @@ int	num_of_args(char **args)
 	return (size);
 }
 
-void		echo(t_env *env, char **args)
+int		echo(t_env *env, char **args)
 {
 	int i;
 	int n_flag;
@@ -35,5 +35,5 @@ void		echo(t_env *env, char **args)
 	}
 	if (n_flag == 0)
 		write (1, "\n", 1);
-	exit(0);
+	return (0);
 }

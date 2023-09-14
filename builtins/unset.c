@@ -21,7 +21,7 @@ void	unset(t_env *env, char **args)
 			env = env->next;
 		else
 			remove_var_from_env(to_unset, env, func);
-		print_nodes(env);
+		//print_nodes(env);
 		free(func);
 	}
 	exit(0);
