@@ -5,7 +5,7 @@ void    print_env(t_env *env, char **standardized)
     t_env   *tmp;
     
     tmp = env;
-    if (*standardized != NULL)
+    if (standardized[1] != NULL)
     {
         ft_putstr_fd("env: ", STDERR_FILENO);
         ft_putstr_fd(*standardized, STDERR_FILENO);

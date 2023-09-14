@@ -21,6 +21,11 @@ char	*find_path(t_cmnd **node, t_env *env)
 	a = 1;
 	if (!(*node)->cmd[0])
 		return (0);
+	if (access((*node)->cmd[0], F_OK | X_OK) != -1)
+	{
+		printf("enters\n");
+		return (ft_strdup((*node)->cmd[0]));
+	}
 	while (env && env->name && ft_strncmp(env->name, "PATH", 4) != 0)
 		env = env->next;
 	bin_paths = ft_split(env->value, ':');
