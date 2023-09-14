@@ -55,7 +55,8 @@ BUILTINS = cd\
 	utils_unset\
 	utils_env\
 	utils1\
-	unset
+	unset\
+	exit
 
 BULITINS_SRC_DIR = builtins/
 BUILTINS_SRC = $(addprefix $(BULITINS_SRC_DIR), $(addsuffix .c, $(BUILTINS)))

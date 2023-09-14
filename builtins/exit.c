@@ -1,12 +1,13 @@
 #include "builtins.h"
 
-void	exit_builtin(t_ex *ex, char **cmd)
+void	exit_builtin(t_env *env, char **cmd)
 {
 	int ret;
+	ret = 0;
+	env = 0;
 
 	if (cmd[1] && cmd[2])
 	{
-		ex->ret = 1;
 		ft_putstr_fd("exit\n", STDERR_FILENO);
 		ft_putstr_fd("minshell: exit: too many arguments\n", STDERR_FILENO);
 	}

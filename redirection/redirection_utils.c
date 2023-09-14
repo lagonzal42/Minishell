@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <larraingonzalez@gmail.com>       +#+  +:+       +#+        */
+/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:59:46 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/08 14:56:59 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/13 18:17:45 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_cmnd	*cmnd_init(void)
 	if (!new)
 		return (NULL);
 	new->cmd = NULL;
+	new->built_ptr = NULL;
 	new->redirs.i_r_type = 0;
 	new->redirs.o_r_type = 0;
 	new->redirs.i_fd = 0;
