@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:56:55 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/13 16:17:18 by abasante         ###   ########.fr       */
+/*   Updated: 2023/09/14 12:47:30 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_cmnd
 	struct s_cmnd		*next;
 	struct s_cmnd		*prev;
 	struct s_redir		redirs;
+	pid_t				pid;
 }	t_cmnd;
 
 void	add_back(t_cmnd *lst, t_cmnd *new);

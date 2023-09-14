@@ -6,13 +6,14 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:27:36 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/13 14:50:22 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/14 12:03:08 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 #include "../builtins/builtins.h"
 #include "../redirection/redirection.h"
+#include "../execution/execution.h"
 
 /*This function calls all the other parsing functions in order. 
 The input is modified by each one of them.
@@ -45,16 +46,20 @@ int	input_handle(char *input, t_env *env, char **envp)
 	args = mini_split(input);
 	args = pipe_spliter(args);
 	args = expand(args, env);
-	ft_printf("TO CREATE COMANDS ===================\n");
+	ft_printf("TO CREATE COMANDS ===================\n"); //debug
 	ft_double_print(args);
 	ft_printf("=====================================\n");
 	envp = 0; //debug
 	head = cmnd_init();
-	node_create(args, &head);
+	if (node_create(args, &head))
+		return(free_cmnds(head), 2);
 	ft_double_free(args);
-	ft_printf("==============COMANDS IN NODES ARE=======================\n");
+	ft_printf("==============COMANDS IN NODES ARE=======================\n"); //debug
 	print_commands(head);
-	ft_printf("==========================================================\n");
+	ft_printf("==========================================================\n"); //debug
+	if (before_execution(head, env) != 0)
+ 		return (free_cmnds(head), 3);
+	fork_loop(head, env);	
 	free_cmnds(head);
 	return (0);
 }

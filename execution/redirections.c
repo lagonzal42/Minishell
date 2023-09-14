@@ -1,4 +1,5 @@
 #include "execution.h"
+#include "../expand/expand.h"
 
 /*I am going to receive the t_cmnd structure:
     1:char **cmd, which are going to be the commands already splited.
@@ -22,6 +23,7 @@ int    before_execution(t_cmnd  *node, t_env *env)
 			ft_putstr_fd("bash: ", STDERR_FILENO);
 			ft_putstr_fd(tmp->cmd[0], STDERR_FILENO);
 			ft_putstr_fd(": command not found\n", STDERR_FILENO);
+			exit_status("set", 127);
 		}
 		node->built_ptr = check_if_builtin(&tmp); 
 		tmp = tmp->next;
@@ -31,11 +33,12 @@ int    before_execution(t_cmnd  *node, t_env *env)
 
 void	execute(t_cmnd	*node, t_env *env)
 {
-	printf("%d\n", node->redirs.i_fd);
 	if (node->redirs.o_r_type != 0)
         dup2(node->redirs.o_fd, STDOUT_FILENO);
     if (node->redirs.i_r_type != 0)
         dup2(node->redirs.i_fd, STDIN_FILENO);
+	if (node->redirs.i_r_type == 3 && node->prev && node->prev->redirs.o_r_type == 3)
+		waitpid(node->prev->pid, NULL, 0);
 	if (node->built_ptr != NULL)
 		node->built_ptr(env, node->cmd);
 	else
@@ -45,49 +48,53 @@ void	execute(t_cmnd	*node, t_env *env)
 void	fork_loop(t_cmnd *node, t_env *env)
 {
 	t_cmnd	*tmp;
-	int	pid;
-
+	pid_t	pid;
+	int		exit_stat;
+	int		status_code;
+	
+	status_code = 0;
 	tmp = node;
 	while (tmp != NULL)
 	{
 		pid = fork();
+		node->pid = pid;
 		if (pid == 0)
 		{
 			execute(tmp, env);
 		}
 		tmp = tmp->next;
-		//printf("aaaaaaa\n");
 	}
-	wait(NULL);
-	printf("bbbbbbb\n");
-	exit (0);
+	wait(&exit_stat);
+	if (WIFEXITED(exit_stat))
+		status_code = WEXITSTATUS(exit_stat);
+	exit_status("set", status_code);
 }
 
-int	main(int ac, char **av, char **envp)
-{
-	char	**str;
-	t_cmnd	*cmds;
-	t_env	*env;
-	ac = 0;
-	av = NULL;
-	cmds = NULL;
-	env = NULL;
+// int	main(int ac, char **av, char **envp)
+// {
+// 	char	**str;
+// 	t_cmnd	*cmds;
+// 	t_env	*env;
+// 	ac = 0;
+// 	av = NULL;
+// 	cmds = NULL;
+// 	env = NULL;
 
-	cmds = cmnd_init();
-	str = malloc(5 * sizeof(char *));
-	str[4] = NULL;
-	str[0] = ft_strdup("pwd");
-    str[1] = ft_strdup("");
-	str[2] = ft_strdup("|");
-	str[3] = ft_strdup("cat>infile");
-	//str[4] = ft_strdup("pwd");
-	env = get_env(envp, env);
-	if (node_create(str, &cmds))
-	 	ft_printf("FAILED WHILE OPENING FDS\n");
-	if (before_execution(cmds, env) != 0)
-		return (1);
-	print_commands(cmds);
-	fork_loop(cmds, env);	
-	free_cmnds(cmds);
-	ft_double_free(str);
-}
+// 	cmds = cmnd_init();
+// 	str = malloc(5 * sizeof(char *));
+// 	str[4] = NULL;
+// 	str[0] = ft_strdup("pwd");
+//     str[1] = ft_strdup("");
+// 	str[2] = ft_strdup("|");
+// 	str[3] = ft_strdup("cat>infile");
+// 	//str[4] = ft_strdup("pwd");
+// 	env = get_env(envp, env);
+// 	if (node_create(str, &cmds))
+// 	 	ft_printf("FAILED WHILE OPENING FDS\n");
+// 	if (before_execution(cmds, env) != 0)
+// 		return (1);
+// 	print_commands(cmds);
+// 	fork_loop(cmds, env);	
+// 	free_cmnds(cmds);
+// 	ft_double_free(str);
+// }
