@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:59:11 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/13 15:20:03 by abasante         ###   ########.fr       */
+/*   Updated: 2023/09/14 12:28:27 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,19 @@ int	add_cmnd(char *spltd, int *m, t_cmnd **tmp)
 {
 	char	*holder;
 	int		end;
+	char	*unquouted;
 
 	ft_printf("cmnd adding case\n");
 	end = find_next_meta(&spltd[*m]);
 	ft_printf("string on right  is: %s\n", &spltd[end]);
 	holder = ft_substr(&spltd[*m], 0, end);
+	*m += ft_strlen(holder) - 1;
+	unquouted = q_t(holder);
 	ft_printf("cmnd to add is: %s\n", holder); //debug
 	if (!holder)
 		return (1);
-	*m += ft_strlen(holder) - 1;
 	ft_printf("===========ADD CMD=================\n"); //debug
-	(*tmp)->cmd = ft_resize((*tmp)->cmd, holder);
+	(*tmp)->cmd = ft_resize((*tmp)->cmd, unquouted);
 	ft_double_print(((*tmp)->cmd));
 	ft_printf("===========ADD CMD END=============\n"); //debug
 	if (!(*tmp)->cmd)
