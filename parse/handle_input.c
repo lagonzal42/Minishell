@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_input.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:27:36 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/14 12:03:08 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/14 14:17:39 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ int	input_handle(char *input, t_env *env, char **envp)
 {
 	char	**args;
 	t_cmnd	*head;
+	pid_t	pid;
+	int		exit_s;
+	int		status_code;
 
 	if (check_valid(input))
 		return (1);
@@ -59,7 +62,19 @@ int	input_handle(char *input, t_env *env, char **envp)
 	ft_printf("==========================================================\n"); //debug
 	if (before_execution(head, env) != 0)
  		return (free_cmnds(head), 3);
-	fork_loop(head, env);	
+	while (head->next)
+		head = head->next;
+	printf("================IN INPUT HANDLE===================\n");
+	printf("%p\n", head->prev);
+	pid = fork();
+	if (pid == 0)
+		fork_loop(&head, env);	
+	else
+		waitpid(pid, &exit_s, 0);
+	status_code = 0;
+	if (WIFEXITED(exit_s))
+		status_code = WEXITSTATUS(exit_s);
+	exit_status("set", status_code);
 	free_cmnds(head);
 	return (0);
 }

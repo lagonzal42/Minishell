@@ -35,4 +35,5 @@ void		echo(t_env *env, char **args)
 	}
 	if (n_flag == 0)
 		write (1, "\n", 1);
+	exit(0);
 }

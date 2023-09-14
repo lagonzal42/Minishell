@@ -17,7 +17,10 @@ int    before_execution(t_cmnd  *node, t_env *env)
 	while (tmp != NULL)
 	{
 		tmp->cmd_pth = find_path(&tmp, env);
-		if (tmp->cmd_pth == NULL)
+		printf("%s\n", tmp->cmd_pth);
+		node->built_ptr = check_if_builtin(&tmp);
+		if (tmp->cmd_pth == NULL && node->built_ptr != &export\
+			&& node->built_ptr != &exit_builtin && node->built_ptr != &unset)
 		{
 			i++;
 			ft_putstr_fd("bash: ", STDERR_FILENO);
@@ -25,7 +28,6 @@ int    before_execution(t_cmnd  *node, t_env *env)
 			ft_putstr_fd(": command not found\n", STDERR_FILENO);
 			exit_status("set", 127);
 		}
-		node->built_ptr = check_if_builtin(&tmp); 
 		tmp = tmp->next;
 	}
 	return (i);
@@ -45,29 +47,28 @@ void	execute(t_cmnd	*node, t_env *env)
 		execve(node->cmd_pth, node->cmd, NULL);
 }
 
-void	fork_loop(t_cmnd *node, t_env *env)
+void	fork_loop(t_cmnd **node, t_env *env)
 {
 	t_cmnd	*tmp;
-	pid_t	pid;
-	int		exit_stat;
-	int		status_code;
+	int	pid2;
+	static int	i;
 	
-	status_code = 0;
-	tmp = node;
-	while (tmp != NULL)
+	tmp = *node;
+	printf("%p\n", (*node)->prev);
+	printf("execution: %d\n", i++);
+	if (tmp->prev != NULL)
 	{
-		pid = fork();
-		node->pid = pid;
-		if (pid == 0)
+		printf("enters\n");
+		pid2 = fork();
+		if (pid2 != 0)
 		{
-			execute(tmp, env);
+			printf("enters2\n");
+			fork_loop(&(*node)->prev, env);
 		}
-		tmp = tmp->next;
+		else if ((*node)->redirs.i_r_type == 3 && (*node)->prev->redirs.o_r_type == 3)
+			waitpid(-1, NULL, 0);
 	}
-	wait(&exit_stat);
-	if (WIFEXITED(exit_stat))
-		status_code = WEXITSTATUS(exit_stat);
-	exit_status("set", status_code);
+	execute(tmp, env);
 }
 
 // int	main(int ac, char **av, char **envp)
