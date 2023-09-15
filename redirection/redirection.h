@@ -6,15 +6,15 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:56:55 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/14 12:47:30 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/15 17:43:07 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef REDIRECTION_H
 # define REDIRECTION_H
 
-#include "../libft/libft.h"
-#include "../builtins/builtins.h"
+# include "../libft/libft.h"
+# include "../builtins/builtins.h"
 
 typedef struct s_redir
 {
@@ -25,13 +25,13 @@ typedef struct s_redir
 	char	*h_lim;
 }	t_redir;
 
-typedef void	(*builtin_function)(t_env *, char **);
+typedef int	(*t_builtin_function)(t_env *, char **);
 
 typedef struct s_cmnd
 {
 	char				**cmd;
 	char				*cmd_pth;
-	builtin_function	built_ptr;
+	t_builtin_function	built_ptr;
 	int					prev_pid;
 	struct s_cmnd		*next;
 	struct s_cmnd		*prev;
@@ -49,12 +49,11 @@ void	print_cmnds(t_cmnd *head);
 int		find_next_meta(char *spltd);
 void	print_commands(t_cmnd *head);
 
-
 /*========================REDIRECTION.C=========================*/
 
-int	get_i_redir(char *holder, t_cmnd **tmp);
-int	get_o_redir(char *holder, t_cmnd **tmp);
-int pipe_case(t_cmnd **tmp);
+int		get_i_redir(char *holder, t_cmnd **tmp);
+int		get_o_redir(char *holder, t_cmnd **tmp);
+int		pipe_case(t_cmnd **tmp);
 
 /*============================UTILS============================*/
 

@@ -17,7 +17,7 @@ char				*find_path(t_cmnd **node, t_env *env);
 int					check_if_access(char *holder);
 void    			output_redirection(t_cmnd  *node);
 int					execute_commands_path(char *path_name, char **av, char **envp);
-builtin_function	check_if_builtin(t_cmnd **node);
+t_builtin_function	check_if_builtin(t_cmnd **node);
 int    				before_execution(t_cmnd  *node, t_env *env);
 void				fork_loop(t_cmnd **node, t_env	*env);
 int					slash_pos(t_cmnd **node);

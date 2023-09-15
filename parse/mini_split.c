@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_split.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 12:09:10 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/05 10:43:34 by abasante         ###   ########.fr       */
+/*   Updated: 2023/09/15 16:16:07 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ char	**mini_split(char *s)
 // int main(int argc, char **argv)
 // {
 // 	char *s;
-	
+//	
 // 	s = argv[1];
 // 	printf("String is :%s\n", s);
 // }

@@ -30,13 +30,20 @@ int    before_execution(t_cmnd  *node, t_env *env)
 void	execute(t_cmnd	*node, t_env *env)
 {
 	if (node->redirs.o_r_type != 0)
+	{
         dup2(node->redirs.o_fd, STDOUT_FILENO);
+		close(node->redirs.o_fd);
+	}
     if (node->redirs.i_r_type != 0)
+	{
         dup2(node->redirs.i_fd, STDIN_FILENO);
+		close(node->redirs.i_fd);
+	}
+	close(node->redirs.i_fd);
 	if (node->redirs.i_r_type == 3 && node->prev && node->prev->redirs.o_r_type == 3)
 		waitpid(node->prev->pid, NULL, 0);
 	if (node->built_ptr != NULL)
-		node->built_ptr(env, node->cmd);
+		exit(node->built_ptr(env, node->cmd));
 	else
 		execve(node->cmd_pth, node->cmd, NULL);
 }

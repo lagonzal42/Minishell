@@ -1,6 +1,6 @@
 #include "builtins.h"
 
-void	unset(t_env *env, char **args)
+int	unset(t_env *env, char **args)
 {
 	t_env 	*to_unset;
 	t_temp	*func;
@@ -24,5 +24,5 @@ void	unset(t_env *env, char **args)
 		//print_nodes(env);
 		free(func);
 	}
-	exit(0);
+	return(0);
 }

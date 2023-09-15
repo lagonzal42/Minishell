@@ -3,20 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   node_create.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 20:16:12 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/13 14:18:59 by abasante         ###   ########.fr       */
+/*   Updated: 2023/09/15 13:49:20 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redirection.h"
 #include "../expand/expand.h"
 
-
 static int	select_redirection(char **spltd, int *n, int *m, t_cmnd **tmp);
 static char	*get_next_word(char **spltd, int *n, int *m, t_cmnd **tmp);
-
 
 int	node_create(char **spltd, t_cmnd **head)
 {
@@ -33,27 +31,19 @@ int	node_create(char **spltd, t_cmnd **head)
 		m = 0;
 		while (spltd[n][m])
 		{
-			ft_printf("m: %d\n", m);
 			if (spltd[n][m] == '<' || spltd[n][m] == '>' || spltd[n][m] == '|')
-			{
 				e = select_redirection(spltd, &n, &m, &tmp);
-			}
 			else
-			{
 				e = add_cmnd(spltd[n], &m, &tmp);
-			}
 			m++;
-			ft_printf("rest: %s\n", &spltd[n][m]);
 		}
 		n++;
 	}
 	return (e);
-
 }
 
 static int	select_redirection(char **spltd, int *n, int *m, t_cmnd **tmp)
 {
-
 	if (spltd[*n][*m] == '<')
 	{
 		if ((*tmp)->redirs.i_r_type)
@@ -67,7 +57,7 @@ static int	select_redirection(char **spltd, int *n, int *m, t_cmnd **tmp)
 		return (get_o_redir(get_next_word(spltd, n, m, tmp), tmp));
 	}
 	else
-		return (pipe_case(tmp));	
+		return (pipe_case(tmp));
 }
 
 static char	*get_next_word(char **spltd, int *n, int *m, t_cmnd **tmp)
@@ -93,7 +83,7 @@ static char	*get_next_word(char **spltd, int *n, int *m, t_cmnd **tmp)
 	if (spltd[*n][*m] == '\0')
 	{
 		*n += 1;
-		*m = 0; 
+		*m = 0;
 	}
 	holder = ft_substr(&spltd[*n][*m], 0, find_next_meta(&spltd[*n][*m]));
 	return (*m += ft_strlen(holder) - 1, q_t(holder));

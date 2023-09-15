@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_pipes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: larra <larra@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 11:40:27 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/02 20:35:44 by larra            ###   ########.fr       */
+/*   Updated: 2023/09/15 16:14:07 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 /*Splits by the current position separating in 3, the left part the pipe and
 the right part. If there is no left part(pipe in first position) or there is
 no right part (pipe in last position) the size of the array will be different
-- Input: s: the string that will be splited in 1, 2, or 3; m: the position of the pipe.
+- Input: s: the string that will be splited in 1, 2, or 3; m: the position of
+the pipe.
 - Output: The array that has the s string splitted.*/
 
 char	**spliter(char *s, int m)

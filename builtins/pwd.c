@@ -15,7 +15,7 @@
 // 	exit (0);
 // }
 
-void	pwd(t_env *env, char **cmd)
+int	pwd(t_env *env, char **cmd)
 {
 	char	*test;
 	env = 0;
@@ -28,5 +28,5 @@ void	pwd(t_env *env, char **cmd)
 		ft_putstr_fd(test, 1);
 		write(1, "\n", 1);
 	}
-	exit (0);
+	return (0);
 }

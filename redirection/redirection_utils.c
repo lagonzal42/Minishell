@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:59:46 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/13 18:17:45 by abasante         ###   ########.fr       */
+/*   Updated: 2023/09/15 13:43:45 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ int	find_next_meta(char *spltd)
 
 	n = 0;
 	quouted = 0;
-	while (spltd[n] && ((spltd[n] != '<' && spltd[n] != '>' && spltd[n] != '|') || quouted))
+	while (spltd[n] && ((spltd[n] != '<'
+				&& spltd[n] != '>' && spltd[n] != '|') || quouted))
 	{
 		if (spltd[n] == '\"' && (quouted == 1 || !quouted))
 		{
@@ -83,7 +84,7 @@ int	find_next_meta(char *spltd)
 		{
 			if (quouted)
 				quouted = 0;
-			else 
+			else
 				quouted = 2;
 		}
 		n++;

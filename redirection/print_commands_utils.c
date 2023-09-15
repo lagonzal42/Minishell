@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_commands_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <larraingonzalez@gmail.com>       +#+  +:+       +#+        */
+/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 17:34:13 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/08 13:48:09 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/15 13:48:02 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	print_commands(t_cmnd *head)
 {
-	t_cmnd  *tmp;
-	int     n;
+	t_cmnd	*tmp;
+	int		n;
 
 	n = 0;
 	tmp = head;

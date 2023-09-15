@@ -34,12 +34,12 @@ typedef struct s_ex
 }				t_ex;
 
 				//BUILTIN FUNCTIONS:
-void    cd(t_env *env, char **args);
+int		cd(t_env *env, char **args);
 int		echo(t_env *env, char **args);
-void	pwd(t_env *env, char **cmd);
-int	export(t_env *env, char **args);
+int		pwd(t_env *env, char **cmd);
+int		export(t_env *env, char **args);
 int		exit_builtin(t_env *env, char **cmd);
-int    print_env(t_env *env, char **standardized);
+int		print_env(t_env *env, char **standardized);
 
 				//FUNCTIONS:
 t_env	*get_env(char **envp, t_env *env);
@@ -65,7 +65,7 @@ int		ft_strisnum(const char *str);
 char	*check_env_string(char **args);
 
 				//UNSET:
-void	unset(t_env *env, char **args);
+int		unset(t_env *env, char **args);
 t_env	*search_for_name_to_unset(t_env *env, char *search);
 void	remove_var_from_env(t_env *to_unset, t_env *env, t_temp *func);
 
