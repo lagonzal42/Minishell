@@ -1,6 +1,6 @@
 #include "execution.h"
 
-builtin_function	check_if_builtin(t_cmnd **node)
+t_builtin_function	check_if_builtin(t_cmnd **node)
 {
 	char	*string_in_node;
 	int		pos;
