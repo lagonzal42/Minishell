@@ -129,7 +129,7 @@ int    do_whatever(void)
     }
 }
 
-void     cd(t_env *env, char **args)
+int     cd(t_env *env, char **args)
 {
     int i;
 

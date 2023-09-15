@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:56:55 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/15 13:44:22 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/15 17:43:07 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct s_redir
 	char	*h_lim;
 }	t_redir;
 
-typedef void	(*t_builtin_function)(t_env *, char **);
+typedef int	(*t_builtin_function)(t_env *, char **);
 
 typedef struct s_cmnd
 {
