@@ -144,5 +144,5 @@ void     cd(t_env *env, char **args)
         i = go_back(env);
     else if (args[1][0] == '.')
         i = do_whatever();
-    exit (i);
+    return (i);
 }

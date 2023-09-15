@@ -2,7 +2,7 @@
 
 //Si solo nos viene un argumento, "export" a secas, escribimos 
 //todas las variables del enviroment con "declare -x" enfrente.
-void	export(t_env *env, char **args)
+int	export(t_env *env, char **args)
 {
 	t_env *tmp;
 	char *var_name;
@@ -33,4 +33,5 @@ void	export(t_env *env, char **args)
 			ft_lstadd_back(env, tmp);
 		}
 	}
+	return (0);
 }
