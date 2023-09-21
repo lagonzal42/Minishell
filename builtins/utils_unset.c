@@ -11,7 +11,7 @@ t_env	*search_for_name_to_unset(t_env *env, char *search)
 			return(tmp);
 		tmp = tmp->next;
 	}
-	return 0;
+	return (0);
 }
 
 void	remove_var_from_env(t_env *to_unset, t_env *env, t_temp *func)

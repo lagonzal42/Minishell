@@ -11,7 +11,6 @@ int    before_execution(t_cmnd  *node, t_env *env)
 	while (tmp != NULL)
 	{
 		tmp->cmd_pth = find_path(&tmp, env);
-		printf("%s\n", tmp->cmd_pth);
 		node->built_ptr = check_if_builtin(&tmp);
 		if (tmp->cmd_pth == NULL && node->built_ptr != &export\
 			&& node->built_ptr != &exit_builtin && node->built_ptr != &unset)
@@ -53,7 +52,7 @@ void	fork_loop(t_cmnd **node, t_env *env)
 	t_cmnd	*tmp;
 	int	pid2;
 	static int	i;
-	
+
 	tmp = *node;
 	printf("%p\n", (*node)->prev);
 	printf("execution: %d\n", i++);
@@ -64,6 +63,7 @@ void	fork_loop(t_cmnd **node, t_env *env)
 		pid2 = fork();
 		if (pid2 != 0)
 		{
+			//pregunta por que aqui queremos que entre el proceso padre al if
 			printf("enters2\n");
 			fork_loop(&(*node)->prev, env);
 		}
