@@ -20,6 +20,8 @@ int	export(t_env *env, char **args)
 	else
 	{
 		var_name = check_env_string(args);
+		if (var_name == NULL)
+			return (0);
 		var_value = return_env_value(args);
 		if (!give_variable(env, &tmp, var_name))
 		{

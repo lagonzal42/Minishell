@@ -13,7 +13,7 @@ char	*check_env_string(char **args)
 		if (ft_isalnum(args[1][i]) == 0 && args[1][i] != '_')
 		{
 			ft_printf("export: '%s': not a valid identifier\n", args[1]);
-			exit (1);
+			return (0);
 		}
 		i++;
 	}
