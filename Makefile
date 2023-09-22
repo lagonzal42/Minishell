@@ -1,5 +1,5 @@
 
-NAME = parse.exec
+NAME = minishell
 
 OBJ_DIR = obj/
 

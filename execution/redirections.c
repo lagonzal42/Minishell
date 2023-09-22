@@ -12,7 +12,9 @@ int    before_execution(t_cmnd  *node, t_env *env)
 	{
 		tmp->cmd_pth = find_path(&tmp, env);
 		node->built_ptr = check_if_builtin(&tmp);
-		if (tmp->cmd_pth == NULL && node->built_ptr != &export\
+		if (!node->cmd)
+			i++;
+		else if (tmp->cmd_pth == NULL && node->built_ptr != &export\
 			&& node->built_ptr != &exit_builtin && node->built_ptr != &unset)
 		{
 			i++;
@@ -26,7 +28,7 @@ int    before_execution(t_cmnd  *node, t_env *env)
 	return (i);
 }
 
-void	execute(t_cmnd	*node, t_env *env)
+void	execute(t_cmnd	*node, t_env *env, char **envp)
 {
 	if (node->redirs.o_r_type != 0)
 	{
@@ -38,37 +40,28 @@ void	execute(t_cmnd	*node, t_env *env)
         dup2(node->redirs.i_fd, STDIN_FILENO);
 		close(node->redirs.i_fd);
 	}
-	close(node->redirs.i_fd);
-	if (node->redirs.i_r_type == 3 && node->prev && node->prev->redirs.o_r_type == 3)
-		waitpid(node->prev->pid, NULL, 0);
 	if (node->built_ptr != NULL)
 		exit(node->built_ptr(env, node->cmd));
 	else
-		execve(node->cmd_pth, node->cmd, NULL);
+		execve(node->cmd_pth, node->cmd, envp);
 }
 
-void	fork_loop(t_cmnd **node, t_env *env)
+void	fork_loop(t_cmnd **node, t_env *env, char **envp)
 {
 	t_cmnd	*tmp;
 	int	pid2;
-	static int	i;
 
 	tmp = *node;
-	printf("%p\n", (*node)->prev);
-	printf("execution: %d\n", i++);
-	printf("execution: %d\n", i);
 	if (tmp->prev != NULL)
 	{
-		printf("ENTERS\n");
 		pid2 = fork();
-		if (pid2 != 0)
+		if (pid2 == 0)
 		{
 			//pregunta por que aqui queremos que entre el proceso padre al if
-			printf("enters2\n");
-			fork_loop(&(*node)->prev, env);
+			fork_loop(&(*node)->prev, env, envp);
 		}
-		else if ((*node)->redirs.i_r_type == 3 && (*node)->prev->redirs.o_r_type == 3)
-			waitpid(-1, NULL, 0);
+		if ((*node)->redirs.i_r_type == 3 && (*node)->prev->redirs.o_r_type == 3)
+			wait(NULL);
 	}
-	execute(tmp, env);
+	execute(tmp, env, envp);
 }

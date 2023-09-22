@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 16:16:20 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/11 14:20:59 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/22 14:23:23 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,9 +119,7 @@ char	**dollar_case(char **spltd, int n, int *m, t_env *env)
 	char	*to_add[3];
 
 	prev = *m;
-	printf("from prev: %s\n", &spltd[n][*m]);
 	name = ft_substr(spltd[n], *m + 1, find_end_word(spltd, n, *m + 1));
-	ft_printf("name to expand :%s\n", name);
 	to_add[0] = ft_substr(spltd[n], 0, *m);
 	to_add[2] = ft_substr(spltd[n], *m + ft_strlen(name) + 1,
 			ft_strlen(spltd[n]));
