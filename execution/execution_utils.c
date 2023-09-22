@@ -38,8 +38,6 @@ int	slash_pos(t_cmnd **node)
 		slash = ft_strchr(&(*node)->cmd[0][n], '/');
 		if (slash)
 			n = slash - &((*node)->cmd[0][0]) + 1;
-		printf("aaa\n");
-		
 	}
 	return (n);
 }
