@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_input.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 16:39:36 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/21 15:55:55 by abasante         ###   ########.fr       */
+/*   Updated: 2023/09/22 18:34:24 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,16 @@
 #include "parse.h"
 #include "../builtins/builtins.h"
 
+int	interactivity(int num)
+{
+	static int	interactivity;
+
+	if (num == 0)
+		return(interactivity);		
+	interactivity = num;
+	return (0);
+}
+
 /*This function below manages the ctrl + c signal. I don't know if we will need
 to change it in the future so i wont explain it now.*/
 
@@ -29,7 +39,8 @@ void	siginthandle(int sigint)
 		write(2, "\n", 1);
 		rl_on_new_line(); 
 		rl_replace_line("", sigint);
-		rl_redisplay();	
+		if (interactivity(0) == 1)
+			rl_redisplay();	
 	}
 }
 /*This function is the start of the program, we will probably need to aply
@@ -51,16 +62,15 @@ void	minishell(t_env **env, char **envp)
 		{
 			if (*s)
 			{
+				interactivity(2);
 				input_handle(s, env, envp);
 				add_history(s);
 			}
 			free(s);
 		}
 		else
-		{
-			//printf("it doesn't\n");
 			eof = 1;
-		}
+		interactivity(1);
 	}
 	rl_clear_history();
 }

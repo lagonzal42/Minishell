@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 11:40:27 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/15 16:14:07 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/22 14:13:29 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ char	**spliter(char *s, int m)
 	if (s[m + 1])
 		holder[n] = ft_substr(s, m + 1, ft_strlen(&s[m] + 1));
 	free(s);
-	ft_double_print(holder);
 	return (holder);
 }
 
@@ -76,7 +75,6 @@ char	**ft_resize2(char **sp, char **addition, unsigned int pos)
 		n++;
 	}
 	new[n] = NULL;
-	ft_double_print(new);
 	return (free(sp), free(addition), new);
 }
 

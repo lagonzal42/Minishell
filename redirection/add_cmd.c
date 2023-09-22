@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:59:11 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/15 13:49:53 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/22 15:16:16 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	add_cmnd(char *spltd, int *m, t_cmnd **tmp)
 	if (!holder)
 		return (1);
 	(*tmp)->cmd = ft_resize((*tmp)->cmd, unquouted);
-	ft_double_print(((*tmp)->cmd));
 	if (!(*tmp)->cmd)
 		return (free(unquouted), 1);
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_input.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:27:36 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/20 13:03:51 by abasante         ###   ########.fr       */
+/*   Updated: 2023/09/22 16:14:27 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ int	prepare_execution(t_cmnd *head, t_env **env, char **envp)
 	int		command_count;
 
 	command_count = 0;
-	envp = 0; //debug
 	status_code = 0;
 	while (head->next)
 	{
@@ -79,7 +78,7 @@ int	prepare_execution(t_cmnd *head, t_env **env, char **envp)
 		return (exit_status("set", execute_one(head, env)));
 	pid = fork();
 	if (pid == 0)
-		fork_loop(&head, *env);
+		fork_loop(&head, *env, envp);
 	else
 		waitpid(pid, &exit_s, 0);
 	if (WIFEXITED(exit_s))

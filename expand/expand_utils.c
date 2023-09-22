@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: larra <larra@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:54:01 by larra             #+#    #+#             */
-/*   Updated: 2023/09/08 20:12:57 by larra            ###   ########.fr       */
+/*   Updated: 2023/09/22 14:12:47 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	find_end_word(char **spltd, int n, int m)
 	int	k;
 
 	k = m;
-	ft_printf("first char checked: %c\n", spltd[n][m]);
 	while (spltd[n][m] && (!ft_is_space(spltd[n][m]) && spltd[n][m] != '>' &&
 		spltd[n][m] != '<' && spltd[n][m] != '|' && spltd[n][m] != '\"' &&
 		spltd[n][m] != '&' && spltd[n][m] != '\\' && spltd[n][m] != '\'' &&
@@ -52,10 +51,8 @@ char	*trim_quoutes(char *spltd, int start, int end)
 	left = ft_substr(spltd, 0, start);
 	mid = ft_substr(spltd, start + 1, end - start -1);
 	right = ft_substr(spltd, end + 1, ft_strlen(spltd));
-	ft_printf("left: %s\nmid: %s\nright: %s\n", left, mid, right);
 	midjoin = ft_strjoin(left, mid);
 	ret = ft_strjoin(midjoin, right);
-	ft_printf("ret: %s\n", ret);
 	free(midjoin);
 	return (free(left), free(mid), free(right), free(spltd) , ret);
 }

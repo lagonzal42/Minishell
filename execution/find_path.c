@@ -19,7 +19,7 @@ char	*find_path(t_cmnd **node, t_env *env)
 	i = 0;
 	j = 0;
 	a = 1;
-	if (!(*node)->cmd[0])
+	if (!(*node)->cmd)
 		return (0);
 	if (access((*node)->cmd[0], F_OK | X_OK) != -1)
 		return (ft_strdup((*node)->cmd[0]));

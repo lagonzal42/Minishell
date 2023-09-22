@@ -5,6 +5,8 @@ t_builtin_function	check_if_builtin(t_cmnd **node)
 	char	*string_in_node;
 	int		pos;
 
+	if (!(*node)->cmd)
+		return (NULL);
 	if (ft_strcmp((*node)->cmd[0], "unset") == 0)
 		return (&unset);
 	else if (ft_strcmp((*node)->cmd[0], "export") == 0)
@@ -13,7 +15,6 @@ t_builtin_function	check_if_builtin(t_cmnd **node)
 		return (&exit_builtin);
 	pos = slash_pos(node);
 	string_in_node = ft_strdup(&(*node)->cmd[0][pos]);
-	printf("string for builtin check: %s\n", string_in_node);
 	if (ft_strcmp(string_in_node, "echo") == 0)
 		return (free(string_in_node), &echo);
 	else if (ft_strcmp(string_in_node, "cd") == 0)

@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 20:16:12 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/15 13:49:20 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/22 16:39:48 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ int	node_create(char **spltd, t_cmnd **head)
 	n = 0;
 	e = 0;
 	tmp = *head;
-	while (spltd[n] && !e)
+	while (!e && spltd[n])
 	{
 		m = 0;
-		while (spltd[n][m])
+		while (!e && spltd[n][m])
 		{
 			if (spltd[n][m] == '<' || spltd[n][m] == '>' || spltd[n][m] == '|')
 				e = select_redirection(spltd, &n, &m, &tmp);
@@ -60,10 +60,8 @@ static int	select_redirection(char **spltd, int *n, int *m, t_cmnd **tmp)
 		return (pipe_case(tmp));
 }
 
-static char	*get_next_word(char **spltd, int *n, int *m, t_cmnd **tmp)
+static void	advance(char **spltd, int *n, int *m,  t_cmnd **tmp)
 {
-	char	*holder;
-
 	if (spltd[*n][*m] == spltd[*n][*m + 1])
 	{
 		if (spltd[*n][*m] == '>')
@@ -85,8 +83,21 @@ static char	*get_next_word(char **spltd, int *n, int *m, t_cmnd **tmp)
 		*n += 1;
 		*m = 0;
 	}
+}
+static char	*get_next_word(char **spltd, int *n, int *m, t_cmnd **tmp)
+{
+	char	*holder;
+	int		o_n;
+	int		o_m;
+
+	o_n = *n;
+	o_m = *m;
+	advance(spltd, n, m, tmp);
 	holder = ft_substr(&spltd[*n][*m], 0, find_next_meta(&spltd[*n][*m]));
-	return (*m += ft_strlen(holder) - 1, q_t(holder));
+	if (ft_strlen(holder) != 0)
+		return (*m += ft_strlen(holder) - 1, q_t(holder));	
+	else
+		return (redir_error(spltd[o_n][o_m]), free(holder), NULL);
 }
 
 // int	main(void)
