@@ -6,7 +6,7 @@
 /*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 20:45:08 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/25 13:04:40 by abasante         ###   ########.fr       */
+/*   Updated: 2023/09/25 17:42:01 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,9 @@ int	pipe_case(t_cmnd **tmp)
 		return (2);
 	(*tmp)->next = new;
 	if ((*tmp)->redirs.o_r_type == 0)
-	{
-		(*tmp)->redirs.o_fd = fd[1];
 		(*tmp)->redirs.o_r_type = 3;
-	}
 	(*tmp)->next->prev = (*tmp);
 	*tmp = (*tmp)->next;
 	(*tmp)->redirs.i_r_type = 3;
-	(*tmp)->redirs.i_fd = fd[0];
-	return (0);
+	return ( 0);
 }

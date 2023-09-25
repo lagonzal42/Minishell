@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_input.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:27:36 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/22 16:14:27 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/25 17:19:29 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,8 @@ int	prepare_execution(t_cmnd *head, t_env **env, char **envp)
 	if (pid == 0)
 		fork_loop(&head, *env, envp);
 	else
-		waitpid(pid, &exit_s, 0);
-	if (WIFEXITED(exit_s))
-		status_code = WEXITSTATUS(exit_s);
+		waitpid(pid, NULL, 0);
+	status_code = WEXITSTATUS(exit_s);
 	exit_status("set", status_code);
 	return (0);
 }
