@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 16:16:20 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/25 15:02:29 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/25 15:03:25 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,6 @@ char	**dollar_case(char **spltd, int n, int *m, t_env *env)
 
 	prev = *m;
 	name = ft_substr(spltd[n], *m + 1, find_end_word(spltd, n, *m + 1));
-	printf("name = %s\n", name);
 	to_add[0] = ft_substr(spltd[n], 0, *m);
 	to_add[2] = ft_substr(spltd[n], *m + ft_strlen(name) + 1,
 			ft_strlen(spltd[n]));
@@ -129,10 +128,9 @@ char	**dollar_case(char **spltd, int n, int *m, t_env *env)
 		to_add[1] = ft_itoa(exit_status("get"));
 	else
 		to_add[1] = ft_strdup(search_for_var(env, name));
-	printf("to_add[1] = %s\n", to_add[1]);
 	to_add[3] = ft_strjoin(to_add[1], to_add[2]);
 	holder = ft_strjoin(to_add[0], to_add[3]);
-	//free(spltd[n]);
+	free(spltd[n]);
 	spltd[n] = holder;
 	return (free(to_add[0]), free(to_add[1]), free(to_add[2]), spltd);
 }
