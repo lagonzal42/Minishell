@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 16:16:20 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/22 14:23:23 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/25 15:02:29 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ char	**expand(char **spltd, t_env *env)
 				spltd = dollar_case(spltd, n, &m, env);
 			else if (spltd[n][m] == '\'')
 				m += find_quoute_end(&spltd[n][m]);
-			m++;
+			if (spltd[n][m] != '$')
+				m++;
 		}
 		n++;
 	}
@@ -116,10 +117,11 @@ char	**dollar_case(char **spltd, int n, int *m, t_env *env)
 	int		prev;
 	char	*holder;
 	char	*name;
-	char	*to_add[3];
+	char	*to_add[4];
 
 	prev = *m;
 	name = ft_substr(spltd[n], *m + 1, find_end_word(spltd, n, *m + 1));
+	printf("name = %s\n", name);
 	to_add[0] = ft_substr(spltd[n], 0, *m);
 	to_add[2] = ft_substr(spltd[n], *m + ft_strlen(name) + 1,
 			ft_strlen(spltd[n]));
@@ -127,22 +129,25 @@ char	**dollar_case(char **spltd, int n, int *m, t_env *env)
 		to_add[1] = ft_itoa(exit_status("get"));
 	else
 		to_add[1] = ft_strdup(search_for_var(env, name));
-	holder = ft_strjoin(to_add[0], ft_strjoin(to_add[1], to_add[2]));
-	free(spltd[n]);
+	printf("to_add[1] = %s\n", to_add[1]);
+	to_add[3] = ft_strjoin(to_add[1], to_add[2]);
+	holder = ft_strjoin(to_add[0], to_add[3]);
+	//free(spltd[n]);
 	spltd[n] = holder;
 	return (free(to_add[0]), free(to_add[1]), free(to_add[2]), spltd);
 }
 
 /*int	main(int ac, char **av, char **envp)
 {
+	t_env	*enviroment;
+
 	enviroment = get_env(envp, enviroment);
-	char *spltd[] = {"echo", "\"my asingment is to write de user:
-			$USER|mi_file TASK COMPLETED!\"", "|<<$USER", "$? cat", "-e", NULL};
+	char *spltd[] = {"$U$U$USER", NULL};
 	char **new;
 	printf("==============PREV================\n");
 	ft_double_print(spltd);
 	printf("==============PREV================\n");
-	new = expand(spltd);
+	new = expand(spltd, enviroment);
 	printf("==============FINAL================\n");
 	ft_double_print(new);
 	printf("==============FINAL================\n");
