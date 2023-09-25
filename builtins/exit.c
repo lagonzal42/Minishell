@@ -3,6 +3,16 @@
 int	exit_builtin(t_env *env, char **cmd)
 {
 	env = 0;
-	cmd = 0;
-	exit(0);
+	if (!cmd[1])
+	{
+		ft_putstr_fd("exit\n", 2);
+		exit(0);
+	}
+	if (cmd[1] && cmd[2])
+	{
+		ft_putstr_fd("exit\nminishell: exit tooo many arguments", 2);
+		exit (1);
+	}
+	ft_putstr_fd("exit\n", 2);
+	exit(ft_atoi(cmd[1]));
 }
