@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_input.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 16:39:36 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/22 18:34:24 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/25 13:14:53 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ void	siginthandle(int sigint)
 		rl_on_new_line(); 
 		rl_replace_line("", sigint);
 		if (interactivity(0) == 1)
-			rl_redisplay();	
+			rl_redisplay();
+		else if (interactivity(0) == 2)
+			exit_status("set", 130);
 	}
 }
 /*This function is the start of the program, we will probably need to aply

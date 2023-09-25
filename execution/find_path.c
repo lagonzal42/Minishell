@@ -26,20 +26,36 @@ char	*find_path(t_cmnd **node, t_env *env)
 	while (env && env->name && ft_strncmp(env->name, "PATH", 4) != 0)
 		env = env->next;
 	bin_paths = ft_split(env->value, ':');
-	while (bin_paths[j] && a == 1)
-	{
-		holder = ft_strjoin(ft_strjoin(bin_paths[j], "/"), (*node)->cmd[0]);
-		j++;
-		a = check_if_access(holder);
-		if (a == 1)
-		{
-			free(holder);
-			holder = NULL;
-		}
-	}
+	holder = loop(bin_paths, node);
 	ft_double_free(bin_paths);
 	if (holder != NULL)
 		return (holder);
 	else
 		return (NULL);
+}
+
+char	*loop(char **bin_paths, t_cmnd **node)
+{
+	int	j;
+	int	a;
+	char	*holder;
+	char	*moment;
+
+	a = 1;
+	j = 0;
+	while (bin_paths[j] && a == 1)
+	{
+		moment = ft_strjoin(bin_paths[j], "/");
+		holder = ft_strjoin(moment, (*node)->cmd[0]);
+		j++;
+		a = check_if_access(holder);
+		if (a == 1)
+		{
+			free(holder);
+			free(moment);
+			holder = NULL;
+			moment = NULL;
+		}
+	}
+	return (free(moment), holder);
 }

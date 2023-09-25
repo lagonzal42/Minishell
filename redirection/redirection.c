@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 20:45:08 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/22 18:24:27 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/25 13:04:40 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,9 @@ static int	get_heredoc_redir(t_cmnd **tmp, char *holder)
 		if (!input || ft_strncmp(holder, input, ft_strlen(holder)) == 0)
 			diff = 0;
 		else
-			ft_putendl_fd(input, fd[1]);	
-		free (input);
+			ft_putendl_fd(input, fd[1]);
+		if (input)
+			free (input);
 	}
 	close(fd[1]);
 	holder = NULL;
