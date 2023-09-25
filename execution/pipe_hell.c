@@ -64,16 +64,6 @@ void	execute(t_cmnd	*node, t_env *env, char **envp)
 		execve(node->cmd_pth, node->cmd, envp);
 }
 
-void child_handler(int signo) 
-{
-	if (signo == SIGCHLD)
-	{
-	while (waitpid(-1, NULL, WNOHANG) > 0)
-		;
-		kill(signo, SIGKILL);
-	}
-}
-
 void	make_pipe(t_cmnd **node)
 {
 	int	fd[2];
@@ -99,13 +89,7 @@ void	fork_loop(t_cmnd **node, t_env *env, char **envp)
 {
 	t_cmnd				*tmp;
 	int					pid2;
-	struct sigaction	sa;
 
-	sa.sa_handler = &child_handler;
-    sigemptyset(&sa.sa_mask);
-    sa.sa_flags = SA_RESTART | SA_NOCLDSTOP;
-    if (sigaction(SIGCHLD, &sa, 0) == -1)
-		exit(1);
 	tmp = *node;
 	if (tmp->prev != NULL)
 	{
