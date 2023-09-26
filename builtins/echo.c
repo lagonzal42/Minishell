@@ -37,14 +37,10 @@ int		echo(t_env *env, char **args)
 	a = 0;
 	i = 1;
 	n_flag = 1;
-	if (num_of_args(args) > 1)
+	while (num_of_args(args) > 1 && args[i])
 	{
-		while (args[i])
-		{
 			if (check_if_nnnn(args[i]) == 0 && a == 0)
-			{
 				n_flag = 0;
-			}
 			else
 			{
 				a = 1;
@@ -53,7 +49,6 @@ int		echo(t_env *env, char **args)
 					write (1, " ", 1);
 			}
 			i++;
-		}
 	}
 	if (n_flag == 1)
 		write (1, "\n", 1);
