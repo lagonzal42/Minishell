@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:56:55 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/15 17:43:07 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/25 18:06:02 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ typedef struct s_redir
 	int		i_fd;
 	int		o_fd;
 	char	*h_lim;
+	int		*in_pipe;
+	int		*out_pipe;
 }	t_redir;
 
 typedef int	(*t_builtin_function)(t_env *, char **);

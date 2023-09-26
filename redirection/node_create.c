@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   node_create.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 20:16:12 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/22 16:39:48 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/26 14:00:10 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	select_redirection(char **spltd, int *n, int *m, t_cmnd **tmp)
 	}
 	else if (spltd[*n][*m] == '>')
 	{
-		if ((*tmp)->redirs.i_r_type && (*tmp)->redirs.o_fd != 1)
+		if ((*tmp)->redirs.o_r_type && (*tmp)->redirs.o_fd != 1)
 			close((*tmp)->redirs.o_fd);
 		return (get_o_redir(get_next_word(spltd, n, m, tmp), tmp));
 	}

@@ -18,7 +18,7 @@ REDIRECTION_OBJ = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(REDIRECTION)))
 EXECUTION = execution_utils\
 	find_path\
 	path_utils\
-	redirections
+	pipe_hell
 
 EXECUTION_SRC_DIR = execution/
 EXECUTION_SRC = $(addprefix $(EXECUTION_SRC_DIR), $(addsuffix .c, $(EXECUTION)))
