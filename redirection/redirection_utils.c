@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:59:46 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/22 16:39:40 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/26 16:46:08 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ t_cmnd	*cmnd_init(void)
 	new->redirs.h_lim = NULL;
 	new->next = NULL;
 	new->prev = NULL;
+	new->redirs.in_pipe = NULL;
+	new->redirs.out_pipe = NULL;
 	return (new);
 }
 
