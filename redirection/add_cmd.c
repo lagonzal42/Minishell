@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:59:11 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/22 15:16:16 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/26 13:53:35 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ int	add_cmnd(char *spltd, int *m, t_cmnd **tmp)
 
 	end = find_next_meta(&spltd[*m]);
 	holder = ft_substr(&spltd[*m], 0, end);
-	*m += ft_strlen(holder) - 1;
-	unquouted = q_t(holder);
 	if (!holder)
 		return (1);
+	*m += ft_strlen(holder) - 1;
+	unquouted = q_t(holder);
 	(*tmp)->cmd = ft_resize((*tmp)->cmd, unquouted);
 	if (!(*tmp)->cmd)
 		return (free(unquouted), 1);

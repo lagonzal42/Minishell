@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 16:16:20 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/25 15:03:25 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/26 13:38:46 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,8 @@ char	**dollar_case(char **spltd, int n, int *m, t_env *env)
 		to_add[1] = ft_strdup(search_for_var(env, name));
 	to_add[3] = ft_strjoin(to_add[1], to_add[2]);
 	holder = ft_strjoin(to_add[0], to_add[3]);
+	free(to_add[3]);
+	free(name);
 	free(spltd[n]);
 	spltd[n] = holder;
 	return (free(to_add[0]), free(to_add[1]), free(to_add[2]), spltd);

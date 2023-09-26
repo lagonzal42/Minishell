@@ -6,7 +6,7 @@
 /*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:27:36 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/25 17:19:29 by abasante         ###   ########.fr       */
+/*   Updated: 2023/09/26 15:14:15 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,6 @@ int	execute_one(t_cmnd *node, t_env **env)
 		dup2(node->redirs.o_fd, STDOUT_FILENO);
 	if (node->redirs.i_r_type != 0)
 		dup2(node->redirs.i_fd, STDIN_FILENO);
-	if (node->redirs.i_r_type == 3 && node->prev
-		&& node->prev->redirs.o_r_type == 3)
-		waitpid(node->prev->pid, NULL, 0);
 	if (node->built_ptr)
 		ret = node->built_ptr(*env, node->cmd);
 	dup2(fd[1], STDOUT_FILENO);
