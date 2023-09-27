@@ -1,25 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pwd.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/27 13:10:53 by abasante          #+#    #+#             */
+/*   Updated: 2023/09/27 13:11:16 by abasante         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "builtins.h"
-
-// int pwd()
-// {
-// 	char cwd[1000000];
-
-// 	if (getcwd(cwd, sizeof(cwd)) != NULL)
-// 		printf("%s\n", getcwd(cwd, sizeof(cwd)));
-// 	else
-// 	{
-// 		perror("getcwd() error");
-// 		exit (1);
-// 	}
-// 	exit (0);
-// }
 
 int	pwd(t_env *env, char **cmd)
 {
 	char	*test;
-	env = 0;
 
+	env = 0;
 	test = getcwd(NULL, 0);
 	if (test == NULL || cmd[1])
 		ft_putstr_fd("Error in pwd\n", 1);
