@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 20:45:08 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/26 14:25:59 by abasante         ###   ########.fr       */
+/*   Updated: 2023/09/27 13:54:28 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include <stdlib.h>
 #include "../readline/readline.h"
 #include "../readline/history.h"
-
 
 static int	get_heredoc_redir(t_cmnd **tmp, char *holder);
 
