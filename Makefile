@@ -1,4 +1,6 @@
 
+.SILENT:
+
 NAME = minishell
 
 OBJ_DIR = obj/
@@ -72,7 +74,7 @@ OBJ = $(PARSE_OBJ) \
 	$(EXECUTION_OBJ)\
 	$(REDIRECTION_OBJ)
 
-SRC = $(BUILTINS_SRC) $(EXPAND_SRC) $(PARSE_SRC) $(EXECUTION_SRC) $(REDIRECTION_SRC)
+SRC = $(BUILTINS_SRC) $(EXPAND_SRC) $(PARSE_SRC) $(EXECUTION_SRC) $(REDIRECTION_SRC) builtins/builtins.h execution/execution.h expand/expand.h redirection/redirection.h parse/parse.h
 
 CC = gcc
 
@@ -91,10 +93,18 @@ $(OBJ): $(SRC)
 	mv *.o $(OBJ_DIR)
 
 $(NAME): $(OBJ) $(RLMAKE) $(CONFIG)
+	/bin/echo -n "Compiling libft."
 	make -C libft
-	bash ./configure.sh
-	@make -C readline
+	/bin/echo ".."
+	/bin/echo -n "Configuring readline."
+	bash ./configure.sh > /dev/null 2>&1
+	/bin/echo ".."
+	/bin/echo -n "Compiling readline."
+	make -C readline >/dev/null 2>&1
+	/bin/echo ".."
+	/bin/echo -n "Compiling minishell."
 	$(CC) $(CFLAGS) $(OBJ) readline/libhistory.a readline/libreadline.a libft/libft.a  -I realdine $(LDLIBS) -o $(NAME) -fsanitize=address -g3
+	/bin/echo ".."
 
 clean:
 	rm -fr $(OBJ_DIR)
@@ -103,7 +113,7 @@ clean:
 
 fclean: clean
 	make fclean -C libft
-	rm -fr $(NAME)
+	rm -fr $(NAME) expand/expand.h.gch builtins.h.gch builtins/builtins.h.gch redirection/redirection.h.gch execution/execution.h.gch parse/parse.h.gch
 
 re: fclean clean all
 

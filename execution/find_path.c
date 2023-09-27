@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 13:35:21 by abasante          #+#    #+#             */
-/*   Updated: 2023/09/27 13:36:10 by abasante         ###   ########.fr       */
+/*   Updated: 2023/09/27 15:25:01 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ char	*find_path(t_cmnd **node, t_env *env)
 		return (ft_strdup((*node)->cmd[0]));
 	while (env && env->name && ft_strncmp(env->name, "PATH", 4) != 0)
 		env = env->next;
+	if (env == NULL)
+		return (NULL);
 	bin_paths = ft_split(env->value, ':');
 	holder = loop(bin_paths, node);
 	ft_double_free(bin_paths);
