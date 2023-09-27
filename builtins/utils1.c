@@ -1,11 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils1.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/27 13:12:33 by abasante          #+#    #+#             */
+/*   Updated: 2023/09/27 13:14:16 by abasante         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "builtins.h"
 
 char	*check_env_string(char **args)
 {
 	char	*var_name;
-	int i;
-	int a;
+	int		i;
+	int		a;
 
 	i = 0;
 	while (args[1][i] != '=')
@@ -18,7 +29,7 @@ char	*check_env_string(char **args)
 		i++;
 	}
 	a = i;
-	while(args[1][i] && !ft_is_space(args[1][i]))
+	while (args[1][i] && !ft_is_space(args[1][i]))
 		i++;
 	var_name = ft_substr(args[1], 0, a);
 	return (var_name);
@@ -27,8 +38,8 @@ char	*check_env_string(char **args)
 char	*return_env_value(char **args)
 {
 	char	*var_value;
-	int i;
-	int a;
+	int		i;
+	int		a;
 
 	a = 0;
 	i = 0;
@@ -55,19 +66,19 @@ int	ft_strcmp(char *s1, char *s2)
 	return (s1[i] - s2[i]);
 }
 
-void    print_nodes(t_env   *env)
+void	print_nodes(t_env *env)
 {
-    t_env   *tmp;
+	t_env	*tmp;
 
-    tmp = env;
-    while (tmp)
-    {
-        ft_putstr_fd(tmp->name, 1);
-        write (1, "=", 1);
-        ft_putstr_fd(tmp->value, 1);
-        write (1, "\n", 1);
-        tmp = tmp->next;
-    }
+	tmp = env;
+	while (tmp)
+	{
+		ft_putstr_fd(tmp->name, 1);
+		write (1, "=", 1);
+		ft_putstr_fd(tmp->value, 1);
+		write (1, "\n", 1);
+		tmp = tmp->next;
+	}
 }
 
 int	ft_strisnum(const char *str)
