@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:54:01 by larra             #+#    #+#             */
-/*   Updated: 2023/09/22 14:12:47 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/27 13:43:42 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ char	*trim_quoutes(char *spltd, int start, int end)
 	char	*mid;
 	char	*ret;
 	char	*midjoin;
-	
+
 	left = ft_substr(spltd, 0, start);
 	mid = ft_substr(spltd, start + 1, end - start -1);
 	right = ft_substr(spltd, end + 1, ft_strlen(spltd));
 	midjoin = ft_strjoin(left, mid);
 	ret = ft_strjoin(midjoin, right);
 	free(midjoin);
-	return (free(left), free(mid), free(right), free(spltd) , ret);
+	return (free(left), free(mid), free(right), free(spltd), ret);
 }
 
 /*This function finds the quoutes in the strings from the array that gets as

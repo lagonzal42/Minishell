@@ -6,7 +6,7 @@
 /*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 16:39:36 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/25 18:52:05 by abasante         ###   ########.fr       */
+/*   Updated: 2023/09/27 13:46:18 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	interactivity(int num)
 	static int	interactivity;
 
 	if (num == 0)
-		return(interactivity);		
+		return (interactivity);
 	interactivity = num;
 	return (0);
 }
@@ -37,7 +37,7 @@ void	siginthandle(int sigint)
 	if (sigint == SIGINT)
 	{
 		write(2, "\n", 1);
-		rl_on_new_line(); 
+		rl_on_new_line();
 		rl_replace_line("", sigint);
 		if (interactivity(0) == 1)
 			rl_redisplay();

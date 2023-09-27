@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   path_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/27 13:36:24 by abasante          #+#    #+#             */
+/*   Updated: 2023/09/27 13:36:34 by abasante         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "execution.h"
 
 int	check_if_path_absolute(char *cmd)
@@ -10,7 +22,7 @@ int	check_if_path_absolute(char *cmd)
 
 int	execute_commands_path(char *path_name, char **av, char **envp)
 {
-	if(execve(path_name, av, envp) == -1)
+	if (execve(path_name, av, envp) == -1)
 		return (0);
 	return (0);
 }

@@ -1,20 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   find_path.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/27 13:35:21 by abasante          #+#    #+#             */
+/*   Updated: 2023/09/27 13:36:10 by abasante         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "execution.h"
 
-
-//this function finds the path to be executed when the command isn't written
-//with the absolute path, it also checks if it has access to that path to then execute 
-//the command with execve outside this function
-
-/*if int bon is 1, it means it is a built in function, so in this case we don't
-  need to find the path of the command because we are going to execute it with our code.
-*/
 char	*find_path(t_cmnd **node, t_env *env)
 {
-	int i;
-	int j;
-	int a;
+	int		i;
+	int		j;
+	int		a;
 	char	**bin_paths;
-	char 	*holder;
+	char	*holder;
 
 	i = 0;
 	j = 0;
@@ -36,8 +40,8 @@ char	*find_path(t_cmnd **node, t_env *env)
 
 char	*loop(char **bin_paths, t_cmnd **node)
 {
-	int	j;
-	int	a;
+	int		j;
+	int		a;
 	char	*holder;
 	char	*moment;
 
