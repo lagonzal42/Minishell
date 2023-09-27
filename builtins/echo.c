@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   echo.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/27 13:04:13 by abasante          #+#    #+#             */
+/*   Updated: 2023/09/27 13:05:01 by abasante         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "builtins.h"
 
 int	num_of_args(char **args)
 {
-	int 	size;
+	int	size;
 
 	size = 0;
 	while (args[size])
@@ -10,7 +22,7 @@ int	num_of_args(char **args)
 	return (size);
 }
 
-int		check_if_nnnn(char *args)
+int	check_if_nnnn(char *args)
 {
 	int	i;
 
@@ -27,33 +39,28 @@ int		check_if_nnnn(char *args)
 	return (1);
 }
 
-int		echo(t_env *env, char **args)
+int	echo(t_env *env, char **args)
 {
-	int i;
+	int	i;
 	int	a;
-	int n_flag;
+	int	n_flag;
 
 	env = 0;
 	a = 0;
 	i = 1;
 	n_flag = 1;
-	if (num_of_args(args) > 1)
+	while (num_of_args(args) > 1 && args[i])
 	{
-		while (args[i])
+		if (check_if_nnnn(args[i]) == 0 && a == 0)
+			n_flag = 0;
+		else
 		{
-			if (check_if_nnnn(args[i]) == 0 && a == 0)
-			{
-				n_flag = 0;
-			}
-			else
-			{
-				a = 1;
-				ft_putstr_fd(args[i], 1);
-				if (args[i + 1])
-					write (1, " ", 1);
-			}
-			i++;
+			a = 1;
+			ft_putstr_fd(args[i], 1);
+			if (args[i + 1])
+				write (1, " ", 1);
 		}
+		i++;
 	}
 	if (n_flag == 1)
 		write (1, "\n", 1);

@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   unset.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/27 13:11:35 by abasante          #+#    #+#             */
+/*   Updated: 2023/09/27 13:12:07 by abasante         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "builtins.h"
 
 int	unset(t_env *env, char **args)
 {
-	t_env 	*to_unset;
+	t_env	*to_unset;
 	t_temp	*func;
 	char	*name_only;
-	int i;
+	int		i;
 
 	func = malloc(sizeof(t_temp));
 	i = 0;
@@ -24,5 +36,5 @@ int	unset(t_env *env, char **args)
 			remove_var_from_env(to_unset, env, func);
 		free(func);
 	}
-	return(0);
+	return (0);
 }

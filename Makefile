@@ -47,11 +47,13 @@ EXPAND_OBJ = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(EXPAND)))
 ############################## BUILTIN ####################################
 
 BUILTINS = cd\
+	cd1\
 	echo\
 	env\
 	export\
 	pwd\
 	utils_export\
+	utils_expot1\
 	utils_unset\
 	utils_env\
 	utils1\
