@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 17:34:13 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/27 13:50:20 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/27 13:54:13 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,18 @@ void	print_commands(t_cmnd *head)
 	}
 }
 
+void	free_pipes(t_cmnd *cmd)
+{
+	if (cmd->redirs.i_r_type == 3)
+		free(cmd->redirs.in_pipe);
+	if (cmd->redirs.o_r_type == 3)
+		free(cmd->redirs.out_pipe);
+	if (cmd->redirs.i_r_type == 3)
+		free(cmd->redirs.in_pipe);
+	if (cmd->redirs.o_r_type == 3)
+		free(cmd->redirs.out_pipe);
+}
+
 void	free_cmnds(t_cmnd *cmds)
 {
 	t_cmnd	*next;
@@ -58,9 +70,5 @@ void	free_cmnds(t_cmnd *cmds)
 		ft_double_free(cmds->cmd);
 	if (cmds->redirs.h_lim)
 		free(cmds->redirs.h_lim);
-	if (cmds->redirs.i_r_type == 3)
-		free(cmds->redirs.in_pipe);
-	if (cmds->redirs.o_r_type == 3)
-		free(cmds->redirs.out_pipe);
 	free(cmds);
 }
