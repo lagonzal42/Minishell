@@ -53,7 +53,7 @@ BUILTINS = cd\
 	export\
 	pwd\
 	utils_export\
-	utils_expot1\
+	utils_export1\
 	utils_unset\
 	utils_env\
 	utils1\
@@ -74,8 +74,6 @@ OBJ = $(PARSE_OBJ) \
 
 SRC = $(BUILTINS_SRC) $(EXPAND_SRC) $(PARSE_SRC) $(EXECUTION_SRC) $(REDIRECTION_SRC)
 
-RLMAKE = readline/Makefile
-
 CC = gcc
 
 CFLAGS = -Wall -Werror -Wextra
@@ -84,18 +82,17 @@ LDLIBS := -lreadline -lncurses
 
 all: $(NAME)
 
-$(RLMAKE):
-	cd readline;\
-	./configure;\
-	cd ..
+$(CONFIG):
+	bash ./configure.sh
 
 $(OBJ): $(SRC)
 	$(CC) $(CFLAGS) -c $(SRC) -I libft
 	@mkdir -p $(OBJ_DIR)
 	mv *.o $(OBJ_DIR)
 
-$(NAME): $(OBJ) $(RLMAKE)
+$(NAME): $(OBJ) $(RLMAKE) $(CONFIG)
 	make -C libft
+	bash ./configure.sh
 	@make -C readline
 	$(CC) $(CFLAGS) $(OBJ) readline/libhistory.a readline/libreadline.a libft/libft.a  -I realdine $(LDLIBS) -o $(NAME) -fsanitize=address -g3
 

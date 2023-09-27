@@ -6,7 +6,7 @@
 /*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 16:16:20 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/26 13:38:46 by abasante         ###   ########.fr       */
+/*   Updated: 2023/09/27 13:43:05 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ char	**expand(char **spltd, t_env *env)
 		}
 		n++;
 	}
-//	quit_quoutes(spltd);
 	return (spltd);
 }
 
