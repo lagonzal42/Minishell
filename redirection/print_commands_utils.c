@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_commands_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 17:34:13 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/26 16:46:47 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/27 13:47:42 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	free_cmnds(t_cmnd *cmds)
 			free(cmds->redirs.in_pipe);
 		if (cmds->redirs.o_r_type == 3)
 			free(cmds->redirs.out_pipe);
-		free(cmds);	
+		free (cmds);
 		cmds = next;
 		next = cmds->next;
 	}
@@ -59,7 +59,7 @@ void	free_cmnds(t_cmnd *cmds)
 	if (cmds->redirs.h_lim)
 		free(cmds->redirs.h_lim);
 	if (cmds->redirs.i_r_type == 3)
-			free(cmds->redirs.in_pipe);
+		free(cmds->redirs.in_pipe);
 	if (cmds->redirs.o_r_type == 3)
 		free(cmds->redirs.out_pipe);
 	free(cmds);
