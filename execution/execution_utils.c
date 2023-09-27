@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   execution_utils.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/27 13:27:12 by abasante          #+#    #+#             */
+/*   Updated: 2023/09/27 13:35:09 by abasante         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "execution.h"
 
 t_builtin_function	check_if_builtin(t_cmnd **node)
@@ -18,7 +30,7 @@ t_builtin_function	check_if_builtin(t_cmnd **node)
 	if (ft_strcmp(string_in_node, "echo") == 0)
 		return (free(string_in_node), &echo);
 	else if (ft_strcmp(string_in_node, "cd") == 0)
-		return (free(string_in_node), &cd);	
+		return (free(string_in_node), &cd);
 	else if (ft_strcmp(string_in_node, "env") == 0)
 		return (free(string_in_node), &print_env);
 	else if (ft_strcmp(string_in_node, "pwd") == 0)
