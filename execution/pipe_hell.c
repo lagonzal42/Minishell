@@ -6,7 +6,7 @@
 /*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 13:36:46 by abasante          #+#    #+#             */
-/*   Updated: 2023/09/28 12:45:22 by abasante         ###   ########.fr       */
+/*   Updated: 2023/09/28 12:54:06 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,15 @@ int	before_execution(t_cmnd *node, t_env *env)
 	return (i);
 }
 
-void	close_pipe(int *fd)
-{
-	if(fd)
-	{
-		close(fd[0]);
-		close(fd[1]);	
-	}
-}
 void	pipe_closer(t_cmnd *node)
 {
 	if (node->prev && node->prev->redirs.o_r_type == 3)
-		close_pipe(node->prev->redirs.out_pipe);
-	close_pipe(node->redirs.in_pipe);
+	{
+		close(node->prev->redirs.out_pipe[0]);
+		close(node->prev->redirs.out_pipe[1]);
+	}
+	close(node->prev->redirs.in_pipe[0]);
+	close(node->prev->redirs.in_pipe[1]);
 }
 
 void	execute(t_cmnd	*node, t_env *env, char **envp)
