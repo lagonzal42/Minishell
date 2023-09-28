@@ -6,7 +6,7 @@
 /*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 13:36:46 by abasante          #+#    #+#             */
-/*   Updated: 2023/09/27 13:41:40 by abasante         ###   ########.fr       */
+/*   Updated: 2023/09/28 12:45:22 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	before_execution(t_cmnd *node, t_env *env)
 	{
 		tmp->cmd_pth = find_path(&tmp, env);
 		node->built_ptr = check_if_builtin(&tmp);
-		if (!node->cmd)
+		if (!tmp->cmd)
 			i++;
 		else if (tmp->cmd_pth == NULL && node->built_ptr != &export \
 			&& node->built_ptr != &exit_builtin && node->built_ptr != &unset)
@@ -42,8 +42,17 @@ int	before_execution(t_cmnd *node, t_env *env)
 
 void	close_pipe(int *fd)
 {
-	close(fd[0]);
-	close(fd[1]);
+	if(fd)
+	{
+		close(fd[0]);
+		close(fd[1]);	
+	}
+}
+void	pipe_closer(t_cmnd *node)
+{
+	if (node->prev && node->prev->redirs.o_r_type == 3)
+		close_pipe(node->prev->redirs.out_pipe);
+	close_pipe(node->redirs.in_pipe);
 }
 
 void	execute(t_cmnd	*node, t_env *env, char **envp)
@@ -59,9 +68,7 @@ void	execute(t_cmnd	*node, t_env *env, char **envp)
 			dup2(node->redirs.out_pipe[1], STDOUT_FILENO);
 		else
 			dup2(node->redirs.in_pipe[0], STDIN_FILENO);
-		close_pipe(node->redirs.out_pipe);
-		if (node->prev->redirs.o_r_type == 3)
-			close_pipe(node->prev->redirs.out_pipe);
+		pipe_closer(node);
 	}
 	if (node->redirs.i_fd != STDIN_FILENO)
 	{
