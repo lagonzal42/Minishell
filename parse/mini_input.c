@@ -6,7 +6,7 @@
 /*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 16:39:36 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/10/02 17:06:11 by abasante         ###   ########.fr       */
+/*   Updated: 2023/10/02 18:41:24 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	minishell(t_env **env, char **envp)
 
 	eof = 0;
 	signal(SIGINT, siginthandle);
+	interactivity(1);
 	while (!eof)
 	{
 		s = readline("pipehell:");
