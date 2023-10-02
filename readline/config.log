@@ -30,8 +30,8 @@ Kernel configured for up to 6 processors.
 Processor type: x86_64h (Intel x86-64h Haswell)
 Processors active: 0 1 2 3 4 5
 Primary memory available: 8.00 gigabytes
-Default processor set: 333 tasks, 1671 threads, 6 processors
-Load average: 2.02, Mach factor: 3.96
+Default processor set: 342 tasks, 1704 threads, 6 processors
+Load average: 1.88, Mach factor: 4.12
 /bin/machine           = unknown
 /usr/bin/oslevel       = unknown
 /bin/universe          = unknown
@@ -1938,7 +1938,7 @@ configure:7074: checking for tgetent
 configure:7074: gcc -o conftest -g -O2   conftest.c  >&5
 Undefined symbols for architecture x86_64:
   "_tgetent", referenced from:
-      _main in conftest-18baa2.o
+      _main in conftest-d29ef2.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:7074: $? = 1
@@ -2233,7 +2233,7 @@ configure:7421: checking for mbscasecmp
 configure:7421: gcc -o conftest -g -O2   conftest.c  >&5
 Undefined symbols for architecture x86_64:
   "_mbscasecmp", referenced from:
-      _main in conftest-d000bc.o
+      _main in conftest-c38f8f.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:7421: $? = 1
@@ -2373,7 +2373,7 @@ configure:7428: checking for mbscmp
 configure:7428: gcc -o conftest -g -O2   conftest.c  >&5
 Undefined symbols for architecture x86_64:
   "_mbscmp", referenced from:
-      _main in conftest-278007.o
+      _main in conftest-4424cc.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:7428: $? = 1
@@ -2521,7 +2521,7 @@ configure:7450: checking for mbschr
 configure:7450: gcc -o conftest -g -O2   conftest.c  >&5
 Undefined symbols for architecture x86_64:
   "_mbschr", referenced from:
-      _main in conftest-2d8d1a.o
+      _main in conftest-fe3da2.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:7450: $? = 1
