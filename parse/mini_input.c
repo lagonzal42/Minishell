@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   mini_input.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 16:39:36 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/10/02 18:46:47 by abasante         ###   ########.fr       */
+/*   Updated: 2023/10/02 18:57:54 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include <signal.h>
 #include <stdlib.h>
 #include "../readline/readline.h"
 #include "../readline/history.h"
@@ -32,35 +31,7 @@ int	interactivity(int num)
 /*This function below manages the ctrl + c signal. I don't know if we will need
 to change it in the future so i wont explain it now.*/
 
-void	siginthandle(int sigint)
-{
-	if (sigint == SIGINT)
-	{
-		write(2, "\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", sigint);
-		if (interactivity(0) == 1)
-			rl_redisplay();
-		else if (interactivity(0) == 2)
-			exit_status("set", 130);
-	}
-}
 
-void	sigquithandle(int sigquit)
-{
-	if (interactivity(0) == 1)
-		;
-	else if (interactivity(0) == 2)
-	{
-		
-	}
-}
-
-void	call_signals(void)
-{
-	signal(SIGINT, siginthandle);
-	signal(SIGQUIT, sigquithandle);
-}
 /*This function is the start of the program, we will probably need to aply
 some changes to it. But basically calls the readline function and sends
 the input to the input handler. 
@@ -73,7 +44,6 @@ void	minishell(t_env **env, char **envp)
 
 	eof = 0;
 	call_signals();
-	signal(SIGINT, siginthandle);
 	interactivity(1);
 	while (!eof)
 	{
