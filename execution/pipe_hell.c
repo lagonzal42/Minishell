@@ -6,7 +6,7 @@
 /*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 13:36:46 by abasante          #+#    #+#             */
-/*   Updated: 2023/10/02 13:15:43 by abasante         ###   ########.fr       */
+/*   Updated: 2023/10/02 16:39:07 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,14 @@ int	before_execution(t_cmnd *node, t_env *env)
 		tmp->cmd_pth = find_path(&tmp, env);
 		node->built_ptr = check_if_builtin(&tmp);
 		if (!tmp->cmd)
+		{
 			i++;
+			ft_putstr_fd("Error, command not found\n", 2);
+		}
 		else if (tmp->cmd_pth == NULL && node->built_ptr != &export \
 			&& node->built_ptr != &exit_builtin && node->built_ptr != &unset)
 		{
 			i++;
-			ft_putstr_fd("bash: ", STDERR_FILENO);
 			ft_putstr_fd(tmp->cmd[0], STDERR_FILENO);
 			ft_putstr_fd(": command not found\n", STDERR_FILENO);
 			exit_status("set", 127);
