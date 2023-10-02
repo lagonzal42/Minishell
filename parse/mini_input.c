@@ -6,7 +6,7 @@
 /*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 16:39:36 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/10/02 18:41:24 by abasante         ###   ########.fr       */
+/*   Updated: 2023/10/02 18:46:47 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,22 @@ void	siginthandle(int sigint)
 			exit_status("set", 130);
 	}
 }
+
+void	sigquithandle(int sigquit)
+{
+	if (interactivity(0) == 1)
+		;
+	else if (interactivity(0) == 2)
+	{
+		
+	}
+}
+
+void	call_signals(void)
+{
+	signal(SIGINT, siginthandle);
+	signal(SIGQUIT, sigquithandle);
+}
 /*This function is the start of the program, we will probably need to aply
 some changes to it. But basically calls the readline function and sends
 the input to the input handler. 
@@ -56,6 +72,7 @@ void	minishell(t_env **env, char **envp)
 	char	*s;
 
 	eof = 0;
+	call_signals();
 	signal(SIGINT, siginthandle);
 	interactivity(1);
 	while (!eof)
