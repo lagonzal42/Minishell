@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 17:01:03 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/10/02 14:10:07 by abasante         ###   ########.fr       */
+/*   Updated: 2023/10/02 19:01:08 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,12 @@ int		find_quoute_end(char *trimed);
 int		find_d_quoute_end(char *trimed);
 char	*ft_find_space(char *s);
 void	free_env(t_env *env);
+
+/*=================================SIGNALS=====================================*/
+
+void	call_signals(void);
+int     interactivity(int num);
+
+
 
 #endif

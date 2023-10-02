@@ -31,7 +31,8 @@ PARSE = check_valid\
 	mini_input\
 	mini_split\
 	parsing_utils\
-	split_pipes
+	split_pipes\
+	signals
 
 PARSE_SRC_DIR = parse/
 PARSE_SRC = $(addprefix $(PARSE_SRC_DIR), $(addsuffix .c, $(PARSE)))
@@ -82,8 +83,8 @@ CFLAGS = -Wall -Werror -Wextra
 
 LDLIBS := -lreadline -lncurses
 
-val:$(NAME)
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --log-file=valgrind.log ./minishell
+#val:$(NAME)
+#	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --log-file=valgrind.log ./minishell
 
 all: $(NAME)
 
