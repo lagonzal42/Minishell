@@ -103,8 +103,7 @@ $(NAME): $(OBJ) $(RLMAKE) $(CONFIG)
 	make -C readline >/dev/null 2>&1
 	/bin/echo ".."
 	/bin/echo -n "Compiling minishell."
-	$(CC) $(CFLAGS) $(OBJ) readline/libhistory.a readline/libreadline.a libft/libft.a  -I realdine $(LDLIBS) -o $(NAME) -fsanitize=address -g3
-	/bin/echo ".."
+	$(CC) $(CFLAGS) $(OBJ) readline/libhistory.a readline/libreadline.a libft/libft.a  -I realdine $(LDLIBS) -o $(NAME)
 
 clean:
 	rm -fr $(OBJ_DIR)

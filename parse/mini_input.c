@@ -6,7 +6,7 @@
 /*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 16:39:36 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/27 13:46:18 by abasante         ###   ########.fr       */
+/*   Updated: 2023/10/02 14:55:32 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,29 @@ void	minishell(t_env **env, char **envp)
 		interactivity(1);
 	}
 	rl_clear_history();
+	free_env(*env);
+}
+
+void	free_env(t_env *env)
+{
+	t_env	*now;
+	t_env	*prev;
+	int		i;
+
+	i = 0;
+	prev = env;
+	now = prev->next;
+	while (now)
+	{
+		free(prev->name);
+		free(prev->value);
+		free(prev);
+		prev = now;
+		now = prev->next;
+	}
+	free(prev->name);
+	free(prev->value);
+	free(prev);
 }
 
 int	main(int argc, char **argv, char **envp)

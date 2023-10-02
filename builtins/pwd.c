@@ -6,7 +6,7 @@
 /*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 13:10:53 by abasante          #+#    #+#             */
-/*   Updated: 2023/09/27 13:11:16 by abasante         ###   ########.fr       */
+/*   Updated: 2023/10/02 14:59:31 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,11 @@
 int	pwd(t_env *env, char **cmd)
 {
 	char	*test;
+	int		a;
 
-	env = 0;
+	a = 0;
+	if (env)
+		a += 1;
 	test = getcwd(NULL, 0);
 	if (test == NULL || cmd[1])
 		ft_putstr_fd("Error in pwd\n", 1);
