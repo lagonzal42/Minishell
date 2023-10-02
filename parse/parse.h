@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 17:01:03 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/15 17:58:09 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/02 14:10:07 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ char	**pipe_spliter(char **in);
 int		find_quoute_end(char *trimed);
 int		find_d_quoute_end(char *trimed);
 char	*ft_find_space(char *s);
+void	free_env(t_env *env);
 
 #endif

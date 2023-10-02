@@ -6,7 +6,7 @@
 /*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 13:36:46 by abasante          #+#    #+#             */
-/*   Updated: 2023/09/28 12:54:06 by abasante         ###   ########.fr       */
+/*   Updated: 2023/10/02 13:15:43 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,11 @@ void	pipe_closer(t_cmnd *node)
 		close(node->prev->redirs.out_pipe[0]);
 		close(node->prev->redirs.out_pipe[1]);
 	}
-	close(node->prev->redirs.in_pipe[0]);
-	close(node->prev->redirs.in_pipe[1]);
+	if (node->redirs.in_pipe)
+	{
+		close(node->redirs.in_pipe[0]);
+		close(node->redirs.in_pipe[1]);
+	}
 }
 
 void	execute(t_cmnd	*node, t_env *env, char **envp)
