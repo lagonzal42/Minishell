@@ -82,6 +82,9 @@ CFLAGS = -Wall -Werror -Wextra
 
 LDLIBS := -lreadline -lncurses
 
+val:$(NAME)
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --log-file=valgrind.log ./minishell
+
 all: $(NAME)
 
 $(CONFIG):

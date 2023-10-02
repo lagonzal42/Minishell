@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:59:46 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/26 16:46:08 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/02 17:06:31 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,20 @@ t_cmnd	*cmnd_init(void)
 
 void	redir_error(char c)
 {
-	ft_putstr_fd("minishell: syntax error near unexpected token '", 2);
+	ft_putstr_fd("pipehell: syntax error near unexpected token '", 2);
 	ft_putchar_fd(c, 2);
 	ft_putstr_fd("'\n", 2);
 }
 
 void	close_previous_in(t_cmnd **tmp)
 {
-	if ((*tmp)->redirs.i_r_type == 1 || (*tmp)->redirs.i_r_type == 3)
+	if ((*tmp)->redirs.i_fd != 0
+		&& ((*tmp)->redirs.i_r_type == 1 || (*tmp)->redirs.i_r_type == 3))
 	{
 		close((*tmp)->redirs.i_fd);
 		(*tmp)->redirs.i_fd = 0;
 	}
-	else if ((*tmp)->redirs.i_r_type == 2)
+	else if ((*tmp)->redirs.i_fd != 0 && (*tmp)->redirs.i_r_type == 2)
 	{
 		free((*tmp)->redirs.h_lim);
 		(*tmp)->redirs.i_fd = 0;
