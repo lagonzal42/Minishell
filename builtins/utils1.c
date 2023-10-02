@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 13:12:33 by abasante          #+#    #+#             */
-/*   Updated: 2023/09/27 13:14:16 by abasante         ###   ########.fr       */
+/*   Updated: 2023/10/02 19:27:17 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,11 @@ int	ft_strcmp(char *s1, char *s2)
 	while (s1[i] == s2[i])
 	{
 		if (s1[i] == '\0' && s2[i] == '\0')
+		{
+			ft_printf("strings finished\n");
 			return (0);
+		}
+		ft_printf("%c vs %c\n", s1[i], s2[i]);
 		i++;
 	}
 	return (s1[i] - s2[i]);
