@@ -6,7 +6,7 @@
 /*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 13:02:53 by abasante          #+#    #+#             */
-/*   Updated: 2023/10/03 13:53:14 by abasante         ###   ########.fr       */
+/*   Updated: 2023/10/03 15:20:57 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	update_oldpwd(t_env *env, char *oldpwd)
 	{
 		if (ft_strcmp(tmp->name, name) == 0)
 		{
+			free(tmp->value);
 			tmp->value = oldpwd;
 		}
 		tmp = tmp->next;
@@ -41,6 +42,7 @@ int	update_pwd(t_env *env, char *pwd)
 	{
 		if (ft_strcmp(tmp->name, name) == 0)
 		{
+			free(tmp->value);
 			tmp->value = pwd;
 		}
 		tmp = tmp->next;
@@ -61,8 +63,8 @@ int	home_case(t_env *env)
 	if (chdir(home_path) == 0)
 	{
 		getcwd(cwd1, sizeof(cwd1));
-		update_pwd(env, cwd1);
-		update_oldpwd(env, cwd);
+		update_pwd(env, ft_strdup(cwd1));
+		update_oldpwd(env, ft_strdup(cwd));
 		return (SUCCESS);
 	}
 	else
@@ -82,8 +84,8 @@ int	slash_case(t_env *env)
 	if (chdir("/") == 0)
 	{
 		getcwd(cwd1, sizeof(cwd1));
-		update_pwd(env, cwd1);
-		update_oldpwd(env, cwd);
+		update_pwd(env, ft_strdup(cwd1));
+		update_oldpwd(env, ft_strdup(cwd));
 		return (SUCCESS);
 	}
 	else
@@ -106,8 +108,8 @@ int	absolute_path(t_env *env, char *absolute_path)
 	if (chdir(absolute_path) == 0)
 	{
 		getcwd(cwd1, sizeof(cwd1));
-		update_pwd(env, cwd1);
-		update_oldpwd(env, cwd);
+		update_pwd(env, ft_strdup(cwd1));
+		update_oldpwd(env, ft_strdup(cwd));
 		return (SUCCESS);
 	}
 	else

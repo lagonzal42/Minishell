@@ -6,7 +6,7 @@
 /*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 16:39:36 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/10/03 14:04:31 by abasante         ###   ########.fr       */
+/*   Updated: 2023/10/03 15:22:34 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,9 @@ void	free_env(t_env *env)
 		prev = now;
 		now = prev->next;
 	}
-	// free(prev->name);
-	// free(prev->value);
-	// free(prev);
+	free(prev->name);
+	free(prev->value);
+	free(prev);
 }
 
 int	main(int argc, char **argv, char **envp)
