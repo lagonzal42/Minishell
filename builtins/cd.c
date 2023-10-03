@@ -6,7 +6,7 @@
 /*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 16:58:35 by abasante          #+#    #+#             */
-/*   Updated: 2023/09/27 13:03:18 by abasante         ###   ########.fr       */
+/*   Updated: 2023/10/03 13:53:56 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,14 @@
 int	go_back(t_env *env)
 {
 	char	cwd[10000];
+	char	cwd1[10000];
 
 	getcwd(cwd, sizeof(cwd));
 	if (chdir("..") == 0)
 	{
+		getcwd(cwd1, sizeof(cwd1));
 		update_oldpwd(env, cwd);
+		update_pwd(env, cwd1);
 		return (SUCCESS);
 	}
 	else
@@ -54,14 +57,14 @@ int	cd(t_env *env, char **args)
 
 	i = 0;
 	if (!args[1] || args[1][0] == '~')
-		i = home_case(env);
+		i = home_case(env);	
 	else if (args[1][0] == '/' && args[1][1] == '\0')
 		i = slash_case(env);
-	else if (args[1])
-		i = absolute_path(env, args[1]);
 	else if (args[1][0] == '.' && args[1][1] == '.')
 		i = go_back(env);
 	else if (args[1][0] == '.')
-		i = do_whatever();
+		i = do_whatever();	
+	else if (args[1])
+		i = absolute_path(env, args[1]);
 	return (i);
 }
