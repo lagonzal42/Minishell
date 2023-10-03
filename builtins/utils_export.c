@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_export.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 13:16:02 by abasante          #+#    #+#             */
-/*   Updated: 2023/09/27 13:20:33 by abasante         ###   ########.fr       */
+/*   Updated: 2023/10/02 19:27:06 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*search_for_var(t_env *env, char *search)
 int	give_variable(t_env *env, t_env **ret, char *search)
 {
 	*ret = env;
-	while ((*ret)->next != NULL)
+	while ((*ret) != NULL)
 	{
 		if (ft_strcmp((*ret)->name, search) == 0)
 			return (0);
