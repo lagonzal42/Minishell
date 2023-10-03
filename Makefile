@@ -116,7 +116,7 @@ clean:
 
 fclean: clean
 	make fclean -C libft
-	rm -fr $(NAME) expand/expand.h.gch builtins.h.gch builtins/builtins.h.gch redirection/redirection.h.gch execution/execution.h.gch parse/parse.h.gch
+	rm -fr $(NAME) expand/expand.h.gch builtins.h.gch builtins/builtins.h.gch redirection/redirection.h.gch execution/execution.h.gch parse/parse.h.gch minishell.dSYM
 
 re: fclean clean all
 
