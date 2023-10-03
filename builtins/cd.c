@@ -6,7 +6,7 @@
 /*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 16:58:35 by abasante          #+#    #+#             */
-/*   Updated: 2023/10/03 13:53:56 by abasante         ###   ########.fr       */
+/*   Updated: 2023/10/03 15:19:26 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	go_back(t_env *env)
 	if (chdir("..") == 0)
 	{
 		getcwd(cwd1, sizeof(cwd1));
-		update_oldpwd(env, cwd);
-		update_pwd(env, cwd1);
+		update_oldpwd(env, ft_strdup(cwd));
+		update_pwd(env, ft_strdup(cwd1));
 		return (SUCCESS);
 	}
 	else

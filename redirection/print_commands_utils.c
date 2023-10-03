@@ -6,7 +6,7 @@
 /*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 17:34:13 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/10/03 14:12:19 by abasante         ###   ########.fr       */
+/*   Updated: 2023/10/03 15:04:10 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	free_cmd(t_cmnd *cmds)
 		if (cmds->redirs.o_r_type == 3)
 			free(cmds->redirs.out_pipe);
 		if (cmds->cmd_pth)
-			free();
+			free(cmds->cmd_pth);
 		free (cmds);
 	}
 }
@@ -70,21 +70,9 @@ void	free_cmnds(t_cmnd *cmds)
 	next = cmds->next;
 	while (next)
 	{
-		if (cmds->cmd)
-			ft_double_free(cmds->cmd);
-		if (cmds->redirs.h_lim)
-			free(cmds->redirs.h_lim);
-		if (cmds->redirs.i_r_type == 3)
-			free(cmds->redirs.in_pipe);
-		if (cmds->redirs.o_r_type == 3)
-			free(cmds->redirs.out_pipe);
-		free (cmds);
+		free_cmd(cmds);
 		cmds = next;
 		next = cmds->next;
 	}
-	if (cmds->cmd)
-		ft_double_free(cmds->cmd);
-	if (cmds->redirs.h_lim)
-		free(cmds->redirs.h_lim);
-	free(cmds);
+	free_cmd(cmds);
 }
