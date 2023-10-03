@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 16:51:21 by abasante          #+#    #+#             */
-/*   Updated: 2023/09/27 15:17:29 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/03 13:39:08 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int		not_declare_x(t_env *env, char **args, t_env *tmp);
 
 				//CD:
 int		update_oldpwd(t_env *env, char *oldpwd);
+int		update_pwd(t_env *env, char *pwd);
 
 				//UNSET:
 int		unset(t_env *env, char **args);
