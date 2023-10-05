@@ -6,7 +6,7 @@
 /*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:27:36 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/10/02 17:04:28 by abasante         ###   ########.fr       */
+/*   Updated: 2023/10/05 19:38:43 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ int	prepare_execution(t_cmnd *head, t_env **env, char **envp)
 	else
 		waitpid(pid, NULL, 0);
 	status_code = WEXITSTATUS(exit_s);
-	exit_status("set", status_code);
+	if (command_count != 1 && g_signaled != 1)
+		exit_status("set", status_code);
 	return (0);
 }
 
