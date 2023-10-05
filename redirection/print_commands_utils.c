@@ -6,7 +6,7 @@
 /*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 17:34:13 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/10/03 15:04:10 by abasante         ###   ########.fr       */
+/*   Updated: 2023/10/05 18:31:12 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	free_cmd(t_cmnd *cmds)
 		free (cmds);
 	}
 }
+
 void	free_cmnds(t_cmnd *cmds)
 {
 	t_cmnd	*next;
