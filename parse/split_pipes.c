@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 11:40:27 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/22 14:13:29 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/05 19:13:35 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	**spliter(char *s, int m)
 	holder[n++] = ft_substr(s, m, 1);
 	if (s[m + 1])
 		holder[n] = ft_substr(s, m + 1, ft_strlen(&s[m] + 1));
-	free(s);
+	//free(s);
 	return (holder);
 }
 
@@ -78,6 +78,14 @@ char	**ft_resize2(char **sp, char **addition, unsigned int pos)
 	return (free(sp), free(addition), new);
 }
 
+void	ft_recount(int *n, int *m, char **sp)
+{
+	if (sp[*n + 1])
+	{
+		*n +=1;
+	}
+	*m = 0;
+}
 /*Finds pipes out of the quoutes and divides it in 3 arrays.
 Then inserts it in the previous array using resize.
 -Input: same as previous
@@ -103,8 +111,7 @@ char	**ft_split_pipes(char **sp)
 			{
 				holder = spliter(sp[n], m);
 				sp = ft_resize2(sp, holder, n);
-				m = 0;
-				n++;
+				ft_recount(&n, &m, sp);
 			}
 		}
 		n++;
@@ -122,4 +129,16 @@ char	**pipe_spliter(char **in)
 
 	spltd = ft_split_pipes(in);
 	return (spltd);
+}
+
+int main(int argc, char **argv)
+{
+	argc = 0;
+	char **splited = malloc (4 * sizeof(char *));
+	splited[0] = ft_strdup(argv[1]);
+	splited[1] = ft_strdup(argv[2]);
+	splited[2] = ft_strdup(argv[3]);
+	splited[3] = NULL;
+	splited = pipe_spliter(splited);
+	ft_double_print(splited);
 }
