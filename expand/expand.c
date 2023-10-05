@@ -6,7 +6,7 @@
 /*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 16:16:20 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/27 13:43:05 by abasante         ###   ########.fr       */
+/*   Updated: 2023/10/05 19:41:46 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,18 @@ int	exit_status(char *action, ...)
 	static int	e_status;
 	va_list		arg_ptr;
 
-	if (action[0] == 'g')
-		return (e_status);
-	else
+	if (interactivity(0) == 2)
 	{
-		va_start(arg_ptr, action);
-		e_status = va_arg(arg_ptr, int);
-		return (0);
-	}		
+		if (action[0] == 'g')
+			return (e_status);
+		else
+		{
+			va_start(arg_ptr, action);
+			e_status = va_arg(arg_ptr, int);
+			return (0);
+		}	
+	}
+	return (0);
 }
 
 /*This function looks for expanding cases. If a simple quoute appears it simply

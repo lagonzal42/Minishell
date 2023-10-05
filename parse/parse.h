@@ -6,7 +6,7 @@
 /*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 17:01:03 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/10/05 18:31:46 by abasante         ###   ########.fr       */
+/*   Updated: 2023/10/05 19:35:55 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # include "../libft/libft.h"
 # include "../expand/expand.h"
 # include "../builtins/builtins.h"
+
+int		g_signaled;
 
 int		input_handle(char *input, t_env **env, char **envp);
 

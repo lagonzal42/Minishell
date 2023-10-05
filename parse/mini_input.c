@@ -6,7 +6,7 @@
 /*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 16:39:36 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/10/05 18:30:42 by abasante         ###   ########.fr       */
+/*   Updated: 2023/10/05 19:41:57 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,9 @@ If an eof appears it closes the prompt line and clears the history.*/
 
 void	minishell(t_env **env, char **envp)
 {
-	int		eof;
-	char	*s;
+	static int		eof;
+	char			*s;
 
-	eof = 0;
 	call_signals();
 	interactivity(1);
 	while (!eof)
@@ -60,6 +59,7 @@ void	minishell(t_env **env, char **envp)
 		else
 			eof = 1;
 		interactivity(1);
+		g_signaled = 0;
 	}
 	rl_clear_history();
 	free_env(*env);
