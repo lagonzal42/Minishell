@@ -6,7 +6,7 @@
 /*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 13:12:33 by abasante          #+#    #+#             */
-/*   Updated: 2023/10/03 13:31:43 by abasante         ###   ########.fr       */
+/*   Updated: 2023/10/05 18:30:25 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,8 @@ int	ft_strcmp(char *s1, char *s2)
 	{
 		if (s1[i] == '\0' && s2[i] == '\0')
 		{
-			ft_printf("strings finished\n"); 
 			return (0);
 		}
-		ft_printf("%c vs %c\n", s1[i], s2[i]);
 		i++;
 	}
 	return (s1[i] - s2[i]);
