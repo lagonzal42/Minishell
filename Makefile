@@ -91,12 +91,8 @@ LDLIBS := -lreadline -lncurses
 all: $(NAME)
 
 $(CONFIG):
-	if [-s "./readline/Makefile"]
-	then
-		/bin/echo "Configuration already done"
-	else
 		bash ./configure.sh
-	fi
+
 
 $(OBJ): $(SRC)
 	/bin/echo -n "Compiling minishell objs."
