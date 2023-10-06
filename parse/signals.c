@@ -6,7 +6,7 @@
 /*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:57:13 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/10/05 19:34:53 by abasante         ###   ########.fr       */
+/*   Updated: 2023/10/06 09:21:54 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	sigquithandle(int sigquit)
 	else if (interactivity(0) == 2)
 	{
 		ft_putstr_fd("Quit\n", 2);
+		exit_status("set", 131);
 	}
 	(void)sigquit;
 }
