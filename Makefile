@@ -75,11 +75,13 @@ OBJ = $(PARSE_OBJ) \
 	$(EXECUTION_OBJ)\
 	$(REDIRECTION_OBJ)
 
-SRC = $(BUILTINS_SRC) $(EXPAND_SRC) $(PARSE_SRC) $(EXECUTION_SRC) $(REDIRECTION_SRC) builtins/builtins.h execution/execution.h expand/expand.h redirection/redirection.h parse/parse.h
+# OBJ := $(SRC:%.c=%.o)
+
+SRC = $(BUILTINS_SRC) $(EXPAND_SRC) $(PARSE_SRC) $(EXECUTION_SRC) $(REDIRECTION_SRC) 
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -fsanitize=address -g3
 
 LDLIBS := -lreadline -lncurses
 
@@ -89,12 +91,15 @@ LDLIBS := -lreadline -lncurses
 all: $(NAME)
 
 $(CONFIG):
-	bash ./configure.sh
+		bash ./configure.sh
+
 
 $(OBJ): $(SRC)
+	/bin/echo -n "Compiling minishell objs."
 	$(CC) $(CFLAGS) -c $(SRC) -I libft
 	@mkdir -p $(OBJ_DIR)
 	mv *.o $(OBJ_DIR)
+	/bin/echo ".."
 
 $(NAME): $(OBJ) $(RLMAKE) $(CONFIG)
 	/bin/echo -n "Compiling libft."
@@ -107,18 +112,28 @@ $(NAME): $(OBJ) $(RLMAKE) $(CONFIG)
 	make -C readline >/dev/null 2>&1
 	/bin/echo ".."
 	/bin/echo -n "Compiling minishell."
-	$(CC) $(CFLAGS) $(OBJ) readline/libhistory.a readline/libreadline.a libft/libft.a  -I realdine $(LDLIBS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) readline/libhistory.a readline/libreadline.a libft/libft.a  -I ./realdine -L./readline $(LDLIBS) -o $(NAME)
+	/bin/echo ".."
+	/bin/echo "Minishell compiled!"
 
 clean:
+	/bin/echo -n "Cleaning objects."
 	rm -fr $(OBJ_DIR)
 	make clean -C libft
 	make clean -C readline
+	/bin/echo ".."
+	/bin/echo "Cleaning completed!"
+
 
 fclean: clean
 	make fclean -C libft
-	rm -fr $(NAME) expand/expand.h.gch builtins.h.gch builtins/builtins.h.gch redirection/redirection.h.gch execution/execution.h.gch parse/parse.h.gch minishell.dSYM
+	/bin/echo -n "Full cleaning."
+	@rm -fr $(NAME) expand/expand.h.gch builtins.h.gch builtins/builtins.h.gch redirection/redirection.h.gch execution/execution.h.gch parse/parse.h.gch minishell.dSYM
+	/bin/echo ".."
+	/bin/echo "Full cleaning completed!"
 
 re: fclean clean all
+	/bin/echo  "Project completely recompiled!"
 
 norm:
-	norminette $(SRC)
+	norminette $(SRC) builtins/builtins.h execution/execution.h expand/expand.h redirection/redirection.h parse/parse.h

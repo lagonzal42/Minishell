@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 10:21:36 by larra             #+#    #+#             */
-/*   Updated: 2023/09/15 13:47:20 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/06 14:17:23 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,40 +21,64 @@ char	*q_t(char *s)
 	int	end;
 
 	start = 0;
-	if (!quoute_detector(s))
-		return (s);
-	while (s[start] != '\"' && s[start] != '\'')
-		start++;
-	if (s[start] == '\'')
-		end = start + find_quoute_end(&s[start]);
-	if (s[start] == '\"')
-		end = start + find_d_quoute_end(&s[start]);
-	return (trim_quoutes(s, start, end));
+	while (quoute_detector(s))
+	{
+		while (s[start] != '\"' && s[start] != '\'')
+			start++;
+		if (s[start] == '\'')
+			end = start + find_quoute_end(&s[start]);
+		if (s[start] == '\"')
+			end = start + find_d_quoute_end(&s[start]);
+		s = trim_quoutes(s, start, end);
+	}
+	return (s);
+}
+
+int	find_first_quoute(char *s, int *q, int *n)
+{
+	while (s[*n] && !*q)
+	{
+		if (s[*n] == '\"')
+			*q = 2;
+		else if (s[*n] == '\'')
+			*q = 1;
+		else
+			*n += 1;
+	}
+	return (*q);
 }
 
 static int	quoute_detector(char *s)
 {
 	int	n;
+	int	q;
+	int	fin;
 
+	q = 0;
 	n = 0;
-	while (s[n])
+	find_first_quoute(s, &q, &n);
+	if (q == 2)
 	{
-		if (s[n] == '\"' || s[n] == '\'')
-			return (1);
-		n++;
+		fin = n + find_d_quoute_end(&s[n]);
+		return(s[fin] == '\"');
+	}
+	if (q == 1)
+	{
+		fin = n + find_quoute_end(&s[n]);
+		return(s[fin] == '\'');
 	}
 	return (0);
 }
 
-/*int	main(void)
-{
-	char	*s;
-	char	*result;
+// int	main(void)
+// {
+// 	char	*s;
+// 	char	*result;
 
-	s = ft_strdup("inf\"ile\"1");
-	result = q_t(s);
-	ft_printf("s: %s\nresult: %s\n", s, result);
-	//free(s);
-	free(result);
+// 	s = ft_strdup("\"\"\"\"");
+// 	result = q_t(s);
+// 	ft_printf("s: %s\nresult: %s\n", s, result);
+// 	//free(s);
+// 	free(result);
 
-}*/
+// }

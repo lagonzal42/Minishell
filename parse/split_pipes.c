@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_pipes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 11:40:27 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/10/05 19:18:16 by abasante         ###   ########.fr       */
+/*   Updated: 2023/10/06 13:26:36 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,17 +96,17 @@ char	**ft_split_pipes(char **sp)
 	int		n;
 	int		m;
 	char	**holder;
-
 	n = 0;
 	while (sp[n])
 	{
 		m = -1;
 		while (sp[n] && sp[n][++m])
 		{
-			if (sp[n][m] == '\'' && (m == 0 || sp[n][m - 1] != 97))
+			if (sp[n][m] == '\'')
 				m += find_quoute_end(&sp[n][m]);
-			else if (sp[n][m] == '\"' && (m == 0 || sp[n][m - 1] != 97))
+			else if (sp[n][m] == '\"')
 				m += find_d_quoute_end(&sp[n][m]);
+				
 			if (sp[n][m] == '|')
 			{
 				holder = spliter(sp[n], m);
@@ -134,11 +134,11 @@ char	**pipe_spliter(char **in)
 // int main(int argc, char **argv)
 // {
 // 	argc = 0;
-// 	char **splited = malloc (4 * sizeof(char *));
+// 	char **splited = malloc (3 * sizeof(char *));
 // 	splited[0] = ft_strdup(argv[1]);
 // 	splited[1] = ft_strdup(argv[2]);
-// 	splited[2] = ft_strdup(argv[3]);
-// 	splited[3] = NULL;
+// 	//splited[2] = ft_strdup(argv[3]);
+// 	splited[2] = NULL;
 // 	splited = pipe_spliter(splited);
 // 	ft_double_print(splited);
 // }
