@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 12:19:35 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/04 13:59:39 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/06 13:45:08 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ int	find_d_quoute_end(char *trimed)
 	while (trimed[n] && trimed[n] != '\"')
 	{
 		n++;
-		if (trimed[n] == '\"' && trimed[n - 1] == 92)
-			n++;
 	}
 	return (n);
 }
