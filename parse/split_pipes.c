@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_pipes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 11:40:27 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/10/06 13:26:36 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/10 13:48:00 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ char	**ft_split_pipes(char **sp)
 	int		n;
 	int		m;
 	char	**holder;
+
 	n = 0;
 	while (sp[n])
 	{
@@ -106,7 +107,6 @@ char	**ft_split_pipes(char **sp)
 				m += find_quoute_end(&sp[n][m]);
 			else if (sp[n][m] == '\"')
 				m += find_d_quoute_end(&sp[n][m]);
-				
 			if (sp[n][m] == '|')
 			{
 				holder = spliter(sp[n], m);

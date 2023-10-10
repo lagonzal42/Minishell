@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quoute_trim.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 10:21:36 by larra             #+#    #+#             */
-/*   Updated: 2023/10/06 14:17:23 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/10 13:47:23 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,12 @@ static int	quoute_detector(char *s)
 	if (q == 2)
 	{
 		fin = n + find_d_quoute_end(&s[n]);
-		return(s[fin] == '\"');
+		return (s[fin] == '\"');
 	}
 	if (q == 1)
 	{
 		fin = n + find_quoute_end(&s[n]);
-		return(s[fin] == '\'');
+		return (s[fin] == '\'');
 	}
 	return (0);
 }
