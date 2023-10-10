@@ -6,7 +6,7 @@
 /*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:57:13 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/10/10 14:05:40 by abasante         ###   ########.fr       */
+/*   Updated: 2023/10/10 14:08:42 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	siginthandle(int sigint)
 		rl_replace_line("", sigint);
 		if (interactivity(0) == 1)
 		{
-		 	rl_redisplay();
+			rl_redisplay();
 			g_signaled = 0;
 		}
 		else

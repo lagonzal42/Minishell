@@ -1,4 +1,4 @@
-	/* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   mini_input.c                                       :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 16:39:36 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/10/05 19:41:57 by abasante         ###   ########.fr       */
+/*   Updated: 2023/10/10 14:08:23 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	interactivity(int num)
 	interactivity = num;
 	return (0);
 }
-
 
 /*This function below manages the ctrl + c signal. I don't know if we will need
 to change it in the future so i wont explain it now.*/
