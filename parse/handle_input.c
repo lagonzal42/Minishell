@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_input.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:27:36 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/10/06 14:17:37 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/10 13:33:16 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,25 +91,25 @@ int	execute_one(t_cmnd *node, t_env **env)
 {
 	int					ret;
 	int					fd[2];
-	t_builtin_function	bp;
 	int					ev;
 
 	ret = 0;
 	fd[0] = dup(STDIN_FILENO);
 	fd[1] = dup(STDOUT_FILENO);
-	bp = node->built_ptr;
 	if (node->redirs.o_r_type != 0)
 		dup2(node->redirs.o_fd, STDOUT_FILENO);
 	if (node->redirs.i_r_type != 0)
 		dup2(node->redirs.i_fd, STDIN_FILENO);
-	if (bp == &exit_builtin)
+	if (node->built_ptr == &exit_builtin)
 	{
-		ev = bp(*env, node->cmd);
+		ev = node->built_ptr(*env, node->cmd);
+		if (ev == -358)
+			return (1);
 		free_cmnds(node);
 		free_env(*env);
 		exit(ev);
 	}
-	if (node->built_ptr)
+	else
 		ret = node->built_ptr(*env, node->cmd);
 	dup2(fd[1], STDOUT_FILENO);
 	dup2(fd[0], STDIN_FILENO);

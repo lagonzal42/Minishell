@@ -6,7 +6,7 @@
 /*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 13:36:46 by abasante          #+#    #+#             */
-/*   Updated: 2023/10/02 16:39:07 by abasante         ###   ########.fr       */
+/*   Updated: 2023/10/10 13:20:46 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	execute(t_cmnd	*node, t_env *env, char **envp)
 		dup2(node->redirs.i_fd, STDIN_FILENO);
 		close(node->redirs.i_fd);
 	}
-	if (node->built_ptr != NULL)
+	if (node->built_ptr != NULL && node->built_ptr != &exit_builtin)
 		exit(node->built_ptr(env, node->cmd));
 	else
 		execve(node->cmd_pth, node->cmd, envp);

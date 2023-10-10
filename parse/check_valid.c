@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_valid.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 18:36:02 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/10/05 19:14:42 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/10 13:11:13 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ int	ft_error(int ecode);
 
 int	check_valid(char *s)
 {
-	if (check_forbidden_chars(s))
-		return (1);
 	if (check_opened_quoutes(s))
+		return (1);
+	if (check_forbidden_chars(s))
 		return (1);
 	return (0);
 }

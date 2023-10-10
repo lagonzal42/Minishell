@@ -81,7 +81,7 @@ SRC = $(BUILTINS_SRC) $(EXPAND_SRC) $(PARSE_SRC) $(EXECUTION_SRC) $(REDIRECTION_
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra -fsanitize=address -g3
+CFLAGS = -Wall -Werror -Wextra
 
 LDLIBS := -lreadline -lncurses
 
