@@ -6,7 +6,7 @@
 /*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:57:13 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/10/06 09:21:54 by abasante         ###   ########.fr       */
+/*   Updated: 2023/10/10 14:05:40 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,19 @@
 
 void	siginthandle(int sigint)
 {
-	g_signaled = 1;
 	if (sigint == SIGINT)
 	{
 		write(2, "\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", sigint);
 		if (interactivity(0) == 1)
-			rl_redisplay();
-		else if (interactivity(0) == 2)
+		{
+		 	rl_redisplay();
+			g_signaled = 0;
+		}
+		else
+			g_signaled = 1;
+		if (interactivity(0) == 2)
 		{
 			exit_status("set", 130);
 		}

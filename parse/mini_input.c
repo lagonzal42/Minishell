@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+	/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   mini_input.c                                       :+:      :+:    :+:   */
@@ -27,6 +27,7 @@ int	interactivity(int num)
 	interactivity = num;
 	return (0);
 }
+
 
 /*This function below manages the ctrl + c signal. I don't know if we will need
 to change it in the future so i wont explain it now.*/
