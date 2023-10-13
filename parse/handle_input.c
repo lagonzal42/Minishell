@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_input.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:27:36 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/10/13 15:43:08 by abasante         ###   ########.fr       */
+/*   Updated: 2023/10/13 16:27:31 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ int	input_handle(char *input, t_env **env, char **envp)
 	head = cmnd_init();
 	if (node_create(args, &head))
 		return (free_cmnds(head), ft_double_free(args), 0);
+	if (head->cmd == NULL)
+		return (free_cmnds(head), ft_double_free(args), exit_status("set", 0));
 	ft_double_free(args);
 	if (before_execution(head, *env) != 0)
 		return (free_cmnds(head), 3);
