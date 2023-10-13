@@ -6,19 +6,36 @@
 /*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 13:06:11 by abasante          #+#    #+#             */
-/*   Updated: 2023/10/10 13:28:35 by abasante         ###   ########.fr       */
+/*   Updated: 2023/10/13 16:03:44 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
+int	numeric_argument(char *arg)
+{
+	int	n;
+
+	n = 0;
+	while (arg[n])
+	{
+		if (ft_isdigit(arg[n]))
+			n++;
+		else
+			return (1);
+	}
+	return (0);
+}
+
 int	exit_builtin(t_env *env, char **cmd)
 {
-	int	a;
-
-	a = 0;
-	if (env)
-		a += 1;
+	env = (t_env *)env;
+	if (cmd[1] && numeric_argument(cmd[1]))
+	{
+		ft_putstr_fd("exit\npipehell: exit: asdf: numeric argument required\n"\
+					, 2);
+		return (255);
+	}
 	if (!cmd[1])
 	{
 		ft_putstr_fd("exit\n", 2);
