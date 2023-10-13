@@ -6,7 +6,7 @@
 /*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 16:58:35 by abasante          #+#    #+#             */
-/*   Updated: 2023/10/05 18:30:06 by abasante         ###   ########.fr       */
+/*   Updated: 2023/10/13 17:15:22 by abasante         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,6 @@ int	cd(t_env *env, char **args)
 		i = slash_case(env);
 	else if (args[1][0] == '.' && args[1][1] == '.')
 		i = go_back(env);
-	else if (args[1][0] == '.')
-		i = do_whatever();
 	else if (args[1])
 		i = absolute_path(env, args[1]);
 	return (i);
