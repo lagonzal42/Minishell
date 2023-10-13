@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   node_create.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 20:16:12 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/09/27 13:47:14 by abasante         ###   ########.fr       */
+/*   Updated: 2023/10/13 16:29:45 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,6 @@ static char	*get_next_word(char **spltd, int *n, int *m, t_cmnd **tmp)
 	if (ft_strlen(holder) != 0)
 		return (*m += ft_strlen(holder) - 1, q_t(holder));
 	else
-		return (redir_error(spltd[o_n][o_m]), free(holder), NULL);
+		return (redir_error(spltd[o_n][o_m]), exit_status("set", 258),
+				free(holder), NULL);
 }
