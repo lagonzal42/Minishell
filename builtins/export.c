@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 13:06:31 by abasante          #+#    #+#             */
-/*   Updated: 2023/10/13 16:59:28 by abasante         ###   ########.fr       */
+/*   Updated: 2023/11/06 20:31:26 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
+
 
 int	theres_equal(char *args)
 {
@@ -71,3 +72,4 @@ int	not_declare_x(t_env *env, char **args, t_env *tmp)
 	}
 	return (0);
 }
+
