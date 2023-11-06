@@ -6,11 +6,28 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 13:06:31 by abasante          #+#    #+#             */
-/*   Updated: 2023/10/02 19:27:22 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/11/06 20:31:26 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
+
+
+int	theres_equal(char *args)
+{
+	int	equal;
+	int	i;
+
+	i = 0;
+	equal = 0;
+	while (args[i] && !equal)
+	{
+		if (args[i] == '=')
+			equal = 1;
+		i++;
+	}
+	return (equal);
+}
 
 int	export(t_env *env, char **args)
 {
@@ -27,7 +44,8 @@ int	export(t_env *env, char **args)
 	}
 	else
 	{
-		not_declare_x(env, args, tmp);
+		if (theres_equal(args[1]))
+			not_declare_x(env, args, tmp);
 	}
 	return (0);
 }
@@ -54,3 +72,4 @@ int	not_declare_x(t_env *env, char **args, t_env *tmp)
 	}
 	return (0);
 }
+
