@@ -1,0 +1,17 @@
+export
+
+int	theres_equal(char *args)
+{
+	int	equal;
+	int	i;
+
+	i = 0;
+	equal = 0;
+	while (args[i] && !equal)
+	{
+		if (args[i] == '=')
+			equal = 1;
+		i++;
+	}
+	return (equal);
+}
