@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:27:36 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/10/13 16:27:31 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/11/06 19:58:16 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,15 +68,17 @@ int	prepare_execution(t_cmnd *head, t_env **env, char **envp)
 	int		exit_s;
 	int		status_code;
 	int		command_count;
+	t_cmnd	*tmp;
 
 	command_count = 0;
 	status_code = 0;
-	while (head->next)
+	tmp = head;
+	while (tmp->next)
 	{
-		head = head->next;
+		tmp = tmp->next;
 		command_count++;
 	}
-	if (command_count == 0 && head->built_ptr)
+	if (!command_count && head->built_ptr)
 		return (exit_status("set", execute_one(head, env)));
 	pid = fork();
 	if (pid == 0)

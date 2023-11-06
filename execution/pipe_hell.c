@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_hell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasante <abasante@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 13:36:46 by abasante          #+#    #+#             */
-/*   Updated: 2023/10/10 13:20:46 by abasante         ###   ########.fr       */
+/*   Updated: 2023/11/06 20:21:12 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,81 +42,74 @@ int	before_execution(t_cmnd *node, t_env *env)
 	return (i);
 }
 
-void	pipe_closer(t_cmnd *node)
+void	close_pipes(int **pipes)
 {
-	if (node->prev && node->prev->redirs.o_r_type == 3)
-	{
-		close(node->prev->redirs.out_pipe[0]);
-		close(node->prev->redirs.out_pipe[1]);
-	}
-	if (node->redirs.in_pipe)
-	{
-		close(node->redirs.in_pipe[0]);
-		close(node->redirs.in_pipe[1]);
-	}
+	//ft_putstr_fd("close pipes\n", 2);
+	close(pipes[0][0]);
+	close(pipes[0][1]);
+	close(pipes[1][0]);
+	close(pipes[1][1]);
 }
 
-void	execute(t_cmnd	*node, t_env *env, char **envp)
+void	close_redirs(t_cmnd *node)
 {
 	if (node->redirs.o_r_type != 3 && node->redirs.o_r_type != 0)
-	{
-		dup2(node->redirs.o_fd, STDOUT_FILENO);
 		close(node->redirs.o_fd);
-	}
-	else if (node->redirs.o_r_type == 3 || node->redirs.i_r_type == 3)
-	{
-		if (node->redirs.o_r_type == 3)
-			dup2(node->redirs.out_pipe[1], STDOUT_FILENO);
-		else
-			dup2(node->redirs.in_pipe[0], STDIN_FILENO);
-		pipe_closer(node);
-	}
-	if (node->redirs.i_fd != STDIN_FILENO)
-	{
-		dup2(node->redirs.i_fd, STDIN_FILENO);
+	if (node->redirs.i_r_type != 3 && node->redirs.i_r_type != 0)
 		close(node->redirs.i_fd);
-	}
+}
+
+void	execution(t_cmnd *node, t_env *env, char **envp, int **pipes)
+{
+	if (node->redirs.i_r_type == 3)
+		dup2(pipes[0][0], STDIN_FILENO);
+	if (node->redirs.o_r_type == 3)
+		dup2(pipes[1][1], STDOUT_FILENO);
+	if (node->redirs.o_r_type && node->redirs.i_r_type != 3)
+		dup2(node->redirs.o_fd, STDOUT_FILENO);
+	if (node->redirs.i_r_type && node->redirs.i_r_type != 3)
+		dup2(node->redirs.i_fd, STDIN_FILENO);
+	close_pipes(pipes);
+	close_redirs(node);
 	if (node->built_ptr != NULL && node->built_ptr != &exit_builtin)
 		exit(node->built_ptr(env, node->cmd));
 	else
 		execve(node->cmd_pth, node->cmd, envp);
 }
 
-void	make_pipe(t_cmnd **node)
+void	call_the_piper(int *in_pipe, int *out_pipe)
 {
-	int	fd[2];
-
-	pipe(fd);
-	if ((*node)->redirs.i_r_type == 3)
-	{
-		(*node)->redirs.in_pipe = malloc(2 * sizeof(int));
-		(*node)->redirs.in_pipe[0] = dup(fd[0]);
-		(*node)->redirs.in_pipe[1] = dup(fd[1]);
-	}
-	if ((*node)->prev->redirs.o_r_type == 3)
-	{
-		(*node)->prev->redirs.out_pipe = malloc(2 * sizeof(int));
-		(*node)->prev->redirs.out_pipe[0] = dup(fd[0]);
-		(*node)->prev->redirs.out_pipe[1] = dup(fd[1]);
-	}
-	close(fd[0]);
-	close(fd[1]);
+	close(in_pipe[0]);
+	close(in_pipe[1]);
+	in_pipe[0] = dup(out_pipe[0]);
+	in_pipe[1] = dup(out_pipe[1]);
+	close(out_pipe[0]);
+	close(out_pipe[1]);
 }
 
 void	fork_loop(t_cmnd **node, t_env *env, char **envp)
 {
 	t_cmnd				*tmp;
-	int					pid2;
+	int					in_pipe[2];
+	int					out_pipe[2];
+	int					**pipes;
+	int					pid;
 
 	tmp = *node;
-	if (tmp->prev != NULL)
+	pipes = malloc(sizeof(int *) * 2);
+	pipe(in_pipe);
+	if (tmp->next != NULL)
 	{
-		if (tmp->prev->redirs.o_r_type == 3 || tmp->redirs.i_r_type == 3)
-			make_pipe(&tmp);
-		pid2 = fork();
-		if (pid2 == 0)
-			fork_loop(&(*node)->prev, env, envp);
-		waitpid(pid2, NULL, 0);
+		pipe(out_pipe);
+		pipes[0] = in_pipe;
+		pipes[1] = out_pipe;
+		pid = fork();
+		if (pid == 0)
+			execution(tmp, env, envp, pipes);
+		else
+			waitpid(pid, NULL, 0);
+		call_the_piper(in_pipe, out_pipe);
+		tmp = tmp->next;
 	}
-	execute(tmp, env, envp);
+	execution(tmp, env, envp, pipes);
 }
