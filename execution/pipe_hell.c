@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_hell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lagonzal <larraingonzalez@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 13:36:46 by abasante          #+#    #+#             */
-/*   Updated: 2023/11/06 20:21:12 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/11/16 20:13:15 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	before_execution(t_cmnd *node, t_env *env)
 
 void	close_pipes(int **pipes)
 {
-	//ft_putstr_fd("close pipes\n", 2);
 	close(pipes[0][0]);
 	close(pipes[0][1]);
 	close(pipes[1][0]);
